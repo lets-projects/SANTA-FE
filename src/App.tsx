@@ -1,9 +1,8 @@
-import LoginPage from './pages/login/LoginPage';
-
+import JoinPage from './pages/join/JoinPage';
 function App() {
   return (
     <div>
-      <LoginPage />
+      <JoinPage />
     </div>
   );
 }
