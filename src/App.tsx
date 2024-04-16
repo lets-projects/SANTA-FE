@@ -1,5 +1,11 @@
+import LoginPage from './pages/login/LoginPage';
+
 function App() {
-    return <>산타 시작~</>;
+  return (
+    <div>
+      <LoginPage />
+    </div>
+  );
 }
 
 export default App;
