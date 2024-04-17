@@ -1,22 +1,10 @@
-@mixin flex-center-col {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-@mixin flex-center-row{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-*{
-    margin:0;
-}
-
+@import '../global';
+@import '../color';
 
 .login-container{
     @include flex-center-col();
+    @include setting;
+    width:100vw;
     height:100vh;
     gap:2.8rem;
     background-color: #EAEF9D;
@@ -25,14 +13,13 @@
 .login-text-container{
     @include flex-center-col();
     .login-text{
-        color:#498428;
+        color:$green3;
+        @include font-title;
         font-size:2rem;
-        font-weight: 700;
     }
     .login-description{
-        color:#4E4E4E;
-        font-size:0.8rem;
-        font-weight:400;
+        color:$gray2;
+        @include font-subtitle2;
     }
 }
 
@@ -47,7 +34,7 @@
         flex-direction: row;
         border-radius: 1.2rem;
         margin:1rem 0;
-        background-color: white;
+        background-color: $white;
         justify-content: space-evenly;
         
     }
@@ -61,12 +48,13 @@
     .login-btn{
         width:18rem;
         height:2.5rem;
-        background-color: #498428;
+        background-color: $green3;
         border:none;
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         border-radius:1.2rem;
         cursor:pointer;
         color:white;
+        @include font-subtitle2;
     }
     .login-menu-container{
         @include flex-center-row();
@@ -74,12 +62,13 @@
         width:100%;
         display:flex;
         justify-content: space-around;
-        color:#498428;
+        color:$green3;
+        cursor:pointer;
 
         .vertical-line{
             width:1px;
             height: 1rem;
-            background: #498428;
+            background: $green3;
         }
     }
 }
@@ -87,8 +76,8 @@
 .social-login-container{
     @include flex-center-col();
 
-    font-size: 0.8rem;
-    color: #498428;
+    @include font-body2;
+    color: $green3;
     .social-login-icon{
         @include flex-center-row();
         

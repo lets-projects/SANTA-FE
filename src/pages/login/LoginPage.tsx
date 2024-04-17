@@ -1,7 +1,7 @@
 //loginPage
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
-import './loginStyle.scss';
+import '../../styles/login/loginStyle.scss';
 
 function LoginPage() {
   return (
