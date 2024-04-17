@@ -1,4 +1,5 @@
-import './joinStyle.scss';
+import { Button } from '../../components/common/Button';
+import '../../styles/join/joinStyle.scss';
 function JoinPage() {
   return (
     <div className="join-container">
@@ -31,9 +32,7 @@ function JoinPage() {
           <input type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" placeholder='"-" 를 제외하고 입력해주세요'></input>
         </div>
       </form>
-      <button type="submit" className="join-btn" onClick={(e) => e.preventDefault()}>
-        회원가입 완료
-      </button>
+      <Button variant="green3">회원가입 완료</Button>
     </div>
   );
 }

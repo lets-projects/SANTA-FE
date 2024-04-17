@@ -8,10 +8,8 @@ type Props = {
 export const Button = ({ variant, onClick, children }: PropsWithChildren<Props>) => {
   const buttonClass = variant ? `button ${variant}` : `button`;
   return (
-    <div>
-      <div className={buttonClass} onClick={onClick}>
-        {children}
-      </div>
+    <div className={buttonClass} onClick={onClick}>
+      {children}
     </div>
   );
 };
