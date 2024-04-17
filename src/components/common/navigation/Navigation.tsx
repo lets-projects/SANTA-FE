@@ -6,6 +6,16 @@ import logo from "../../../../public/images/logo.svg";
 import styles from "../../../styles/components/common/navigation.module.scss";
 import UserProfile from "./UserProfile";
 
+const NAVLIST = [
+  { title: "내 프로필", path: "/porfile" },
+  { title: "랭킹", path: "/rank" },
+  { title: "진행중인 챌린지", path: "/challenge" },
+  { title: "내 모임 바로가기", path: "/myclub" },
+  { title: "실시간 채팅", path: "/livechat" },
+  { title: "모임 만들기", path: "#" },
+  { title: "설정", path: "/setting" },
+];
+
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const outside = useRef<any>();
@@ -16,7 +26,7 @@ export default function Navigation() {
       document.removeEventListener("mousedown", handlerOutsie);
     };
   });
-  const handlerOutsie = (e: any) => {
+  const handlerOutsie = (e: MouseEvent) => {
     if (!outside.current.contains(e.target)) {
       toggleSide();
     }
@@ -26,23 +36,21 @@ export default function Navigation() {
     setIsOpen(false);
   };
 
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={isOpen ? styles.darkBg : ""}>
-        <button
-          onClick={(e) => {
-            setIsOpen(!isOpen);
-            e.preventDefault();
-          }}
-          className={styles.hambergerBtn}
-        >
+        <button onClick={onClick} className={styles.hambergerBtn}>
           <GiHamburgerMenu size="30" color="white" />
         </button>
         <div
           className={isOpen ? styles.navOpen : styles.navClose}
           ref={outside}
         >
-          <Link to="/">
+          <Link to="/" onClick={onClick}>
             <img src={logo} className={styles.logo} />
           </Link>
           <div className={styles.navContainer}>
@@ -51,27 +59,13 @@ export default function Navigation() {
             </div>
             <div className={styles.linkBox}>
               <ul>
-                <li>
-                  <Link to="/porfile">내 프로필</Link>
-                </li>
-                <li>
-                  <Link to="/rank">랭킹</Link>
-                </li>
-                <li>
-                  <Link to="/challenge">진행 중인 챌린지</Link>
-                </li>
-                <li>
-                  <Link to="/myclub">내 모임 바로가기</Link>
-                </li>
-                <li>
-                  <Link to="/livechat">실시간 채팅</Link>
-                </li>
-                <li>
-                  <Link to="#">모임 만들기</Link>
-                </li>
-                <li>
-                  <Link to="/setting">설정</Link>
-                </li>
+                {NAVLIST.map((item) => (
+                  <li>
+                    <Link to={item.path} onClick={onClick}>
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
