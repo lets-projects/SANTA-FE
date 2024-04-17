@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import "./styles/_global.scss";
 import "./styles/_reset.scss";
-import Navigation from "./components/common/Navigation";
+import Navigation from "./components/common/navigation/Navigation";
 
 function App() {
   return (
