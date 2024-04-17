@@ -2,7 +2,7 @@ import JoinPage from './pages/join/JoinPage';
 function App() {
   return (
     <div>
-      <JoinPage />
+      <JoinPage />a
     </div>
   );
 }
