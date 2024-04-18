@@ -12,7 +12,7 @@ const NAVLIST = [
   { title: '진행중인 챌린지', path: '/challenge' },
   { title: '내 모임 바로가기', path: '/myclub' },
   { title: '실시간 채팅', path: '/livechat' },
-  { title: '모임 만들기', path: '#' },
+  { title: '모임 만들기', path: '/createclub' },
   { title: '설정', path: '/setting' },
 ];
 
