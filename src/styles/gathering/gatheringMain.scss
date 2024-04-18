@@ -1,0 +1,9 @@
+@import '../color';
+@import '../global';
+
+.gathering-container{
+    @include flex-center-col;
+    @include setting;
+    height:100vh;
+
+}

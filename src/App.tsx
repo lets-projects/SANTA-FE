@@ -1,8 +1,11 @@
-import './styles/_global.scss';
-import './styles/_reset.scss';
+import GatheringMainPage from './pages/gathering/GatheringMainPage';
 
 function App() {
-  return <div>산타</div>;
+  return (
+    <div>
+      <GatheringMainPage />
+    </div>
+  );
 }
 
 export default App;
