@@ -1,4 +1,3 @@
-import { Chips } from '../../../components/common/Chips';
 import '../../../styles/gathering/gatheringList.scss';
 type Props = {
   title: string;
@@ -18,12 +17,12 @@ export function GatheringList({ title, content, tag, imageUrl, mountain, capacit
         <div className="title">{title}</div>
         <div className="content">{content}</div>
         <div className="info-container">
-          <Chips variant="green3">{tag}</Chips>
+          <div className="tag">{tag}</div>
           <div>{mountain}</div>
           <div>
-            멤버 {attendance}/{capacity}
+            {attendance}/{capacity}(명)
           </div>
-          <div>날짜 {date}</div>
+          <div>{date}</div>
         </div>
       </div>
     </div>
