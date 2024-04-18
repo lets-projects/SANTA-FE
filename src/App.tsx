@@ -4,6 +4,7 @@ import './styles/_global.scss';
 import Navigation from './components/common/Naigation/Navigation';
 import Footer from './components/common/Footer';
 import Main from './pages/Main'; //레이아웃 테스트
+import TabBar from './components/common/Naigation/TabBar';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <Navigation />
       <div id="wrapper">
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/porfile" element={<>프로필 페이지 입니다</>} />
           <Route path="/rank" element={<>랭킹 페이지 입니다</>} />
           <Route path="/challenge" element={<>챌린지 페이지 입니다</>} />
@@ -21,6 +22,7 @@ function App() {
           <Route path="/setting" element={<>설정 페이지 입니다</>} />
         </Routes>
       </div>
+      <TabBar />
       <Footer />
     </div>
   );

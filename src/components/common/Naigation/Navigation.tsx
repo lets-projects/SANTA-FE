@@ -48,7 +48,7 @@ export default function Navigation() {
             <GiHamburgerMenu size="30" color="white" />
           </button>
           <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
-            <Link to="/" onClick={onClick}>
+            <Link to="/main" onClick={onClick}>
               <img src={logo} className={styles.logo} />
             </Link>
             <div className={styles.navContainer}>
