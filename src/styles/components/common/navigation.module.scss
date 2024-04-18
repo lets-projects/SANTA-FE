@@ -1,14 +1,12 @@
 @import "../../color";
-@import "../../global";
-
-.container {
-  @include setting;
-}
 
 .header {
   background-color: $green2;
   width: 100%;
   height: 3.125rem;
+
+  position: fixed;
+  z-index: 999;
 }
 
 .logo {
@@ -51,7 +49,7 @@
     margin: 0;
     padding: 0.938rem 0;
     padding-right: 1.563rem;
-    @include font-title;
+    font-size: 20px;
     a {
       text-decoration: none;
       color: $black;
