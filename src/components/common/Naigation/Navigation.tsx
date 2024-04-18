@@ -21,12 +21,12 @@ export default function Navigation() {
   const outside = useRef<any>();
 
   useEffect(() => {
-    document.addEventListener('mousedown', handlerOutsie);
+    document.addEventListener('mousedown', handlerOutside);
     return () => {
-      document.removeEventListener('mousedown', handlerOutsie);
+      document.removeEventListener('mousedown', handlerOutside);
     };
   });
-  const handlerOutsie = (e: MouseEvent) => {
+  const handlerOutside = (e: MouseEvent) => {
     if (!outside.current.contains(e.target)) {
       toggleSide();
     }
@@ -41,35 +41,33 @@ export default function Navigation() {
   };
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <nav className={isOpen ? styles.darkBg : ''}>
-          <button onClick={onClick} className={styles.hambergerBtn}>
-            <GiHamburgerMenu size="30" color="white" />
-          </button>
-          <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
-            <Link to="/main" onClick={onClick}>
-              <img src={logo} className={styles.logo} />
-            </Link>
-            <div className={styles.navContainer}>
-              <div className={styles.userBox}>
-                <UserProfile />
-              </div>
-              <div className={styles.linkBox}>
-                <ul>
-                  {NAVLIST.map((item) => (
-                    <li>
-                      <Link to={item.path} onClick={onClick}>
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <header className={styles.header}>
+      <nav className={isOpen ? styles.darkBg : ''}>
+        <button onClick={onClick} className={styles.hambergerBtn}>
+          <GiHamburgerMenu size="30" color="white" />
+        </button>
+        <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
+          <Link to="/" onClick={onClick}>
+            <img src={logo} className={styles.logo} />
+          </Link>
+          <div className={styles.navContainer}>
+            <div className={styles.userBox}>
+              <UserProfile />
+            </div>
+            <div className={styles.linkBox}>
+              <ul>
+                {NAVLIST.map((item) => (
+                  <li>
+                    <Link to={item.path} onClick={onClick}>
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-        </nav>
-      </header>
-    </div>
+        </div>
+      </nav>
+    </header>
   );
 }

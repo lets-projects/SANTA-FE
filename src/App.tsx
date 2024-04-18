@@ -12,7 +12,7 @@ function App() {
       <Navigation />
       <div id="wrapper">
         <Routes>
-          <Route path="/main" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/porfile" element={<>프로필 페이지 입니다</>} />
           <Route path="/rank" element={<>랭킹 페이지 입니다</>} />
           <Route path="/challenge" element={<>챌린지 페이지 입니다</>} />
