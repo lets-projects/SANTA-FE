@@ -41,36 +41,38 @@ export default function Navigation() {
   };
 
   return (
-    <header className={styles.header}>
-      <nav className={isOpen ? styles.darkBg : ""}>
-        <button onClick={onClick} className={styles.hambergerBtn}>
-          <GiHamburgerMenu size="30" color="white" />
-        </button>
-        <div
-          className={isOpen ? styles.navOpen : styles.navClose}
-          ref={outside}
-        >
-          <Link to="/" onClick={onClick}>
-            <img src={logo} className={styles.logo} />
-          </Link>
-          <div className={styles.navContainer}>
-            <div className={styles.userBox}>
-              <UserProfile />
-            </div>
-            <div className={styles.linkBox}>
-              <ul>
-                {NAVLIST.map((item) => (
-                  <li>
-                    <Link to={item.path} onClick={onClick}>
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <nav className={isOpen ? styles.darkBg : ""}>
+          <button onClick={onClick} className={styles.hambergerBtn}>
+            <GiHamburgerMenu size="30" color="white" />
+          </button>
+          <div
+            className={isOpen ? styles.navOpen : styles.navClose}
+            ref={outside}
+          >
+            <Link to="/" onClick={onClick}>
+              <img src={logo} className={styles.logo} />
+            </Link>
+            <div className={styles.navContainer}>
+              <div className={styles.userBox}>
+                <UserProfile />
+              </div>
+              <div className={styles.linkBox}>
+                <ul>
+                  {NAVLIST.map((item) => (
+                    <li>
+                      <Link to={item.path} onClick={onClick}>
+                        {item.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
+    </div>
   );
 }
