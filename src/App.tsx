@@ -8,8 +8,8 @@ import MainPage from './MainPage';
 function App() {
   return (
     <div className="app">
+      <Navigation />
       <div id="wrapper">
-        <Navigation />
         <Routes>
           <Route
             path="/"
