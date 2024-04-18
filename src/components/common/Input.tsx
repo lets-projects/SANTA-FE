@@ -9,11 +9,7 @@ type Props = {
 
 export const Input = ({ variant, onChange, value, placeholder }: Props) => {
   const inputClass = variant ? `input ${variant}` : `input`;
-  return (
-    <div>
-      <input className={inputClass} onChange={onChange} value={value} placeholder={placeholder}></input>
-    </div>
-  );
+  return <input className={inputClass} onChange={onChange} value={value} placeholder={placeholder}></input>;
 };
 
 type searchProps = {
@@ -24,7 +20,7 @@ type searchProps = {
 export const SearchInput = ({ onChange, value, placeholder }: searchProps) => {
   return (
     <div className="search-input-container">
-      <IoSearch className="search-icon" />
+      <IoSearch color="#498428" />
       <input className="search-input" onChange={onChange} value={value} placeholder={placeholder}></input>
     </div>
   );
