@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './styles/_global.scss';
 import Navigation from './components/common/Naigation/Navigation';
 import LoginPage from './pages/login/LoginPage';
+import Footer from './components/common/Footer';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/setting" element={<>설정 페이지 입니다</>} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
