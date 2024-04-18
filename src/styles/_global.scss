@@ -1,9 +1,10 @@
-@mixin setting{
-    width:390px;
-    height:100vh;
-    padding:2rem;
-    box-sizing: border-box;
-}
+@mixin setting {
+    @media (min-width: 390px) {
+      height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+  }
 @mixin flex-center-col{
     display: flex;
     flex-direction: column;
