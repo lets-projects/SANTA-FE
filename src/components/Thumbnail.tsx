@@ -1,4 +1,5 @@
 import IssueChip from './IssueChip';
+import '../pages/main/main.style.scss';
 
 interface ThumnailProps {
   img: string;

@@ -1,3 +1,5 @@
+import '../pages/main/main.style.scss';
+
 interface SectionTitleProps {
   title: string;
   subtitle: string;

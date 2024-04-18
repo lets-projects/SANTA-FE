@@ -1,4 +1,4 @@
-import '../main.style.scss';
+import '../pages/main/main.style.scss';
 
 export default function IssueChip() {
   return <div className="issue-chip">HOT🔥</div>;

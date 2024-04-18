@@ -1,4 +1,4 @@
-import IssueChip from './IssueChip';
+import IssueChip from '../../../components/IssueChip';
 interface ClubListProps {
   id: string;
   title: string;

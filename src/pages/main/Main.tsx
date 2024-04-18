@@ -1,7 +1,7 @@
 import { SliderMainImgBanner } from './components/SliderMainImgBanner';
 import { Button } from '../../components/common/Button';
-import SectionTitle from './components/SectionTitle';
-import Thumbnail from './components/Thumbnail';
+import SectionTitle from '../../components/SectionTitle';
+import Thumbnail from '../../components/Thumbnail';
 import Toggle from './components/Toggle';
 import ClubList from './components/ClubList';
 import RankList from './components/RankList';
