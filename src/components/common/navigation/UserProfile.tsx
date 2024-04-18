@@ -1,9 +1,9 @@
-import styles from "./UserProfile.module.scss";
+import styles from './UserProfile.module.scss';
 
 const user: { name: string; rank: number; img: string } = {
-  name: "산악대장",
+  name: '산악대장',
   rank: 1256,
-  img: "https://cdn.pixabay.com/photo/2022/08/05/05/59/korea-7366036_1280.jpg",
+  img: 'https://cdn.pixabay.com/photo/2022/08/05/05/59/korea-7366036_1280.jpg',
 };
 
 export default function UserProfile() {
