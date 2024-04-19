@@ -11,10 +11,10 @@ const NAVLIST = [
   { title: '내 프로필', path: '/profile' },
   { title: '랭킹', path: '/rank' },
   { title: '진행중인 챌린지', path: '/challenge' },
-  { title: '내 모임 바로가기', path: '/myclub' },
+  { title: '내 모임 바로가기', path: '/gathering' },
   { title: '실시간 채팅', path: '/livechat' },
   { title: '모임 만들기', path: '/createclub' },
-  { title: '설정', path: '/setting' },
+  { title: '회원가입', path: '/join' },
 ];
 
 export default function Navigation({ back }: { back: boolean }) {

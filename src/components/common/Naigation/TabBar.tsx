@@ -5,7 +5,7 @@ import styles from './tabBar.module.scss';
 const NAVLIST = [
   { title: '홈', icon: '🏠', path: '/' },
   { title: '실시간 채팅', icon: '💬', path: '/livechat' },
-  { title: '내 모임', icon: '📋', path: '/myclub' },
+  { title: '내 모임', icon: '📋', path: '/gathering' },
   { title: '랭킹', icon: '🏅', path: '/rank' },
   { title: '내 정보', icon: '👥', path: '/profile' },
 ];
