@@ -5,16 +5,19 @@ import { IoSearch } from 'react-icons/io5';
 import { Button } from '../../components/common/Button';
 import styles from '../../styles/gathering/gatheringMain.module.scss';
 import Thumbnail from '../../components/Thumbnail';
+import { Link } from 'react-router-dom';
 function GatheringMainPage() {
   return (
     <div className={styles.gatheringContainer}>
       <div className={styles.container}>
         <div className={styles.profileContainer}>
           <UserProfile_small name="윤혜원" imageUrl="/images/profile.png" />
-          <div className={styles.searchBtn}>
-            <IoSearch color="#498428" />
-            <div>모임을 검색해보세요</div>
-          </div>
+          <Link to={'/gathering/search'}>
+            <div className={styles.searchBtn}>
+              <IoSearch color="#498428" />
+              <div>모임을 검색해보세요</div>
+            </div>
+          </Link>
         </div>
         <Button variant="green3">모임 만들기</Button>
       </div>

@@ -6,7 +6,7 @@ import Navigation from './components/common/Naigation/Navigation';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import Main from './pages/main/Main.page';
-
+import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 function App() {
   return (
     <div className="app">
@@ -23,6 +23,7 @@ function App() {
           <Route path="/setting" element={<>설정 페이지 입니다</>} />
           <Route path="/join" element={<JoinPage />} />
           <Route path="/gathering" element={<GatheringMainPage />} />
+          <Route path="/gathering/search" element={<GatheringSearchPage />} />
         </Routes>
       </div>
     </div>
