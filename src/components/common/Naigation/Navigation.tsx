@@ -7,7 +7,7 @@ import styles from '../../../styles/components/common/navigation.module.scss';
 import UserProfile from './UserProfile';
 
 const NAVLIST = [
-  { title: '내 프로필', path: '/porfile' },
+  { title: '내 프로필', path: '/profile' },
   { title: '랭킹', path: '/rank' },
   { title: '진행중인 챌린지', path: '/challenge' },
   { title: '내 모임 바로가기', path: '/myclub' },

@@ -7,7 +7,7 @@ const NAVLIST = [
   { title: '실시간 채팅', icon: '💬', path: '/livechat' },
   { title: '내 모임', icon: '📋', path: '/myclub' },
   { title: '랭킹', icon: '🏅', path: '/rank' },
-  { title: '내 정보', icon: '👥', path: '/porfile' },
+  { title: '내 정보', icon: '👥', path: '/profile' },
 ];
 
 export default function TabBar() {
