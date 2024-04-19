@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoIosArrowBack } from 'react-icons/io';
 
 import logo from '../../../../public/images/logo.svg';
 import styles from '../../../styles/components/common/navigation.module.scss';
-import UserProfile from './components/UserProfile';
+import UserProfile from './UserProfile';
 
 const NAVLIST = [
   { title: '내 프로필', path: '/profile' },
@@ -17,6 +18,7 @@ const NAVLIST = [
 ];
 
 export default function Navigation() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const outside = useRef<any>();
 
@@ -40,12 +42,31 @@ export default function Navigation() {
     setIsOpen(!isOpen);
   };
 
+  const HambergerBtn = () => {
+    return (
+      <button onClick={onClick} className={styles.btn}>
+        <GiHamburgerMenu size="30" color="white" />
+      </button>
+    );
+  };
+
+  const BackBtn = () => {
+    return (
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+        className={styles.btn}
+      >
+        <IoIosArrowBack size="30" color="white" />
+      </button>
+    );
+  };
+
   return (
     <header className={styles.header}>
       <nav className={isOpen ? styles.darkBg : ''}>
-        <button onClick={onClick} className={styles.hambergerBtn}>
-          <GiHamburgerMenu size="30" color="white" />
-        </button>
+        <HambergerBtn />
         <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
           <Link to="/" onClick={onClick}>
             <img src={logo} className={styles.logo} />
