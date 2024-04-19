@@ -18,7 +18,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: '/profile', element: <ProfilePage /> },
-      { path: '/rank', element: <>랭킹 페이지 입니다</> },
       { index: true, element: <MainPage /> },
       { path: '/profile', element: <>프로필 페이지 입니다</> },
       { path: '/rank', element: <RankPage /> },
