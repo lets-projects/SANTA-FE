@@ -17,7 +17,7 @@ const NAVLIST = [
   { title: '설정', path: '/setting' },
 ];
 
-export default function Navigation() {
+export default function Navigation({ back }: { back: boolean }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const outside = useRef<any>();
@@ -66,7 +66,7 @@ export default function Navigation() {
   return (
     <header className={styles.header}>
       <nav className={isOpen ? styles.darkBg : ''}>
-        <HambergerBtn />
+        {back ? <BackBtn /> : <HambergerBtn />}
         <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
           <Link to="/" onClick={onClick}>
             <img src={logo} className={styles.logo} />

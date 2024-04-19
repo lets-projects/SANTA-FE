@@ -5,12 +5,13 @@ import TabBar from '../components/common/Naigation/TabBar';
 import Footer from '../components/common/Footer';
 
 const INCLUDE_TAB_BAR_PATH = ['/rank', '/challenge'];
+const INCLUDE_BACK_BTN_PATH = ['/profile', '/livechat'];
 
 export default function Layout() {
   const path = useLocation().pathname;
   return (
     <>
-      <Navigation />
+      <Navigation back={INCLUDE_BACK_BTN_PATH.includes(path)} />
       <Outlet />
       {INCLUDE_TAB_BAR_PATH.includes(path) && <TabBar />}
       <Footer />
