@@ -15,7 +15,7 @@ const MOCKUP_USER: UserList[] = [
   { userId: '4', rank: '4', userProfileImg: '', userNickname: '바다 거북이', userScore: '123214' },
   { userId: '5', rank: '5', userProfileImg: '', userNickname: '토끼와 엘리스', userScore: '123214' },
 ];
-export default function RankList() {
+export default function MainRankList() {
   return (
     <div className={styles.rankListBox}>
       {MOCKUP_USER.map((user) => (

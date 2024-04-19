@@ -3,15 +3,15 @@ import { Button } from '../../components/common/Button';
 import SectionTitle from '../../components/SectionTitle';
 import Thumbnail from '../../components/Thumbnail';
 import Toggle from './components/Toggle';
-import ClubList from './components/ClubList';
-import RankList from './components/RankList';
+import ClubList from './components/MainClubList';
+import UserRankList from './components/MainRankList';
 import styles from './main.module.scss';
 
 export default function Main() {
   return (
     <div className={styles.container}>
+      <SliderMainImgBanner />
       <div className={styles.flex}>
-        <SliderMainImgBanner />
         <div className={styles.buttonWrapper}>
           <Button onClick={() => {}} variant="yellow">
             내 인증 바로가기
@@ -25,17 +25,18 @@ export default function Main() {
           />
           <Thumbnail img="이미지" title="막걸리 한잔" isHotTopic={true} isIndexChip={true} />
         </div>
-        {/* todo div 붙이기 */}
         <div>
-          <div className={styles.toggleWrapper}>
-            <Toggle />
+          <div className={styles.sectionWrapper}>
+            <div className={styles.toggleWrapper}>
+              <Toggle />
+            </div>
+            <SectionTitle title="신규 모임" subtitle="현재 진행중인 모임을 확인해보세요." moreButtonParams="2" />
+            <ClubList />
           </div>
-          <SectionTitle title="신규 모임" subtitle="현재 진행중인 모임을 확인해보세요." moreButtonParams="2" />
-          <ClubList />
         </div>
         <div>
           <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" moreButtonParams="3" />
-          <RankList />
+          <UserRankList />
         </div>
       </div>
     </div>
