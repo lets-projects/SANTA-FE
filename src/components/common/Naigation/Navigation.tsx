@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -19,24 +19,24 @@ const NAVLIST = [
 
 export default function Navigation({ back }: { back: boolean }) {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const outside = useRef<any>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navRef = useRef<HTMLDivElement>(null);
+
+  const hideNav = useCallback((e: MouseEvent) => {
+    if (navRef.current === null) {
+      return;
+    }
+    if (!navRef.current.contains(e.target as HTMLElement)) {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handlerOutside);
+    document.addEventListener('click', hideNav, true);
     return () => {
-      document.removeEventListener('mousedown', handlerOutside);
+      document.removeEventListener('click', hideNav, true);
     };
-  });
-  const handlerOutside = (e: MouseEvent) => {
-    if (!outside.current.contains(e.target)) {
-      toggleSide();
-    }
-  };
-
-  const toggleSide = () => {
-    setIsOpen(false);
-  };
+  }, [hideNav]);
 
   const onClick = () => {
     setIsOpen(!isOpen);
@@ -67,7 +67,7 @@ export default function Navigation({ back }: { back: boolean }) {
     <header className={styles.header}>
       <nav className={isOpen ? styles.darkBg : ''}>
         {back ? <BackBtn /> : <HambergerBtn />}
-        <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
+        <div className={isOpen ? styles.navOpen : styles.navClose} ref={navRef}>
           <Link to="/" onClick={onClick}>
             <img src={logo} className={styles.logo} />
           </Link>
