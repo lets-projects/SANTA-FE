@@ -1,0 +1,21 @@
+//ClubList.tsx
+@import '../global';
+@import '../color';
+@import '../reset';
+
+.clublistItemBox {
+  @include flex-center-row;
+  margin: 0px 20px;
+  padding: 13px;
+  border-bottom: solid 1px $gray1;
+  cursor: pointer;
+}
+.chipPlace {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clubTitle {
+  width: 80%;
+}

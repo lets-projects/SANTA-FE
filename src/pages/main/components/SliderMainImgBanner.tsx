@@ -1,3 +1,4 @@
+import styles from '../main.module.scss';
 import { useState, useEffect } from 'react';
 
 const MOCKUP: SliderItems[] = [
@@ -11,7 +12,7 @@ interface SliderItems {
   title: string;
   subtitle: string;
 }
-import '../main.style.scss';
+import '../main.module.scss';
 
 const SliderMainImgBanner = () => {
   // todo api연결
@@ -29,14 +30,14 @@ const SliderMainImgBanner = () => {
   useEffect(() => {}, []);
   // 넘어오는 메인 이미지들을 map으로 반환
   return (
-    <div className="banner-container">
-      <div className="slider-button-wrapper">
-        <div className="pre-button">이전</div>
-        <div className="next-button">다음</div>
+    <div className={styles.bannerContainer}>
+      <div className={styles.sliderButtonWrapper}>
+        <div className={styles.preButton}>이전</div>
+        <div className={styles.nextButton}>다음</div>
       </div>
-      <ul className="slider-box">
+      <ul className={styles.sliderBox}>
         {MOCKUP.map((item) => (
-          <li className="slide-item">{item.title}</li>
+          <li className={styles.slideItem}>{item.title}</li>
         ))}
       </ul>
     </div>
