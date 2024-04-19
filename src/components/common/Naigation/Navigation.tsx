@@ -4,7 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 import logo from '../../../../public/images/logo.svg';
 import styles from '../../../styles/components/common/navigation.module.scss';
-import UserProfile from './UserProfile';
+import UserProfile from './components/UserProfile';
 
 const NAVLIST = [
   { title: '내 프로필', path: '/profile' },
