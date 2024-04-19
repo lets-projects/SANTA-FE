@@ -5,7 +5,8 @@ import './styles/_reset.scss';
 import Layout from './utils/Layout';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
-import Main from './pages/main/Main.page';
+import MainPage from './pages/main/MainPage';
+import RankPage from './pages/rank/RankPage';
 import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
 
@@ -18,6 +19,9 @@ const router = createBrowserRouter([
       { index: true, element: <Main /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/rank', element: <>랭킹 페이지 입니다</> },
+      { index: true, element: <MainPage /> },
+      { path: '/profile', element: <>프로필 페이지 입니다</> },
+      { path: '/rank', element: <RankPage /> },
       { path: '/challenge', element: <>챌린지 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/join', element: <JoinPage /> },

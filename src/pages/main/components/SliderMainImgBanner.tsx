@@ -1,4 +1,4 @@
-import styles from '../main.module.scss';
+import styles from '../mainPage.module.scss';
 import { useState, useEffect } from 'react';
 
 const MOCKUP: SliderItems[] = [
@@ -12,7 +12,6 @@ interface SliderItems {
   title: string;
   subtitle: string;
 }
-import '../main.module.scss';
 
 const SliderMainImgBanner = () => {
   // todo api연결
