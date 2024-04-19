@@ -22,25 +22,15 @@ function GatheringMainPage() {
         <Button variant="green3">모임 만들기</Button>
       </div>
       <div className={styles.container}>
-        <SectionTitle
-          title="인기 모임"
-          subtitle="현재 진행중인 챌린지/모임을 확인해보세요!"
-          isThereMoreButton={false}
-          isThereToggle={false}
-        />
-        <Thumbnail img="/images/profile.png" title="한라산 등반" isHotTopic={false} />
+        <SectionTitle title="인기 모임" subtitle="현재 진행중인 챌린지/모임을 확인해보세요!" isThereToggle={false} />
+        <Thumbnail img="/images/profile.png" title="한라산 등반" isHotTopic={false} isIndexChip={false} />
       </div>
       <div className={styles.container}>
-        <SectionTitle
-          title="나의 모임"
-          subtitle="참여중인 모임을 확인해보세요"
-          isThereMoreButton={true}
-          isThereToggle={false}
-        />
-        <Thumbnail img="" title="맛있는 김밥 먹는 모임" isHotTopic={false} />
+        <SectionTitle title="나의 모임" subtitle="참여중인 모임을 확인해보세요" isThereToggle={false} />
+        <Thumbnail img="" title="맛있는 김밥 먹는 모임" isHotTopic={false} isIndexChip={false} />
       </div>
       <div className={`${styles.container} ${styles.gap}`}>
-        <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" isThereMoreButton={true} />
+        <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
         <GatheringList
           title={'한라산 등반 모임'}
           content={'한라산에서 함께 등산하실 분'}
