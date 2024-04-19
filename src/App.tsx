@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <> hi dveloper🙃 im error page </>,
     children: [
-      { index: true, element: <Main /> },
+      { index: true, element: <MainPage /> },
       { path: '/profile', element: <ProfilePage /> },
       { path: '/rank', element: <>랭킹 페이지 입니다</> },
       { index: true, element: <MainPage /> },
