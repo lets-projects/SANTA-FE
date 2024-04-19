@@ -1,4 +1,4 @@
-import '../../../styles/gathering/gatheringList.scss';
+import styles from '../../../styles/gathering/gatheringList.module.scss';
 type Props = {
   title: string;
   content: string;
@@ -11,13 +11,13 @@ type Props = {
 };
 export function GatheringList({ title, content, tag, imageUrl, mountain, capacity, attendance, date }: Props) {
   return (
-    <div className="gathering-list-container">
-      <div className="image">이미지 : {imageUrl}</div>
-      <div className="text-container">
-        <div className="title">{title}</div>
-        <div className="content">{content}</div>
-        <div className="info-container">
-          <div className="tag">{tag}</div>
+    <div className={styles.gatheringListContainer}>
+      <div className={styles.image}>이미지 : {imageUrl}</div>
+      <div className={styles.textContainer}>
+        <div className={styles.subtitle1}>{title}</div>
+        <div className={styles.body2}>{content}</div>
+        <div className={`${styles.infoContainer} ${styles.body2}`}>
+          <div className={styles.tag}>{tag}</div>
           <div>{mountain}</div>
           <div>
             {attendance}/{capacity}(명)
