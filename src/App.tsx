@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import './styles/_global.scss';
 import './styles/_reset.scss';
+import Layout from './utils/Layout';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import Main from './pages/main/Main.page';
