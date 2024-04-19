@@ -1,3 +1,4 @@
+import TrophyBox from './components/TrophyBox';
 import styles from './profile.module.scss';
 
 interface User {
@@ -17,8 +18,7 @@ const USER: User = {
 export default function ProfilePage() {
   return (
     <div className={styles.container}>
-      <img src={USER.img} />
-      <img />
+      <TrophyBox />
     </div>
   );
 }
