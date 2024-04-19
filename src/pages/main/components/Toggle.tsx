@@ -1,7 +1,9 @@
+import styles from '../main.module.scss';
+
 export default function Toggle() {
   return (
-    <div className="toggle">
-      <div className="toggle-handler">인기</div>
+    <div className={styles.toggle}>
+      <div className={styles.toggleHandler}>인기</div>
     </div>
   );
 }

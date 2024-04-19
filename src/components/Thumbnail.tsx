@@ -1,5 +1,5 @@
 import IssueChip from './IssueChip';
-import '../pages/main/main.style.scss';
+import styles from '../styles/components/thumbnail.module.scss';
 
 interface ThumnailProps {
   img: string;
@@ -9,42 +9,42 @@ interface ThumnailProps {
 export default function Thumbnail({ img, title, isHotTopic }: ThumnailProps) {
   // todo api 연결 후 map으로 출력, img 태그 변경
   return (
-    <div className="thumnail-container">
-      <div className="thumnail-item-box">
-        <div className="index-badge">1</div>
+    <div className={styles.thumnailContainer}>
+      <div className={styles.thumnailItemBox}>
+        <div className={styles.indexBadge}>1</div>
         {isHotTopic ? (
-          <div className="chip-wrapper">
+          <div className={styles.chipWrapper}>
             <IssueChip />
           </div>
         ) : (
           ''
         )}
-        <div className="img">{img}</div>
-        <p className="thumnail-title">{title}</p>
+        <div className={styles.img}>{img}</div>
+        <p className={styles.thumnailTitle}>{title}</p>
       </div>
-      <div className="thumnail-item-box">
-        <div className="index-badge">1</div>
+      <div className={styles.thumnailItemBox}>
+        <div className={styles.indexBadge}>1</div>
         {isHotTopic ? (
-          <div className="chip-wrapper">
+          <div className={styles.chipWrapper}>
             <IssueChip />
           </div>
         ) : (
           ''
         )}
-        <div className="img">{img}</div>
-        <p className="thumnail-title">{title}</p>
+        <div className={styles.img}>{img}</div>
+        <p className={styles.thumnailTitle}>{title}</p>
       </div>{' '}
-      <div className="thumnail-item-box">
-        <div className="index-badge">1</div>
+      <div className={styles.thumnailItemBox}>
+        <div className={styles.indexBadge}>1</div>
         {isHotTopic ? (
-          <div className="chip-wrapper">
+          <div className={styles.chipWrapper}>
             <IssueChip />
           </div>
         ) : (
           ''
         )}
-        <div className="img">{img}</div>
-        <p className="thumnail-title">{title}</p>
+        <div className={styles.img}>{img}</div>
+        <p className={styles.thumnailTitle}>{title}</p>
       </div>
     </div>
   );

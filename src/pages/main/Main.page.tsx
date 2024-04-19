@@ -5,18 +5,19 @@ import Thumbnail from '../../components/Thumbnail';
 import Toggle from './components/Toggle';
 import ClubList from './components/ClubList';
 import RankList from './components/RankList';
+import styles from './main.module.scss';
 
 export default function Main() {
   return (
-    <div className="container">
-      <div className="flex">
+    <div className={styles.container}>
+      <div className={styles.flex}>
         <SliderMainImgBanner />
-        <div className="button-wrapper">
+        <div className={styles.buttonWrapper}>
           <Button onClick={() => {}} variant="yellow">
             내 인증 바로가기
           </Button>
         </div>
-        <div className="section-wrapper">
+        <div className={styles.sectionWrapper}>
           <SectionTitle
             title="챌린지 둘러보기"
             subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
@@ -25,8 +26,8 @@ export default function Main() {
           <Thumbnail img="이미지" title="막걸리 한잔" isHotTopic={true} />
         </div>
         {/* todo div 붙이기 */}
-        <div className="m0">
-          <div className="toggle-wrapper">
+        <div>
+          <div className={styles.toggleWrapper}>
             <Toggle />
           </div>
           <SectionTitle title="신규 모임" subtitle="현재 진행중인 모임을 확인해보세요." moreButtonId="2" />

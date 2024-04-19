@@ -1,5 +1,5 @@
-import '../pages/main/main.style.scss';
+import styles from '../styles/components/issueChip.module.scss';
 
 export default function IssueChip() {
-  return <div className="issue-chip">HOT🔥</div>;
+  return <div className={styles.issueChip}>HOT🔥</div>;
 }
