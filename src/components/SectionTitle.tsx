@@ -1,4 +1,4 @@
-import '../pages/main/main.style.scss';
+import styles from '../styles/components/sectionTitle.module.scss';
 
 interface SectionTitleProps {
   title: string;
@@ -15,12 +15,12 @@ export default function SectionTitle({
   isThereMoreButton = true,
 }: SectionTitleProps) {
   return (
-    <div className="section-title-wrapper">
-      <p className="title">{title}</p>
-      <div className="subtitle-wrapper">
-        <p className="subtitle">{subtitle}</p>
+    <div className={styles.sectionTitleWrapper}>
+      <p className={styles.title}>{title}</p>
+      <div className={styles.subtitleWrapper}>
+        <p className={styles.subtitle}>{subtitle}</p>
         {isThereMoreButton ? (
-          <p className="absolute-more-button" id={`${moreButtonId}`}>
+          <p className={styles.absoluteMoreButton} id={`${moreButtonId}`}>
             더보기 &gt;
           </p>
         ) : (
