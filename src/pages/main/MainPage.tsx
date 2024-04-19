@@ -5,7 +5,8 @@ import Thumbnail from '../../components/Thumbnail';
 import Toggle from './components/Toggle';
 import ClubList from './components/MainClubList';
 import UserRankList from './components/MainRankList';
-import styles from './main.module.scss';
+
+import styles from './mainPage.module.scss';
 
 export default function Main() {
   return (

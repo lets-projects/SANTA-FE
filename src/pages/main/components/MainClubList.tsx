@@ -1,4 +1,4 @@
-import styles from '../main.module.scss';
+import styles from '../mainPage.module.scss';
 import IssueChip from '../../../components/IssueChip';
 
 interface ClubListProps {

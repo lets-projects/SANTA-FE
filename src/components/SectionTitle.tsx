@@ -12,7 +12,6 @@ export default function SectionTitle({
   subtitle = '업적을 달설할 수 있는 챌린지를 확인해보세요!',
   moreButtonParams,
 }: SectionTitleProps) {
-  console.log(moreButtonParams);
   return (
     <div className={styles.sectionTitleWrapper}>
       <p className={styles.title}>{title}</p>

@@ -1,4 +1,4 @@
-import styles from '../main.module.scss';
+import styles from '../mainPage.module.scss';
 
 export default function Toggle() {
   return (
