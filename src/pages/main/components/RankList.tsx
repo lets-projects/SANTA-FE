@@ -1,4 +1,4 @@
-import '../main.style.scss';
+import styles from '../main.module.scss';
 
 interface UserList {
   userId: string;
@@ -17,15 +17,15 @@ const MOCKUP_USER: UserList[] = [
 ];
 export default function RankList() {
   return (
-    <div className="rank-list-box">
+    <div className={styles.rankListBox}>
       {MOCKUP_USER.map((user) => (
-        <div id={`${user.userId}`} className="rank-item-wrapper">
-          <div className="user-rank">{user.rank}</div>
-          <div className="profile-img-wrapper">
-            <div className="user-profile-img">{user.userProfileImg}</div>
+        <div id={`${user.userId}`} className={styles.rankItemWrapper}>
+          <div className={styles.userRank}>{user.rank}</div>
+          <div className={styles.profileImgWrapper}>
+            <div className={styles.userProfileImg}>{user.userProfileImg}</div>
           </div>
-          <div className="user-nickname">{user.userNickname}</div>
-          <div className="user-score">{user.userScore}</div>
+          <div className={styles.userNickname}>{user.userNickname}</div>
+          <div className={styles.userScore}>{user.userScore}</div>
         </div>
       ))}
     </div>

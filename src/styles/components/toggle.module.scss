@@ -1,0 +1,30 @@
+//Toggle.tsx
+@import '../global';
+@import '../color';
+@import '../reset';
+
+.toggle {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  border: gray solid 1px;
+  width: 64px;
+  height: 26px;
+  border-radius: 16px;
+}
+
+.toggleHandler {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 22px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 0.3em $gray1;
+  margin: 3px;
+  background-color: $green3;
+  color: $white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}

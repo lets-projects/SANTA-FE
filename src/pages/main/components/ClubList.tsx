@@ -1,4 +1,6 @@
+import styles from '../main.module.scss';
 import IssueChip from '../../../components/IssueChip';
+
 interface ClubListProps {
   id: string;
   title: string;
@@ -16,9 +18,9 @@ export default function ClubList() {
   return (
     <div>
       {MOCKUP_LIST.map((item) => (
-        <div className="clublist-item-box">
-          <div className="chip-place">{item.isHotTopic ? <IssueChip /> : ''}</div>
-          <p className="club-title">{item.title}</p>
+        <div className={styles.clublistItemBox}>
+          <div className={styles.chipPlace}>{item.isHotTopic ? <IssueChip /> : ''}</div>
+          <p className={styles.clubTitle}>{item.title}</p>
         </div>
       ))}
     </div>
