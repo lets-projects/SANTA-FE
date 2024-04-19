@@ -3,7 +3,7 @@ import '../pages/main/main.style.scss';
 interface SectionTitleProps {
   title: string;
   subtitle: string;
-  moreButtonId: string;
+  moreButtonId?: string;
   isThereMoreButton: boolean;
   isThereToggle?: boolean;
 }
