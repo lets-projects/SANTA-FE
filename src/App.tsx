@@ -5,6 +5,7 @@ import './styles/_reset.scss';
 import Navigation from './components/common/Naigation/Navigation';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
+import Main from './pages/main/Main.page';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Navigation />
       <div id="wrapper">
         <Routes>
-          <Route path="/" element={<>메인페이지 입니다</>} />
+          <Route path="/" element={<Main />} />
           <Route path="/porfile" element={<>프로필 페이지 입니다</>} />
           <Route path="/rank" element={<>랭킹 페이지 입니다</>} />
           <Route path="/challenge" element={<>챌린지 페이지 입니다</>} />

@@ -26,26 +26,43 @@
   justify-content: center;
   align-items: center;
 }
+@mixin flex-between-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin flex-between-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 
 @mixin font-title {
   font-weight: 700;
   font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 @mixin font-subtitle1 {
   font-weight: 700;
   font-size: 16px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 @mixin font-subtitle2 {
   font-weight: 500;
   font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 @mixin font-body1 {
   font-weight: 700;
   font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 @mixin font-body2 {
   font-weight: 500;
   font-size: 12px;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 body {
