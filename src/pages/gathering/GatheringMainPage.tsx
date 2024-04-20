@@ -6,6 +6,7 @@ import { Button } from '../../components/common/Button';
 import styles from '../../styles/gathering/gatheringMain.module.scss';
 import Thumbnail from '../../components/Thumbnail';
 import { Link } from 'react-router-dom';
+import { GatheringCategory } from './components/GatheringCategory';
 function GatheringMainPage() {
   return (
     <div className={styles.gatheringContainer}>
@@ -35,7 +36,8 @@ function GatheringMainPage() {
         <Thumbnail img="" title="맛있는 김밥 먹는 모임" isHotTopic={false} isIndexChip={false} />
       </div>
       <div className={`${styles.container} ${styles.gap}`}>
-        <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
+        <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" moreButtonParams="true" />
+        <GatheringCategory />
         <GatheringList
           title={'한라산 등반 모임'}
           content={'한라산에서 함께 등산하실 분'}
