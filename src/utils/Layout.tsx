@@ -4,7 +4,9 @@ import Navigation from '../components/common/Naigation/Navigation';
 import TabBar from '../components/common/Naigation/TabBar';
 import Footer from '../components/common/Footer';
 
-const INCLUDE_TAB_BAR_PATH = ['/rank', '/challenge'];
+const EXCLUDE_TAB_BAR_PATH = ['/challenge'];
+const INCLUDE_FOOTER_PATH = ['/', '/rank'];
+
 const INCLUDE_BACK_BTN_PATH = ['/profile', '/livechat', '/join'];
 
 export default function Layout() {
@@ -13,8 +15,8 @@ export default function Layout() {
     <>
       <Navigation back={INCLUDE_BACK_BTN_PATH.includes(path)} />
       <Outlet />
-      {INCLUDE_TAB_BAR_PATH.includes(path) && <TabBar />}
-      <Footer />
+      {INCLUDE_FOOTER_PATH.includes(path) && <Footer />}
+      {!EXCLUDE_TAB_BAR_PATH.includes(path) && <TabBar />}
     </>
   );
 }
