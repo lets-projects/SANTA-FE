@@ -18,6 +18,8 @@ const USER: User = {
 export default function ProfilePage() {
   return (
     <div className={styles.container}>
+      <img className={styles.userImg} src={USER.img} />
+      <div className={styles.nickname}>{USER.nickname}</div>
       <TrophyBox />
     </div>
   );

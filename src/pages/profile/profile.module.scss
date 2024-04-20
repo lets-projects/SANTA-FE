@@ -4,3 +4,9 @@
 .container {
   @include setting;
 }
+
+.userImg {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
