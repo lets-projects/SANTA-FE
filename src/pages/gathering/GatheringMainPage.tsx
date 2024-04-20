@@ -26,7 +26,12 @@ function GatheringMainPage() {
         <Thumbnail img="/images/profile.png" title="한라산 등반" isHotTopic={false} isIndexChip={false} />
       </div>
       <div className={styles.container}>
-        <SectionTitle title="나의 모임" subtitle="참여중인 모임을 확인해보세요" isThereToggle={false} />
+        <SectionTitle
+          title="나의 모임"
+          subtitle="참여중인 모임을 확인해보세요"
+          isThereToggle={false}
+          moreButtonParams="true"
+        />
         <Thumbnail img="" title="맛있는 김밥 먹는 모임" isHotTopic={false} isIndexChip={false} />
       </div>
       <div className={`${styles.container} ${styles.gap}`}>

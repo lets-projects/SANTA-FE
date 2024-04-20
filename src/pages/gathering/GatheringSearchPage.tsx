@@ -12,6 +12,7 @@ export function GatheringSearchPage() {
         </Link>
         <SearchInput placeholder="모임을 검색해보세요" />
       </div>
+      <div className={styles.back}>dddd</div>
     </div>
   );
 }

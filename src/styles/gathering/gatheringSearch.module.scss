@@ -6,6 +6,7 @@
 .mainContainer{
     @include flex-center-col;
     @include setting;
+    height: calc(100vh - 8.875rem) !important;
 }
 .backBtn{
     cursor: pointer;
@@ -14,4 +15,8 @@
 .containerRow{
     @include flex-between-row;
     width:100%;
+}
+.back{
+    height:300px;
+    background-color: red;
 }

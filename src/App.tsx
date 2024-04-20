@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: '/join', element: <JoinPage /> },
       { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },
-      { path: '/gathering', element: <GatheringSearchPage /> },
+      { path: '/gathering/search', element: <GatheringSearchPage /> },
     ],
   },
   {
