@@ -26,7 +26,7 @@
   flex-direction: row;
 }
 
-.buttom {
+.middle {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -37,4 +37,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.buttom {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.withdrawalBtn {
+  height: 3.4rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #ff8080;
+  color: white;
+  font-size: 0.93rem;
+  font-weight: 700;
 }

@@ -4,6 +4,7 @@ import AchievementsBox from './components/AchievementsBox';
 import CategoryBox from './components/CategotyBox';
 import GatheringBox from './components/GatheringBox';
 import TrophyBox from './components/TrophyBox';
+import OauthBtn from './components/OAuthBtn';
 import styles from './profile.module.scss';
 
 interface User {
@@ -21,9 +22,8 @@ const USER: User = {
 };
 
 export default function ProfilePage() {
-  //유저 권한, 세션에 토큰이 들어있는지 확인하는 hook 있으면 좋을듯?
+  //유저 권한 => 세션에 토큰이 들어있는지 확인
   const onClick = () => {
-    //프로필 수정의 경우 권한 확인?
     alert('버튼 클릭됨!');
   };
 
@@ -36,7 +36,7 @@ export default function ProfilePage() {
       </div>
       <div className={styles.infoContainer}>
         <TrophyBox />
-        <div className={styles.buttom}>
+        <div className={styles.middle}>
           <div className={styles.left}>
             <CategoryBox />
             <GatheringBox />
@@ -46,7 +46,9 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
-      <div className={styles.oauthContainer}></div>
+      <div className={styles.buttom}>
+        <button className={styles.withdrawalBtn}>회원 탈퇴</button>
+      </div>
     </div>
   );
 }
