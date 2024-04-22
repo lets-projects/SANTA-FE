@@ -6,6 +6,7 @@ import GatheringBox from './components/GatheringBox';
 import TrophyBox from './components/TrophyBox';
 import OauthBtn from './components/OAuthBtn';
 import styles from './profile.module.scss';
+import LoginBtn from './components/LoginBtn';
 
 interface User {
   userId: number;
@@ -49,6 +50,8 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className={styles.buttom}>
+        <LoginBtn value={'kakao'} />
+        <LoginBtn value={'google'} state={true} />
         <button className={styles.withdrawalBtn}>회원 탈퇴</button>
       </div>
     </div>
