@@ -10,6 +10,7 @@ import RankPage from './pages/rank/RankPage';
 import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 import { ParticipatingGroupPage } from './pages/gathering/ParticipatingGroupPage';
 import { PostPage } from './pages/gathering/PostPage';
+import { GatheringDetailPage } from './pages/gathering/GatheringDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: '/gathering/search', element: <GatheringSearchPage /> },
       { path: '/gathering/participate', element: <ParticipatingGroupPage /> },
       { path: '/gathering/post', element: <PostPage /> },
+      { path: '/gathering/detail', element: <GatheringDetailPage /> },
     ],
   },
   {

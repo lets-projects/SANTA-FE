@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { TitleContainer } from './components/TitleContainer';
 import styles from '../../styles/gathering/gatheringPostPage.module.scss';
 import { IoPersonOutline } from 'react-icons/io5';
@@ -5,7 +6,7 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { Button } from '../../components/common/Button';
 import { IoImageOutline } from 'react-icons/io5';
 import { DatePickerComponent } from '../../components/common/DatePickerComponent';
-import React, { ChangeEvent, useEffect, useState } from 'react'; // ChangeEvent 추가
+import { ChangeEvent, useEffect, useState } from 'react'; // ChangeEvent 추가
 import { IoCloseOutline } from 'react-icons/io5';
 
 export function PostPage() {
