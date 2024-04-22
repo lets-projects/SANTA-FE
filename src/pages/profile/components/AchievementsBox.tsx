@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PiMedal } from 'react-icons/pi';
 
 import styles from './Achievements.module.scss';
@@ -39,9 +39,12 @@ const totalHeight = RECORD.reduce((prev, current) => {
 const totalSummit = RECORD.length;
 
 export default function AchievementsBox() {
+  const navigate = useNavigate();
+
   const onClick = () => {
-    window.location.href = '/산인증페이지';
+    navigate('/산인증페이지');
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>

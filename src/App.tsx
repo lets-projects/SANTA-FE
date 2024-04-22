@@ -19,7 +19,6 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: '/profile', element: <ProfilePage /> },
       { index: true, element: <MainPage /> },
-      { path: '/profile', element: <>프로필 페이지 입니다</> },
       { path: '/rank', element: <RankPage /> },
       { path: '/challenge', element: <>챌린지 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },

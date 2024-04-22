@@ -4,9 +4,10 @@ import AchievementsBox from './components/AchievementsBox';
 import CategoryBox from './components/CategotyBox';
 import GatheringBox from './components/GatheringBox';
 import TrophyBox from './components/TrophyBox';
-import OauthBtn from './components/OAuthBtn';
 import styles from './profile.module.scss';
 import LoginBtn from './components/LoginBtn';
+import kakaoLogo from '/public/images/kakao.png';
+import googleLogo from '/public/images/google.svg';
 
 interface User {
   userId: number;
@@ -50,8 +51,8 @@ export default function ProfilePage() {
         </div>
       </div>
       <div className={styles.buttom}>
-        <LoginBtn value={'kakao'} />
-        <LoginBtn value={'google'} state={true} />
+        <LoginBtn loginType={'kakao'} imgUrl={kakaoLogo} />
+        <LoginBtn loginType={'google'} imgUrl={googleLogo} state={'연동하기'} />
         <button className={styles.withdrawalBtn}>회원 탈퇴</button>
       </div>
     </div>
