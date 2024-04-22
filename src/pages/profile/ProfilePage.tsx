@@ -32,7 +32,9 @@ export default function ProfilePage() {
       <div className={styles.userInfo}>
         <img className={styles.userImg} src={USER.img} />
         <div className={styles.userName}>{USER.nickname}</div>
-        <Button variant={'rounded-outline'} children={'프로필 수정'} onClick={onClick} />
+        <div className={styles.btn}>
+          <Button variant={'rounded-outline'} children={'프로필 수정'} onClick={onClick} />
+        </div>
       </div>
       <div className={styles.infoContainer}>
         <TrophyBox />
