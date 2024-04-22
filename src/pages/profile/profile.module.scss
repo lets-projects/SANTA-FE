@@ -22,6 +22,8 @@
 }
 
 .boxContainer {
-  flex-direction: column;
+  width: 20.9rem;
+  display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 }
