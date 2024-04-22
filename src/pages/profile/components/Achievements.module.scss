@@ -1,0 +1,36 @@
+@import '../../../styles/global';
+@import '../../../styles/color';
+@import './boxStyle';
+
+.container {
+  @include container-default;
+  width: 9.37rem;
+  height: 21.6rem;
+  background-color: #eef2b1;
+}
+
+.title {
+  @include title-default;
+}
+
+.icon {
+  @include icon-default;
+}
+
+.records {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.3rem;
+  p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0 0.75rem 1rem;
+  }
+}
+
+.achievName {
+  font-size: 0.94rem;
+  color: $gray2;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+}

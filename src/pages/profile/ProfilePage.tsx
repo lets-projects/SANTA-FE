@@ -1,3 +1,6 @@
+import { Button } from '../../components/common/Button';
+import AchievementsBox from './components/AchievementsBox';
+import CategoryBox from './components/CategotyBox';
 import TrophyBox from './components/TrophyBox';
 import styles from './profile.module.scss';
 
@@ -16,11 +19,24 @@ const USER: User = {
 };
 
 export default function ProfilePage() {
+  //유저 권한, 세션에 토큰이 들어있는지 확인하는 hook 있으면 좋을듯?
+  const onClick = () => {
+    //프로필 수정의 경우 권한 확인?
+    alert('버튼 클릭됨!');
+  };
+
   return (
     <div className={styles.container}>
-      <img className={styles.userImg} src={USER.img} />
-      <div className={styles.nickname}>{USER.nickname}</div>
-      <TrophyBox />
+      <div className={styles.userInfo}>
+        <img className={styles.userImg} src={USER.img} />
+        <div className={styles.userName}>{USER.nickname}</div>
+        <Button variant={'rounded-outline'} children={'프로필 수정'} onClick={onClick} />
+      </div>
+      <div className={styles.boxContainer}>
+        <TrophyBox />
+        <CategoryBox />
+        <AchievementsBox />
+      </div>
     </div>
   );
 }

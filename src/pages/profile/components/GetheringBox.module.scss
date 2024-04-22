@@ -1,0 +1,16 @@
+@import '../../../styles/global';
+@import '../../../styles/color';
+@import './boxStyle';
+
+.container {
+  @include container-default;
+  width: 9.37rem;
+}
+
+.title {
+  @include title-default;
+}
+
+.icon {
+  @include icon-default;
+}

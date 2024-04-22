@@ -1,6 +1,7 @@
 import { GoTrophy } from 'react-icons/go';
 
 import styles from './TrophyBox.module.scss';
+import { Link } from 'react-router-dom';
 
 interface Trophy {
   name: string;
@@ -41,7 +42,9 @@ export default function () {
     <div className={styles.container}>
       <div className={styles.title}>
         <p>획득한 트로피</p>
-        <GoTrophy className={styles.trophyIcon} />
+        <Link to="/challenge">
+          <GoTrophy className={styles.icon} />
+        </Link>
       </div>
       <div className={styles.trophyList}>
         {ACHIEVE_TROPHY.map((item) => {
