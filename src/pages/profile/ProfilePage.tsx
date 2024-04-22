@@ -6,8 +6,8 @@ import GatheringBox from './components/GatheringBox';
 import TrophyBox from './components/TrophyBox';
 import styles from './profile.module.scss';
 import LoginBtn from './components/LoginBtn';
-import kakaoLogo from '/public/images/kakao.png';
-import googleLogo from '/public/images/google.svg';
+import kakaoLogo from '/images/kakao.png';
+import googleLogo from '/images/google.svg';
 
 interface User {
   userId: number;

@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PiMedal } from 'react-icons/pi';
 
 import styles from './Achievements.module.scss';
-import mountain from '../../../../public/images/mountain.png';
+import mountain from '/images/mountain.png';
 
 interface Record {
   name: string;
