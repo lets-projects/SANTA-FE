@@ -20,6 +20,7 @@ export function SearchList() {
   }
   const gatheringData = [
     {
+      leaderId: '12334',
       title: '한라산에서 모일사람',
       content: '안녕하세요',
       tag: '힐링',
@@ -30,6 +31,7 @@ export function SearchList() {
       date: '2023.03.23',
     },
     {
+      leaderId: '123222',
       title: '222한라산에서 모일사람',
       content: '22안녕하세요',
       tag: '2힐링',
@@ -62,8 +64,8 @@ export function SearchList() {
           </div>
         </div>
       </div>
-      {gatheringData.map((item, index) => (
-        <div key={index} className={styles.width100}>
+      {gatheringData.map((item) => (
+        <div key={item.leaderId} className={styles.width100}>
           <GatheringList
             title={item.title}
             content={item.content}

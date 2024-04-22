@@ -9,6 +9,7 @@ export function ParticipatingGroupPage() {
   const [showInProgress, setShowInProgress] = useState(false);
   const data = [
     {
+      leaderId: '23333',
       title: '한라산 등반 모임',
       content: '한라산에서 함께 등산하실 분',
       tag: '힐링',
@@ -19,6 +20,7 @@ export function ParticipatingGroupPage() {
       date: '2023.08.14',
     },
     {
+      leaderId: '2333411',
       title: '한라산 등반 모임',
       content: '한라산에서 함께 등산하실 분',
       tag: '힐링',
@@ -40,9 +42,9 @@ export function ParticipatingGroupPage() {
           {showInProgress ? <IoCheckmarkCircleSharp color="#498428" /> : <IoCheckmarkCircleOutline color="#498428" />}
           <div className={styles.body1}>활동 완료된 모임 숨기기</div>
         </div>
-        {data.map((item, index) => (
+        {data.map((item) => (
           <div
-            key={index}
+            key={item.leaderId}
             className={`${styles.width100} ${styles.bgLightYellow} ${styles.borderRadius} ${styles.padding}`}
           >
             <GatheringList

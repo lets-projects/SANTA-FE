@@ -9,9 +9,9 @@
 .inputContainer{
     display:flex;
     flex-direction: column;
-    margin:1rem 0;
+    margin:2rem 0;
     gap:1rem;
-    input{
+    .inputBox{
         padding:0.6rem 1rem;
         height:2.5rem;
         box-sizing: border-box;
@@ -34,6 +34,7 @@
     align-items: center;
     flex-wrap: nowrap;
     @include font-body1
+    
 }
 
 .width60{
@@ -64,10 +65,50 @@
 .grayBack{
     background-color: $white2;
     height:100%;
-    padding:0 1rem;
+    padding-right: 1rem;
 }
 .outlineContainer{
     border-color: $white2;
     border:0.1rem solid $white2;
     padding: 0.8rem;
+}
+.center{
+    @include flex-center-col;
+    height:100%;
+}
+
+.inputSettingWidth{
+    width:14rem;
+}
+.tagInput{
+    background-color: $white;
+    border:none;
+    outline:none;
+    width:100%;
+    // border:0.1rem solid $green3;
+    // border-radius: 20%;
+}
+.tagContainer{
+    display:flex;
+    gap:0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-wrap: wrap;
+}
+.tagItem{
+    padding:0.3rem;
+    border:0.1rem solid $green3;
+    border-radius: 1.5rem;
+}
+.closeBtn:hover{
+    background-color: $green2;
+    cursor:pointer;
+   border-radius: 50%;
+    
+   
+   
+}
+.pointer{
+    cursor:pointer;
 }

@@ -4,7 +4,12 @@ import { IoCloseOutline } from 'react-icons/io5';
 import styles from '../../../styles/gathering/gatheringSearch.module.scss';
 
 export function SearchKeyword() {
-  const [searchKeywords, setSearchKeywords] = useState(['검색1', '검색어2', '검색3', '4', '5', '6']);
+  const [searchKeywords, setSearchKeywords] = useState([
+    { id: 1, keyword: '검색1' },
+    { id: 2, keyword: '검색2' },
+    { id: 3, keyword: '검색3' },
+    { id: 4, keyword: '검색4' },
+  ]);
   const [isDeleted, setIsDeleted] = useState(false);
   function deleteSearchKeyword(index: number) {
     const newArr = [...searchKeywords.slice(0, index), ...searchKeywords.slice(index + 1)];
@@ -27,10 +32,10 @@ export function SearchKeyword() {
         </div>
         <div className={`${styles.containerRow} ${styles.wrap}`}>
           {searchKeywords.map((item, index) => (
-            <div key={index} className={styles.chipContainer}>
+            <div key={item.id} className={styles.chipContainer}>
               <Chips variant="green1">
                 <div className={styles.chipContainer}>
-                  {item}
+                  {item.keyword}
                   {isDeleted && (
                     <IoCloseOutline className={styles.closeBtn} onClick={() => deleteSearchKeyword(index)} />
                   )}
