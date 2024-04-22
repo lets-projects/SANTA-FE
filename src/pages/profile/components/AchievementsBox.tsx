@@ -57,9 +57,9 @@ export default function AchievementsBox() {
         <p>{totalSummit} 개</p>
       </div>
       <div className={styles.btnContainer}>
-        <button className={styles.certificationBtn} onClick={onClick}>
+        {/* <button className={styles.certificationBtn} onClick={onClick}>
           인증하기
-        </button>
+        </button> */}
       </div>
       <img className={styles.mountainImg} src={mountain} />
     </div>

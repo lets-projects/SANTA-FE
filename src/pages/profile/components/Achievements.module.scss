@@ -4,7 +4,8 @@
 
 .container {
   @include container-default;
-  width: 9.37rem;
+  display: flex;
+  width: 9.3rem;
   height: 21.6rem;
   background-color: #eef2b1;
 }
