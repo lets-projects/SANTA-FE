@@ -20,9 +20,21 @@
   @include font-title;
   padding: 0.75rem 0 0.8rem;
 }
-
-.boxContainer {
+.infoContainer {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.buttom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.94rem;
+}
+
+.left {
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }

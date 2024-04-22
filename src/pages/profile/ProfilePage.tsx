@@ -34,12 +34,19 @@ export default function ProfilePage() {
         <div className={styles.userName}>{USER.nickname}</div>
         <Button variant={'rounded-outline'} children={'프로필 수정'} onClick={onClick} />
       </div>
-      <div className={styles.boxContainer}>
+      <div className={styles.infoContainer}>
         <TrophyBox />
-        <CategoryBox />
-        <GatheringBox />
-        <AchievementsBox />
+        <div className={styles.buttom}>
+          <div className={styles.left}>
+            <CategoryBox />
+            <GatheringBox />
+          </div>
+          <div className={styles.right}>
+            <AchievementsBox />
+          </div>
+        </div>
       </div>
+      <div className={styles.oauthContainer}></div>
     </div>
   );
 }
