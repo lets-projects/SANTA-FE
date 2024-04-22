@@ -1,0 +1,73 @@
+@import '../color';
+@import '../global';
+@import '../reset';
+
+.mainContainer{
+    @apply flex-between-col;
+    @include setting;
+}
+.inputContainer{
+    display:flex;
+    flex-direction: column;
+    margin:1rem 0;
+    gap:1rem;
+    input{
+        padding:0.6rem 1rem;
+        height:2.5rem;
+        box-sizing: border-box;
+        background-color: $white2;
+        border:none;
+        outline:none;
+        width:100%;
+    }
+}
+.containerCol{
+    display: flex;
+    flex-direction: column;
+    gap:0.5rem;
+    justify-content: space-between;
+}
+.containerRow{
+    display:flex;
+    gap:0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    @include font-body1
+}
+
+.width60{
+    width:60%
+}
+.width20{
+    width:20%;
+}
+.imageContainer{
+    width: 6rem;
+    height:6rem;
+    // padding-top: 38%; /* 너비의 38%만큼의 높이를 설정 */
+    position: relative;
+    overflow: hidden;
+    box-sizing: content-box;
+    background-color: $white2;
+}
+.imageInput{
+    display: none;
+}
+.textarea{
+    background-color: $white2;
+    border:none;
+    padding:1rem;
+    outline:none;
+}
+
+.grayBack{
+    background-color: $white2;
+    height:100%;
+    padding:0 1rem;
+}
+.outlineContainer{
+    border-color: $white2;
+    border:0.1rem solid $white2;
+    padding: 0.8rem;
+}

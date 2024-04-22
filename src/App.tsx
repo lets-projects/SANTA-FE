@@ -8,6 +8,8 @@ import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import MainPage from './pages/main/MainPage';
 import RankPage from './pages/rank/RankPage';
 import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
+import { ParticipatingGroupPage } from './pages/gathering/ParticipatingGroupPage';
+import { PostPage } from './pages/gathering/PostPage';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/gathering/search', element: <GatheringSearchPage /> },
+      { path: '/gathering/participate', element: <ParticipatingGroupPage /> },
+      { path: '/gathering/post', element: <PostPage /> },
     ],
   },
   {

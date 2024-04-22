@@ -42,3 +42,47 @@ a{
 .gap{
     gap:1rem;
 }
+.width100{
+    width:100%;
+    @extend a;
+}
+
+.titleContainer{
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    div{
+        margin: 0 auto;
+        @include font-title;
+        color:$green3;
+    }
+}
+.backBtn{
+    cursor: pointer;
+    // margin-right:auto;
+}
+.iconTextContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding:0 0.2rem;
+    gap:0.3rem;
+    @include font-body1;
+    color:$green3;
+}
+
+.bgLightYellow{
+    background-color: #F5F7CE;
+}
+.bgLightGreen{
+    background-color: #EAEF9D;
+}
+.borderRadius{
+    border-radius: 1rem;
+}
+.padding{
+    padding:0.2rem 1rem;
+}
