@@ -3,7 +3,7 @@
 @import '../reset';
 
 .mainContainer{
-    @apply flex-between-col;
+    @include flex-between-col;
     @include setting;
 }
 .inputContainer{

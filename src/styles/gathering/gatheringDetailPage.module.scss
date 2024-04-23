@@ -1,5 +1,6 @@
-@import '../color';
 @import '../global';
+@import '../color';
+@import '../reset';
 
 .gatheringDetailContainer{
     @include flex-center-col;
@@ -57,4 +58,24 @@
     align-items: flex-start;
     width:100%;
     gap:0.5rem;
+}
+.subtitle1{
+    @include font-subtitle1;
+}
+.memberContainer{
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-start;
+    width:100%;
+    margin-top:0.8rem;
+}
+
+.profileListContainer{
+    display:flex;
+    gap:2rem;
+    flex-wrap: nowrap;
+    width:100%;
+    overflow-x : auto;
+    padding:0.2rem 0;
+
 }

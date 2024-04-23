@@ -5,6 +5,7 @@
     padding: 2rem;
     padding-top: 5.125rem;
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
   }
   @media (min-width: 390px) {
     width: 390px;
@@ -12,6 +13,7 @@
     padding: 2rem;
     padding-top: 5.125rem;
     box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
   }
 }
 @mixin flex-center-col {

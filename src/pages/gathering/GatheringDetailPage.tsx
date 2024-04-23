@@ -4,6 +4,8 @@ import { FaMountain } from 'react-icons/fa';
 import { IoPersonOutline } from 'react-icons/io5';
 import { IoCalendarClearOutline } from 'react-icons/io5';
 import { Chips } from '../../components/common/Chips';
+import { VerticalProfile } from './components/VerticalProfile';
+import { Button } from '../../components/common/Button';
 
 export function GatheringDetailPage() {
   const data = {
@@ -20,6 +22,14 @@ export function GatheringDetailPage() {
     participants: [
       {
         userId: 1,
+        userName: 'string',
+      },
+      {
+        userId: 2,
+        userName: 'string',
+      },
+      {
+        userId: 3,
         userName: 'string',
       },
     ],
@@ -56,6 +66,17 @@ export function GatheringDetailPage() {
               </div>
             ))}
           </div>
+          <div className={styles.memberContainer}>
+            <div className={styles.subtitle1}>참여인원</div>
+            <div className={styles.profileListContainer}>
+              {data.participants.map((item) => (
+                <div key={item.userId}>
+                  <VerticalProfile name={item.userName} imageUrl="/images/defaultProfile.png" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <Button variant="green3">참가신청하기</Button>
         </div>
       </div>
     </div>
