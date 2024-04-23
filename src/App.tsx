@@ -29,6 +29,8 @@ const router = createBrowserRouter([
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/gathering', element: <GatheringSearchPage /> },
       { path: '/trophy', element: <TrophyPage /> },
+      { path: '/find_password', element: <>비번찾기</> },
+      { path: '/find_account', element: <>계정찾기</> },
     ],
   },
   {
