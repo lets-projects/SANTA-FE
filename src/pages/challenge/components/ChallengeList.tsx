@@ -31,7 +31,7 @@ export default function ChallengeBox({ data, color }: { data: Challenge[]; color
                   <div className={styles.progress} ref={progressRef}>
                     <div
                       className={color == 'green1' ? styles.percentBar_g : styles.percentBar_y}
-                      style={{ width: item.progress }}
+                      style={{ width: `${item.progress}` }}
                     />
                   </div>
                 </div>

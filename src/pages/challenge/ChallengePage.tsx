@@ -3,18 +3,18 @@ import { UserProfile_small } from '/src/components/common/UserProfile_small';
 import ChallengeList from './components/ChallengeList';
 import { useState } from 'react';
 
-const CHALLENGE = [
+const CHALLENGE1 = [
   {
     name: '11111',
     imgUrl: 'https://cdn.pixabay.com/photo/2021/07/13/11/34/cat-6463284_1280.jpg',
     description: '영차! 올라가봅시다!!',
-    progress: '10%',
+    progress: '20%',
   },
   {
     name: '22222',
     imgUrl: 'https://cdn.pixabay.com/photo/2021/07/13/11/34/cat-6463284_1280.jpg',
     description: '영차! 올라가봅시다!!',
-    progress: '60%',
+    progress: '50%',
   },
   {
     name: '3333',
@@ -24,9 +24,30 @@ const CHALLENGE = [
   },
 ];
 
+const CHALLENGE2 = [
+  {
+    name: '4444',
+    imgUrl: 'https://cdn.pixabay.com/photo/2021/07/13/11/34/cat-6463284_1280.jpg',
+    description: '잉차! 올라가봅시다!!',
+    progress: '50%',
+  },
+  {
+    name: '5555',
+    imgUrl: 'https://cdn.pixabay.com/photo/2021/07/13/11/34/cat-6463284_1280.jpg',
+    description: '잉차! 올라가봅시다!!',
+    progress: '70%',
+  },
+  {
+    name: '66666',
+    imgUrl: 'https://cdn.pixabay.com/photo/2021/07/13/11/34/cat-6463284_1280.jpg',
+    description: '잉차! 올라가봅시다!!',
+    progress: '90%',
+  },
+];
+
 const tabData = [
-  { button: '진행중인 챌린지', data: CHALLENGE },
-  { button: '시작 전 챌린지', data: CHALLENGE },
+  { button: '진행중인 챌린지', data: CHALLENGE1 },
+  { button: '시작 전 챌린지', data: CHALLENGE2 },
 ];
 
 export default function ChallengePage() {
@@ -42,7 +63,7 @@ export default function ChallengePage() {
         {tabData.map((item, index) => {
           return (
             <button
-              className={styles.tabBtn}
+              className={openTab == index ? styles.clickedBtn : styles.nomalBtn}
               onClick={() => {
                 setOpenTab(index);
               }}
