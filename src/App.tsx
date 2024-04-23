@@ -10,6 +10,7 @@ import MainPage from './pages/main/MainPage';
 import RankPage from './pages/rank/RankPage';
 import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
+import ChallengePage from './pages/challenge/ChallengePage';
 
 const router = createBrowserRouter([
   {
@@ -19,9 +20,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <MainPage /> },
       { path: '/profile', element: <ProfilePage /> },
-      { index: true, element: <MainPage /> },
       { path: '/rank', element: <RankPage /> },
-      { path: '/challenge', element: <>챌린지 페이지 입니다</> },
+      { path: '/challenge', element: <ChallengePage /> },
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/join', element: <JoinPage /> },
       { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
