@@ -2,6 +2,7 @@ import styles from './ChallengePage.module.scss';
 import { UserProfile_small } from '/src/components/common/UserProfile_small';
 import ChallengeList from './components/ChallengeList';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CHALLENGE1 = [
   {
@@ -52,12 +53,20 @@ const tabData = [
 
 export default function ChallengePage() {
   const [openTab, setOpenTab] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <UserProfile_small name={'산악대'} />
-        <button className={styles.myTrophyBtn}>나의 트로피 보러 가기</button>
+        <button
+          className={styles.myTrophyBtn}
+          onClick={() => {
+            navigate('/trophy');
+          }}
+        >
+          나의 트로피 보러 가기
+        </button>
       </div>
       <div className={styles.middle}>
         {tabData.map((item, index) => {

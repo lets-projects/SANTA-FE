@@ -11,6 +11,7 @@ import RankPage from './pages/rank/RankPage';
 import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChallengePage from './pages/challenge/ChallengePage';
+import TrophyPage from './pages/trophy/TrophyPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/gathering', element: <GatheringSearchPage /> },
+      { path: '/trophy', element: <TrophyPage /> },
     ],
   },
   {
