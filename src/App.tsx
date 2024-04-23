@@ -12,6 +12,8 @@ import { GatheringSearchPage } from './pages/gathering/GatheringSearchPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChallengePage from './pages/challenge/ChallengePage';
 import TrophyPage from './pages/trophy/TrophyPage';
+import FindAccountPage from './pages/finduser/FindAccountPage';
+import FindPasswordPage from './pages/finduser/FindPasswordPage';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +31,8 @@ const router = createBrowserRouter([
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/gathering', element: <GatheringSearchPage /> },
       { path: '/trophy', element: <TrophyPage /> },
-      { path: '/find_password', element: <>비번찾기</> },
-      { path: '/find_account', element: <>계정찾기</> },
+      { path: '/find_account', element: <FindAccountPage /> },
+      { path: '/find_password', element: <FindPasswordPage /> },
     ],
   },
   {
