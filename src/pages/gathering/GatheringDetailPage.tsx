@@ -6,6 +6,7 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { Chips } from '../../components/common/Chips';
 import { VerticalProfile } from './components/VerticalProfile';
 import { Button } from '../../components/common/Button';
+// import { api } from '/src/services/api';
 
 export function GatheringDetailPage() {
   const data = {
@@ -34,6 +35,8 @@ export function GatheringDetailPage() {
       },
     ],
   };
+
+  // async function fetchData() {}
   return (
     <div className={styles.gatheringDetailContainer}>
       <TitleContainer title="모임 상세보기" />

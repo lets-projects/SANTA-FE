@@ -6,7 +6,7 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { Button } from '../../components/common/Button';
 import { IoImageOutline } from 'react-icons/io5';
 import { DatePickerComponent } from '../../components/common/DatePickerComponent';
-import { ChangeEvent, useEffect, useState } from 'react'; // ChangeEvent 추가
+import { ChangeEvent, useEffect, useRef, useState } from 'react'; // ChangeEvent 추가
 import { IoCloseOutline } from 'react-icons/io5';
 
 export function PostPage() {
@@ -14,6 +14,7 @@ export function PostPage() {
   const [formatDate, setFormatDate] = useState('');
   const [tag, setTag] = useState<string[]>([]);
   const [tagValue, setTagValue] = useState<string>();
+  const [imgFile, setImgFile] = useState<string | null>(null);
 
   const handleDateChange = (date: Date) => {
     if (date) {
@@ -56,6 +57,23 @@ export function PostPage() {
   useEffect(() => {
     console.log(tag);
   }, [tag]);
+
+  function handleImageUpload(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        console.log(typeof reader.result);
+        if (reader.result !== null && typeof reader.result === 'string') {
+          setImgFile(reader.result);
+        }
+      };
+
+      console.log(file);
+    }
+  }
   return (
     <div className={styles.mainContainer}>
       <TitleContainer title="모임 만들기" />
@@ -66,9 +84,19 @@ export function PostPage() {
             <input placeholder="산" onClick={clickMountainSearch} className={styles.inputBox} />
           </div>
           <div className={styles.imageContainer}>
-            <input id="image" type="file" placeholder="사진" className={`${styles.inputBox} ${styles.imageInput}`} />
+            <input
+              id="image"
+              type="file"
+              placeholder="사진"
+              className={`${styles.inputBox} ${styles.imageInput}`}
+              onChange={handleImageUpload}
+            />
             <label htmlFor="image" className={styles.center}>
-              <IoImageOutline size="2rem" color="#7f7f7f" />
+              {imgFile ? (
+                <img src={imgFile} className={styles.image}></img>
+              ) : (
+                <IoImageOutline size="2rem" color="#7f7f7f" />
+              )}
             </label>
           </div>
         </div>
