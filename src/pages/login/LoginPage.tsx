@@ -23,19 +23,19 @@ function LoginPage() {
   const postLogin = useMutation({
     mutationFn: (loginData: LoginForm) => axios.post(`http://43.200.136.37:8080/api/users/sign-in`, loginData),
     onSuccess: (data) => {
-      console.log('성공!!', data.data);
       localStorage.setItem('access', data.data.accessToken);
       localStorage.setItem('refresh', data.data.refreshToken);
+      navigate('/');
     },
     onError: (data) => {
       console.log('아임 에러!!!!', data);
+      alert('로그인 다시 시도해주세유 :(');
     },
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     postLogin.mutate(loginData);
-    navigate('/');
   };
 
   return (
@@ -45,7 +45,7 @@ function LoginPage() {
         <div className="login-description">로그인 하시면 더 다양한 기능을 이용하실 수 있습니다</div>
       </div>
       <div className="input-container">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="email input-container">
             <IoMailOutline className="mail-icon" />
             <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
@@ -54,7 +54,7 @@ function LoginPage() {
             <IoLockOpenOutline />
             <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
           </div>
-          <button type="submit" className="login-btn" onClick={handleSubmit}>
+          <button type="submit" className="login-btn">
             로그인
           </button>
         </form>
