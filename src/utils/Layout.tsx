@@ -8,7 +8,15 @@ const INCLUDE_TAB_BAR_PATH = ['/rank', '/challenge', '/gathering', '/gathering/s
 const INCLUDE_FOOTER_PATH = ['/', '/rank'];
 
 //나중에 nav 컴포넌트 안에서 제어하기
-const INCLUDE_BACK_BTN_PATH = ['/livechat', '/join', '/challenge', '/trophy', '/find_password', '/find_account'];
+const INCLUDE_BACK_BTN_PATH = [
+  '/livechat',
+  '/join',
+  '/challenge',
+  '/trophy',
+  '/user/find_password',
+  '/user/find_account',
+  '/user/category',
+];
 
 export default function Layout() {
   const path = useLocation().pathname;
