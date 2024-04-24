@@ -9,6 +9,7 @@ import UserProfile from './UserProfile';
 import paths from '/src/utils/path';
 
 const NAVLIST = [
+  { title: '메인', path: '/' },
   { title: '내 프로필', path: paths.PROFILE },
   { title: '랭킹', path: paths.RANK },
   { title: '진행중인 챌린지', path: paths.CHALLENGE },
