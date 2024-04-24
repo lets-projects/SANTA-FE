@@ -15,8 +15,8 @@ import { GatheringDetailPage } from './pages/gathering/GatheringDetailPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import ChallengePage from './pages/challenge/ChallengePage';
 import TrophyPage from './pages/trophy/TrophyPage';
-import FindAccountPage from './pages/finduser/FindAccountPage';
-import FindPasswordPage from './pages/finduser/FindPasswordPage';
+import FindAccountPage from './pages/user/find/FindAccountPage';
+import FindPasswordPage from './pages/user/find/FindPasswordPage';
 import ChoiceCategoty from './pages/ChoiceCategory';
 
 const router = createBrowserRouter([
@@ -26,7 +26,6 @@ const router = createBrowserRouter([
     errorElement: <> hi dveloper🙃 im error page </>,
     children: [
       { index: true, element: <MainPage /> },
-      { path: '/profile', element: <ProfilePage /> },
       { path: '/rank', element: <RankPage /> },
       { path: '/challenge', element: <ChallengePage /> },
       { path: '/gathering', element: <GatheringMainPage /> },
@@ -38,8 +37,9 @@ const router = createBrowserRouter([
       { path: '/gathering/post', element: <PostPage /> },
       { path: '/gathering/detail', element: <GatheringDetailPage /> },
       { path: '/trophy', element: <TrophyPage /> },
-      { path: '/find_account', element: <FindAccountPage /> },
-      { path: '/find_password', element: <FindPasswordPage /> },
+      { path: '/profile', element: <ProfilePage /> },
+      { path: '/user/find_account', element: <FindAccountPage /> },
+      { path: '/user/find_password', element: <FindPasswordPage /> },
       { path: '/category', element: <ChoiceCategoty /> },
     ],
   },
