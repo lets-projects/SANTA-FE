@@ -18,12 +18,13 @@ import TrophyPage from './pages/trophy/TrophyPage';
 import FindAccountPage from './pages/user/find/FindAccountPage';
 import FindPasswordPage from './pages/user/find/FindPasswordPage';
 import CategotyPage from './pages/user/CategoryPage';
+import ErrorPage from './pages/error/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
-    errorElement: <> hi dveloper🙃 im error page </>,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <MainPage /> },
       { path: '/rank', element: <RankPage /> },
