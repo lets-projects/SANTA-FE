@@ -1,9 +1,43 @@
 //loginPage
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
 import '../../styles/login/loginStyle.scss';
 
 function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginData = { email: email, password: password };
+  const navigate = useNavigate();
+
+  type LoginForm = {
+    email: string;
+    password: string;
+  };
+
+  const postLogin = useMutation({
+    mutationFn: (loginData: LoginForm) => axios.post(`http://43.200.136.37:8080/api/users/sign-in`, loginData),
+    onSuccess: (data) => {
+      console.log('성공!!', data.data);
+      localStorage.setItem('access', data.data.accessToken);
+      localStorage.setItem('refresh', data.data.refreshToken);
+    },
+    onError: (data) => {
+      console.log('아임 에러!!!!', data);
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    postLogin.mutate(loginData);
+    navigate('/');
+  };
+
   return (
     <div className="login-container">
       <div className="login-text-container">
@@ -14,13 +48,13 @@ function LoginPage() {
         <form>
           <div className="email input-container">
             <IoMailOutline className="mail-icon" />
-            <input type="email"></input>
+            <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
           </div>
           <div className="password input-container">
             <IoLockOpenOutline />
-            <input type="password"></input>
+            <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
           </div>
-          <button type="submit" className="login-btn" onClick={(e) => e.preventDefault()}>
+          <button type="submit" className="login-btn" onClick={handleSubmit}>
             로그인
           </button>
         </form>
