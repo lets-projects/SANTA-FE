@@ -9,7 +9,7 @@ export default function CategoryBox() {
     <div className={styles.container}>
       <div className={styles.title}>
         <p>선호 카테고리</p>
-        <Link to="/카테고리 수정">
+        <Link to="/category">
           <FaGear className={styles.icon} />
         </Link>
       </div>
