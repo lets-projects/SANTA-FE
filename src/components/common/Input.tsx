@@ -1,15 +1,21 @@
-import '../../styles/components/common/_input.scss';
+import styles from '../../styles/components/common/input.module.scss';
 import { IoSearch } from 'react-icons/io5';
 type Props = {
-  variant?: 'outline-green3' | 'outline-gray' | 'underline';
+  variant: 'outline-green3' | 'outline-gray' | 'underline';
   onChange?: React.ChangeEventHandler<HTMLInputElement>; // 수정
   value?: string;
   placeholder?: string;
 };
 
 export const Input = ({ variant, onChange, value, placeholder }: Props) => {
-  const inputClass = variant ? `input ${variant}` : `input`;
-  return <input className={inputClass} onChange={onChange} value={value} placeholder={placeholder}></input>;
+  return (
+    <input
+      className={`${styles.input} ${styles[variant]}`}
+      onChange={onChange}
+      value={value}
+      placeholder={placeholder}
+    ></input>
+  );
 };
 
 type searchProps = {
