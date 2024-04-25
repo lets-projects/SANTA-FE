@@ -27,6 +27,7 @@ function LoginPage() {
   const postLogin = useMutation({
     mutationFn: (loginData: LoginForm) => axios.post(`http://43.200.136.37:8080/api/users/sign-in`, loginData),
     onSuccess: (data) => {
+      console.log(data.data);
       localStorage.setItem('access', data.data.accessToken);
       localStorage.setItem('refresh', data.data.refreshToken);
       navigate('/');
@@ -45,8 +46,6 @@ function LoginPage() {
       postLogin.mutate(loginData);
     }
   };
-
-  console.log();
 
   return (
     <div className={styles.container}>
