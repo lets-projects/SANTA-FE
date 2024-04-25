@@ -18,7 +18,7 @@
 
 .textContainer {
   @include flex-center-col;
-  padding: 3.1rem 0 1.9rem;
+  padding-top: 5rem;
   .text {
     color: $green3;
     @include font-title;
@@ -103,4 +103,11 @@
     height: 3.75rem;
     margin: 0 5px;
   }
+}
+
+.errorMessage {
+  @include flex-center-col;
+  color: $red2;
+  padding-bottom: 12px;
+  font-size: 0.9rem;
 }

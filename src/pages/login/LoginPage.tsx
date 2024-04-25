@@ -9,6 +9,7 @@ import { IoLockOpenOutline } from 'react-icons/io5';
 import styles from '/src/styles/login/loginPage.module.scss';
 import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
+import { validateEmail } from '/src/utils/validation';
 
 type LoginForm = {
   email: string;
@@ -18,6 +19,7 @@ type LoginForm = {
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, seterrorMessage] = useState('');
 
   const loginData = { email: email, password: password };
   const navigate = useNavigate();
@@ -31,14 +33,20 @@ function LoginPage() {
     },
     onError: (data) => {
       console.log('아임 에러!!!!', data);
-      alert('로그인 다시 시도해주세유 :(');
+      seterrorMessage('아이디 또는 비밀번호를 잘못 입력하였습니다.');
     },
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postLogin.mutate(loginData);
+    if (email == '') return seterrorMessage('아이디를 입력해 주세요');
+    if (!validateEmail(email)) return seterrorMessage('아이디는 이메일 형식이어야 합니다.');
+    else {
+      postLogin.mutate(loginData);
+    }
   };
+
+  console.log();
 
   return (
     <div className={styles.container}>
@@ -51,11 +59,14 @@ function LoginPage() {
           <form onSubmit={handleSubmit}>
             <div className={styles.inputContainer}>
               <IoMailOutline />
-              <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
+              <input type="text" onChange={(e) => setEmail(e.target.value)}></input>
             </div>
             <div className={styles.inputContainer}>
               <IoLockOpenOutline />
               <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
+            </div>
+            <div className={styles.errorMessage}>
+              <p>{errorMessage}</p>
             </div>
             <button type="submit" className={styles.loginBtn}>
               로그인
