@@ -8,12 +8,15 @@ import Thumbnail from '../../components/Thumbnail';
 import { Link } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
 import { useEffect, useState } from 'react';
-import { getGatheringList } from '/src/services/gatheringApi';
+import { getGatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
+import { useCategoryStore } from '/src/store/store';
 function GatheringMainPage() {
+  const { category } = useCategoryStore();
   const [gatheringData, setGatheringData] = useState([
     {
       leaderId: 1,
+      meetingId: 1,
       meetingName: '산악회',
       categoryName: '등산',
       mountainName: '북한산',
@@ -25,24 +28,35 @@ function GatheringMainPage() {
     },
   ]);
 
-  const { data, isSuccess, isError } = useQuery({
-    queryKey: ['gathering'],
-    queryFn: getGatheringList,
-  });
-
   useEffect(() => {
-    if (isSuccess) {
-      console.log('출력합니다', data.data);
-      setGatheringData(data.data);
-    } else if (isError) {
-      console.error('Error loading data');
-    }
-
     //테스트용 토큰
     const token =
       'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RAYXNkLmNvbSIsImF1dGgiOiIiLCJleHAiOjE3MTQwMzIwOTF9.NExt8F1fLmobgcm6I5hh3IXvcNDCsUsezl2es1yDbCM';
     localStorage.setItem('userToken', token);
+    if (isSuccess) {
+      console.log('출력합니다', data.data);
+      setGatheringData(data.data);
+      // setGatheringData(data.data);
+    } else if (isError) {
+      console.error('Error loading data');
+    }
   }, []);
+
+  const { data, isSuccess, isError } = useQuery({
+    queryKey: ['gatheringListByCategory', category],
+    queryFn: () => getGatheringListByCategory(category),
+  });
+
+  useEffect(() => {
+    //카테고리 변경시 api 호출
+    if (isSuccess) {
+      console.log('카테고리 변경, 출력합니다', category, data.data);
+      setGatheringData(data.data);
+      // setGatheringData(data.data);
+    } else if (isError) {
+      console.error('Error loading data');
+    }
+  }, [category]);
   return (
     <div className={styles.gatheringContainer}>
       <div className={styles.container}>
@@ -72,9 +86,10 @@ function GatheringMainPage() {
       <div className={`${styles.container} ${styles.gap}`}>
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
         <GatheringCategory />
+        <div>선택된 카테고리 {category}</div>
         <div className={styles.gatheringList}>
           {gatheringData.map((item) => (
-            <div key={item.leaderId}>
+            <div key={item.meetingId}>
               <GatheringList
                 title={item.meetingName}
                 content={item.description}

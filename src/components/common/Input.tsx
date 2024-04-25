@@ -22,12 +22,13 @@ type searchProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>; // 수정
   value?: string;
   placeholder?: string;
+  onClick: React.MouseEventHandler<SVGElement>;
 };
-export const SearchInput = ({ onChange, value, placeholder }: searchProps) => {
+export const SearchInput = ({ onChange, value, placeholder, onClick }: searchProps) => {
   return (
-    <div className="search-input-container">
-      <IoSearch color="#498428" />
-      <input className="search-input" onChange={onChange} value={value} placeholder={placeholder}></input>
+    <div className={styles.searchInputContainer}>
+      <input className={styles.searchInput} onChange={onChange} value={value} placeholder={placeholder}></input>
+      <IoSearch color="#498428" onClick={onClick} />
     </div>
   );
 };

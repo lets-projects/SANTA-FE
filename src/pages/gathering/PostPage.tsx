@@ -10,6 +10,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'; // ChangeEvent
 import { IoCloseOutline } from 'react-icons/io5';
 import { useMutation } from '@tanstack/react-query';
 import { postGathering } from '/src/services/gatheringApi';
+import { GatheringCategorySelectBox } from './components/GatheringCategorySelectBox';
 
 export function PostPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -27,9 +28,24 @@ export function PostPage() {
     image: '',
   });
 
-  function handleCategoryInput(e: ChangeEvent<HTMLInputElement>) {
+  function handleCategoryInput(e: ChangeEvent<HTMLSelectElement>) {
+    const value = e.target.value;
+    let category = '';
+    if (value === 'healing') {
+      category = '힐링';
+    } else if (value === 'peak') {
+      category = '정상깨기';
+    } else if (value === 'photo') {
+      category = '출사';
+    } else if (value === 'food') {
+      category = '식도락';
+    } else if (value === 'camping') {
+      category = '캠핑';
+    } else if (value === 'others') {
+      category = '기타';
+    }
     const newData = { ...postData };
-    newData.categoryName = e.target.value;
+    newData.categoryName = category;
     setPostData(newData);
   }
   function handleMountainInput(e: ChangeEvent<HTMLInputElement>) {
@@ -134,12 +150,13 @@ export function PostPage() {
       <div className={styles.inputContainer}>
         <div className={styles.containerRow}>
           <div className={`${styles.containerCol} ${styles.width60}`}>
-            <input
+            <GatheringCategorySelectBox onChange={handleCategoryInput} />
+            {/* <input
               placeholder="카테고리"
               className={styles.inputBox}
               value={postData.categoryName}
               onChange={handleCategoryInput}
-            />
+            /> */}
             <input
               placeholder="산"
               onClick={clickMountainSearch}
