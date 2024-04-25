@@ -25,6 +25,5 @@ export const postUserLogin = async (loginData: LoginData) => {
 };
 
 export const getUserInfo = async () => {
-  const response = await api.get<UserInfo>('/api/users/my');
-  return response;
+  return await api.get<UserInfo>('/api/users/my');
 };
