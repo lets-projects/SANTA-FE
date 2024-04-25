@@ -7,10 +7,11 @@ import styles from '../../styles/gathering/gatheringMain.module.scss';
 import Thumbnail from '../../components/Thumbnail';
 import { Link } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
-import { api } from '/src/services/api';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { getGatheringList } from '/src/services/gatheringApi';
+import { useQuery } from '@tanstack/react-query';
 function GatheringMainPage() {
-  const data = [
+  const [gatheringData, setGatheringData] = useState([
     {
       leaderId: 1,
       meetingName: '산악회',
@@ -22,26 +23,25 @@ function GatheringMainPage() {
       tags: ['산행', '등산모임'],
       image: 'image',
     },
-    {
-      leaderId: 2,
-      meetingName: '산악회2',
-      categoryName: '등산2',
-      mountainName: '북한산2',
-      description: '북한산 등산 후 식사2',
-      headcount: 15,
-      date: '2024-05-20',
-      tags: ['산행', '등산모임'],
-      image: 'image',
-    },
-  ];
+  ]);
 
-  async function fetchData() {
-    const response = await api.get('meetings');
-    console.log(response);
-  }
+  const { data, isSuccess, isError } = useQuery({
+    queryKey: ['gathering'],
+    queryFn: getGatheringList,
+  });
 
   useEffect(() => {
-    fetchData();
+    if (isSuccess) {
+      console.log('출력합니다', data.data);
+      setGatheringData(data.data);
+    } else if (isError) {
+      console.error('Error loading data');
+    }
+
+    //테스트용 토큰
+    const token =
+      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RAYXNkLmNvbSIsImF1dGgiOiIiLCJleHAiOjE3MTQwMzIwOTF9.NExt8F1fLmobgcm6I5hh3IXvcNDCsUsezl2es1yDbCM';
+    localStorage.setItem('userToken', token);
   }, []);
   return (
     <div className={styles.gatheringContainer}>
@@ -73,7 +73,7 @@ function GatheringMainPage() {
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
         <GatheringCategory />
         <div className={styles.gatheringList}>
-          {data.map((item) => (
+          {gatheringData.map((item) => (
             <div key={item.leaderId}>
               <GatheringList
                 title={item.meetingName}
