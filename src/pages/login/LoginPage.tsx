@@ -6,7 +6,14 @@ import axios from 'axios';
 
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
-import '../../styles/login/loginStyle.scss';
+import styles from '/src/styles/login/loginPage.module.scss';
+import googleIcon from '/images/google.svg';
+import kakaoIcon from '/images/kakao.png';
+
+type LoginForm = {
+  email: string;
+  password: string;
+};
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -14,11 +21,6 @@ function LoginPage() {
 
   const loginData = { email: email, password: password };
   const navigate = useNavigate();
-
-  type LoginForm = {
-    email: string;
-    password: string;
-  };
 
   const postLogin = useMutation({
     mutationFn: (loginData: LoginForm) => axios.post(`http://43.200.136.37:8080/api/users/sign-in`, loginData),
@@ -39,38 +41,40 @@ function LoginPage() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-text-container">
-        <div className="login-text">LOGIN</div>
-        <div className="login-description">로그인 하시면 더 다양한 기능을 이용하실 수 있습니다</div>
-      </div>
-      <div className="input-container">
-        <form onSubmit={handleSubmit}>
-          <div className="email input-container">
-            <IoMailOutline className="mail-icon" />
-            <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
-          </div>
-          <div className="password input-container">
-            <IoLockOpenOutline />
-            <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
-          </div>
-          <button type="submit" className="login-btn">
-            로그인
-          </button>
-        </form>
-        <div className="login-menu-container">
-          <div>아이디 찾기</div>
-          <div className="vertical-line"></div>
-          <div>비밀번호 찾기</div>
-          <div className="vertical-line"></div>
-          <div>회원가입</div>
+    <div className={styles.container}>
+      <div className={styles.loginContainer}>
+        <div className={styles.textContainer}>
+          <div className={styles.text}>LOGIN</div>
+          <div className={styles.description}>로그인 하시면 더 다양한 기능을 이용하실 수 있습니다</div>
         </div>
-      </div>
-      <div className="social-login-container">
-        <div>소셜 계정으로 로그인</div>
-        <div className="social-login-icon">
-          <div>kakao</div>
-          <div>google</div>
+        <div className={styles.middleContainer}>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.inputContainer}>
+              <IoMailOutline />
+              <input type="email" onChange={(e) => setEmail(e.target.value)}></input>
+            </div>
+            <div className={styles.inputContainer}>
+              <IoLockOpenOutline />
+              <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
+            </div>
+            <button type="submit" className={styles.loginBtn}>
+              로그인
+            </button>
+          </form>
+          <div className={styles.loginMenuContainer}>
+            <div>아이디 찾기</div>
+            <div className={styles.verticalLine}></div>
+            <div>비밀번호 찾기</div>
+            <div className={styles.verticalLine}></div>
+            <div className={styles.siginText}>회원가입</div>
+          </div>
+        </div>
+        <div className={styles.socialLoginContainer}>
+          <div>소셜 계정으로 로그인</div>
+          <div className={styles.socialLoginIcon}>
+            <img src={kakaoIcon} />
+            <img src={googleIcon} />
+          </div>
         </div>
       </div>
     </div>
