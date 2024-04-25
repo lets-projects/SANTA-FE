@@ -1,49 +1,47 @@
-//loginPage
 import { useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
 import styles from '/src/styles/login/loginPage.module.scss';
 import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
-import { validateEmail } from '/src/utils/validation';
-
-type LoginForm = {
-  email: string;
-  password: string;
-};
+import { postUserLogin, getUserInfo } from '../../services/user';
 
 function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, seterrorMessage] = useState('');
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const loginData = { email: email, password: password };
-  const navigate = useNavigate();
+  const { refetch, data } = useQuery({
+    queryKey: ['userData'],
+    queryFn: () => getUserInfo(),
+    refetchOnWindowFocus: false,
+    enabled: false,
+  });
 
-  const postLogin = useMutation({
-    mutationFn: (loginData: LoginForm) => axios.post(`http://43.200.136.37:8080/api/users/sign-in`, loginData),
+  const { mutate, isError, isSuccess } = useMutation({
+    mutationFn: () => postUserLogin(loginData),
     onSuccess: (data) => {
-      console.log(data.data);
-      localStorage.setItem('access', data.data.accessToken);
-      localStorage.setItem('refresh', data.data.refreshToken);
-      navigate('/');
-    },
-    onError: (data) => {
-      console.log('아임 에러!!!!', data);
-      seterrorMessage('아이디 또는 비밀번호를 잘못 입력하였습니다.');
+      //local에 토큰 저장
+      localStorage.setItem('access_token', data.accessToken);
+      localStorage.setItem('refresh_token', data.refreshToken);
+      //uesr 정보 받아오기
+      refetch();
+      console.log('get user success', data);
     },
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //버튼 클릭시 post 요청
+  const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email == '') return seterrorMessage('아이디를 입력해 주세요');
-    if (!validateEmail(email)) return seterrorMessage('아이디는 이메일 형식이어야 합니다.');
-    else {
-      postLogin.mutate(loginData);
+    mutate(loginData);
+    if (isSuccess) {
+      //
+    } else if (isError) {
+      console.error('login error');
     }
   };
 
@@ -55,17 +53,17 @@ function LoginPage() {
           <div className={styles.description}>로그인 하시면 더 다양한 기능을 이용하실 수 있습니다</div>
         </div>
         <div className={styles.middleContainer}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleLoginSubmit}>
             <div className={styles.inputContainer}>
               <IoMailOutline />
-              <input type="text" onChange={(e) => setEmail(e.target.value)}></input>
+              <input type="text" onChange={(e) => setLoginData({ ...loginData, email: e.target.value })} />
             </div>
             <div className={styles.inputContainer}>
               <IoLockOpenOutline />
-              <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
+              <input type="password" onChange={(e) => setLoginData({ ...loginData, password: e.target.value })} />
             </div>
             <div className={styles.errorMessage}>
-              <p>{errorMessage}</p>
+              <p>{isError && '아이디 또는 비밀번호를 잘못 입력하였습니다.'}</p>
             </div>
             <button type="submit" className={styles.loginBtn}>
               로그인
