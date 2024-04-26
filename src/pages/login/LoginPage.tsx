@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,6 @@ import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
-import useUserInfoStore from '/src/store/userInfoStore';
 import { postUserLogin, getUserInfo } from '../../services/userApi';
 
 function LoginPage() {
@@ -17,7 +16,6 @@ function LoginPage() {
   });
 
   const navigate = useNavigate();
-  const { setUserInfo } = useUserInfoStore();
 
   //로그인 토큰 받아오기
   const { mutate, isError } = useMutation({
@@ -37,13 +35,8 @@ function LoginPage() {
   const { data: userInfo, refetch } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
+    staleTime: Infinity,
   });
-  // zustand 저장소에 넣기
-  useEffect(() => {
-    if (userInfo) {
-      setUserInfo(userInfo.data);
-    }
-  }, [userInfo]);
 
   //로그인 버튼을 클릭했을 때 실행
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {

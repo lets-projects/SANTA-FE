@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const getUserToken = () => {
   // 로컬 스토리지에서 토큰을 가져온다.
   const userToken = localStorage.getItem('access_token');

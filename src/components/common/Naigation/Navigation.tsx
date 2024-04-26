@@ -43,9 +43,10 @@ export default function Navigation({ back }: { back: boolean }) {
     setIsOpen(!isOpen);
   };
 
-  const onClickLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user_email');
     navigate('/');
   };
 
@@ -91,7 +92,7 @@ export default function Navigation({ back }: { back: boolean }) {
                     </Link>
                   </li>
                 ))}
-                <li className={styles.logoutBtn} onClick={onClickLogout}>
+                <li className={styles.logoutBtn} onClick={handleLogout}>
                   로그아웃
                 </li>
               </ul>

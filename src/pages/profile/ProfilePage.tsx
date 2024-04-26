@@ -8,10 +8,16 @@ import styles from './profile.module.scss';
 import LoginBtn from './components/LoginBtn';
 import kakaoLogo from '/images/kakao.png';
 import googleLogo from '/images/google.svg';
-import useUserInfoStore from '/src/store/userInfoStore';
+import { useQuery } from '@tanstack/react-query';
+import { getUserInfo } from '/src/services/userApi';
 
 export default function ProfilePage() {
-  const { userInfo } = useUserInfoStore();
+  const { data: userInfo } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: getUserInfo,
+    select: (data) => data.data,
+  });
+
   //유저 권한 => 세션에 토큰이 들어있는지 확인
   const onClick = () => {
     alert('버튼 클릭됨!');
@@ -20,8 +26,8 @@ export default function ProfilePage() {
   return (
     <div className={styles.container}>
       <div className={styles.userInfo}>
-        <img className={styles.userImg} src={userInfo.image} />
-        <div className={styles.userName}>{userInfo.nickname}</div>
+        <img className={styles.userImg} src={userInfo?.image} />
+        <div className={styles.userName}>{userInfo?.nickname}</div>
         <div className={styles.btn}>
           <Button variant={'rounded-outline'} children={'프로필 수정'} onClick={onClick} />
         </div>
