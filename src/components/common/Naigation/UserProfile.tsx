@@ -1,12 +1,6 @@
 import styles from './UserProfile.module.scss';
 import useUserInfoStore from '/src/store/userInfoStore';
 
-// const user: { name: string; rank: number; img: string } = {
-//   name: '산악대장',
-//   rank: 1256,
-//   img: 'https://cdn.pixabay.com/photo/2022/08/05/05/59/korea-7366036_1280.jpg',
-// };
-
 const USERANK = 7777;
 
 export default function UserProfile() {
