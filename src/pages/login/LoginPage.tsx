@@ -32,10 +32,12 @@ function LoginPage() {
   });
 
   //유저정보 받아오기
-  const { data: userInfo, refetch } = useQuery({
+  const { refetch } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
+    select: (data) => data.data,
     staleTime: Infinity,
+    enabled: false,
   });
 
   //로그인 버튼을 클릭했을 때 실행
