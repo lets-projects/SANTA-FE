@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import { IoMailOutline } from 'react-icons/io5';
-import { IoLockOpenOutline } from 'react-icons/io5';
 import styles from '/src/styles/login/loginPage.module.scss';
 import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
-import { postUserLogin } from '../../services/user';
+import { IoMailOutline } from 'react-icons/io5';
+import { IoLockOpenOutline } from 'react-icons/io5';
+import useUserInfoStore from '/src/store/userInfoStore';
+import { postUserLogin, getUserInfo } from '../../services/userApi';
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
@@ -16,24 +17,39 @@ function LoginPage() {
   });
 
   const navigate = useNavigate();
+  const { setUserInfo } = useUserInfoStore();
 
-  const { mutate, isError, isSuccess } = useMutation({
+  //로그인 토큰 받아오기
+  const { mutate, isError } = useMutation({
     mutationFn: () => postUserLogin(loginData),
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('refresh_token', data.refreshToken);
+      refetch();
+      navigate('/');
+    },
+    onError: (error) => {
+      console.log('login error', error);
     },
   });
 
+  //유저정보 받아오기
+  const { data: userInfo, refetch } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: getUserInfo,
+  });
+  // zustand 저장소에 넣기
+  useEffect(() => {
+    if (userInfo) {
+      setUserInfo(userInfo.data);
+    }
+  }, [userInfo]);
+
+  //로그인 버튼을 클릭했을 때 실행
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //유효성 검사 필요
     mutate(loginData);
-    if (isSuccess) {
-      navigate('/');
-    } else if (isError) {
-      console.error('login error');
-    }
   };
 
   return (
