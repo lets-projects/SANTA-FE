@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import styles from './UserProfile.module.scss';
 import { getUserInfo } from '/src/services/userApi';
 
-//유저 랭킹도 요구하기
+//유저 랭킹도 요구
 const USERANK = 7777;
 
 export default function UserProfile() {

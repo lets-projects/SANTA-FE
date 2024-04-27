@@ -17,7 +17,6 @@ function LoginPage() {
 
   const navigate = useNavigate();
 
-  //로그인 토큰 받아오기
   const { mutate, isError } = useMutation({
     mutationFn: () => postUserLogin(loginData),
     onSuccess: (data) => {
@@ -31,7 +30,6 @@ function LoginPage() {
     },
   });
 
-  //유저정보 받아오기
   const { refetch } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
@@ -40,7 +38,6 @@ function LoginPage() {
     enabled: false,
   });
 
-  //로그인 버튼을 클릭했을 때 실행
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //유효성 검사 필요

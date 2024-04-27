@@ -5,7 +5,7 @@ export function getAuthToken() {
   return localStorage.getItem('access_token');
 }
 
-//user id 대신 email만 주는게 맞는지 다시 확인
+//user id 대신 email?
 export function getUserEmail() {
   return localStorage.getItem('user_email');
 }
