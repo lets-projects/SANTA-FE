@@ -6,13 +6,15 @@ import { IoIosArrowBack } from 'react-icons/io';
 import logo from '/images/logo.svg';
 import styles from '/src/styles/components/common/navigation.module.scss';
 import UserProfile from './UserProfile';
-import { NAVLIST } from '/src/utils/path';
+import { NAVLIST, paths } from '/src/utils/path';
 import handleLogout from '/src/utils/logout';
+import { getRefreshToken } from '/src/services/auth';
 
 export default function Navigation({ back }: { back: boolean }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const isLogin = getRefreshToken();
 
   const hideNav = useCallback((e: MouseEvent) => {
     if (navRef.current === null) {
@@ -76,9 +78,20 @@ export default function Navigation({ back }: { back: boolean }) {
                     </Link>
                   </li>
                 ))}
-                <li className={styles.logoutBtn} onClick={handleLogout}>
-                  로그아웃
-                </li>
+                {isLogin ? (
+                  <li className={styles.logoutBtn} onClick={handleLogout}>
+                    로그아웃
+                  </li>
+                ) : (
+                  <li
+                    className={styles.logoutBtn}
+                    onClick={() => {
+                      navigate(paths.LOGIN);
+                    }}
+                  >
+                    로그인
+                  </li>
+                )}
               </ul>
             </div>
           </div>
