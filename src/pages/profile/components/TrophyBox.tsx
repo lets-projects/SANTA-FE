@@ -48,8 +48,8 @@ export default function () {
         </Link>
       </div>
       <div className={styles.trophyList}>
-        {ACHIEVE_TROPHY.map((item) => {
-          return <img className={styles.trophyImg} src={item.img} />;
+        {ACHIEVE_TROPHY.map((trophy) => {
+          return <img key={trophy.name} className={styles.trophyImg} src={trophy.img} />;
         })}
       </div>
     </div>

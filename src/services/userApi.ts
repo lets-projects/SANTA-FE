@@ -27,3 +27,7 @@ export const postUserLogin = async (loginData: LoginData) => {
 export const getUserInfo = async () => {
   return await api.get<UserInfo>('/api/users/my-info');
 };
+
+export const getMyMountains = async () => {
+  return await api.get('/api/users/mountains');
+};
