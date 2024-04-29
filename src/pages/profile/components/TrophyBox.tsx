@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { GoTrophy } from 'react-icons/go';
 import styles from './TrophyBox.module.scss';
-import paths from '/src/utils/path';
+import { paths } from '/src/utils/path';
 
 interface Trophy {
   name: string;

@@ -3,7 +3,7 @@ import { UserProfile_small } from '/src/components/common/UserProfile_small';
 import ChallengeList from './components/ChallengeList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import paths from '/src/utils/path';
+import { paths } from '/src/utils/path';
 
 const CHALLENGE1 = [
   {

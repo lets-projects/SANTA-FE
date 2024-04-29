@@ -1,7 +1,7 @@
 import { Button } from '../../components/common/Button';
 
 import AchievementsBox from './components/AchievementsBox';
-import CategoryBox from './components/CategotyBox';
+import CategoryBox from './components/CategoryBox';
 import GatheringBox from './components/GatheringBox';
 import TrophyBox from './components/TrophyBox';
 import styles from './profile.module.scss';

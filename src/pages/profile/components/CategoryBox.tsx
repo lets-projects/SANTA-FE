@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { FaGear } from 'react-icons/fa6';
 import styles from './CategoryBox.module.scss';
-import paths from '/src/utils/path';
+import { paths } from '/src/utils/path';
 
 const CATEGORY = ['출사', '힐링', '아마추어'];
 
