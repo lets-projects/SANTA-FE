@@ -10,6 +10,7 @@ export default function UserProfile() {
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
     select: (data) => data.data,
+    staleTime: Infinity,
   });
 
   return (

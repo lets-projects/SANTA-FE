@@ -28,13 +28,13 @@ export function GatheringSearchPage() {
   function handleClickSearchBtn() {
     console.log('검색어', searchValue);
     if (isSuccess) {
-      console.log('search data ', data.data);
-      if (data.data.length === 0) {
+      console.log('search data ', data.data.content);
+      if (data.data.content.length === 0) {
         setIsNoResult(true);
       } else {
         setIsNoResult(false);
       }
-      setSearchResult(data.data);
+      setSearchResult(data.data.content);
     } else if (isError) {
       console.log('error');
     }

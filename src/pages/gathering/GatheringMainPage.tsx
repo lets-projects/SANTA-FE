@@ -7,32 +7,52 @@ import styles from '../../styles/gathering/gatheringMain.module.scss';
 import Thumbnail from '../../components/Thumbnail';
 import { Link } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
+import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 
 function GatheringMainPage() {
   const { category } = useCategoryStore();
+  // const PAGE_SIZE = 5;
+  // const fetchGatheringListByCategory = ({ pageParam = 0 }) => {
+  //   return getGatheringListByCategory(category, pageParam, PAGE_SIZE);
+  // };
 
-  useEffect(() => {
-    //테스트용 토큰
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RAYXNkLmNvbSIsImF1dGgiOiIiLCJleHAiOjE3MTQwMzIwOTF9.NExt8F1fLmobgcm6I5hh3IXvcNDCsUsezl2es1yDbCM';
-    localStorage.setItem('userToken', token);
+  // const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+  //   queryKey: ['gatheringListByCategory', category],
+  //   queryFn: fetchGatheringListByCategory,
+  //   getNextPageParam: (lastPage, allPages) => {
+  //     const { number, totalPages, last } = lastPage.data.pageable; // 이전 페이지의 데이터에서 필요한 정보 추출
 
-    console.log(data);
-  }, []);
+  //     return number < totalPages && !last ? number + 1 : undefined;
+  //   },
+  //   initialPageParam: 0,
+  //   select: (data) => data.data.content,
+  // });
 
-  const { data } = useQuery({
-    queryKey: ['gatheringListByCategory', category],
-    queryFn: () => getGatheringListByCategory(category),
+  //무한스크롤
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [moreData, setMoreData] = useState(true);
+  const [page, setPage] = useState(1);
+  const { data, refetch } = useQuery({
+    queryKey: ['gatheringListByCategory', category, page],
+    queryFn: () => getGatheringListByCategory(category, page),
     select: (data) => data.data.content,
   });
 
   useEffect(() => {
-    console.log(data);
+    setPage(1);
   }, [category]);
+  useIntersectionObserver({
+    targetRef,
+    hasNextPage: moreData,
+    fetchNextPage: () => {
+      setPage((prevPage) => prevPage + 1);
+      setMoreData(false);
+    },
+  });
 
   return (
     <div className={styles.gatheringContainer}>
@@ -78,6 +98,7 @@ function GatheringMainPage() {
               />
             </div>
           ))}
+          {moreData ? <div ref={targetRef}></div> : null}
           {data?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
       </div>

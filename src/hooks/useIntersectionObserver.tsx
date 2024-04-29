@@ -1,40 +1,37 @@
-// import { InfiniteQueryObserverResult } from '@tanstack/react-query';
-// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-// interface useIntersectionObserverProps {
-//   threshold?: number;
-//   hasNextPage: boolean | undefined;
-//   fetchNextPage: () => Promise<InfiniteQueryObserverResult>;
-// }
+interface useIntersectionObserverProps {
+  targetRef: React.RefObject<HTMLDivElement>;
+  threshold?: number;
+  hasNextPage: boolean | undefined;
+  fetchNextPage: () => void;
+}
 
-// export default function useIntersectionObserver({
-//   threshold,
-//   hasNextPage,
-//   fetchNextPage,
-// }: useIntersectionObserverProps) {
-//   const [target, setTarget] = useState<HTMLDivElement | null | undefined>(null);
+export default function useIntersectionObserver({
+  targetRef,
+  threshold,
+  hasNextPage,
+  fetchNextPage,
+}: useIntersectionObserverProps) {
+  useEffect(() => {
+    if (!targetRef.current) return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+    };
+    //ointersection observer 인스턴스 생성
+    const observer = new IntersectionObserver(observerCallback, {
+      threshold: threshold || 0.5,
+    });
 
-//   const observerCallback: IntersectionObserverCallback = (entries) => {
-//     entries.forEach((entry) => {
-//       if (entry.isIntersecting && hasNextPage) {
-//         fetchNextPage();
-//       }
-//     });
-//   };
-//   useEffect(() => {
-//     if (!target) return;
+    // 타겟 관찰 시작
+    observer.observe(targetRef.current);
 
-//     //ointersection observer 인스턴스 생성
-//     const observer = new IntersectionObserver(observerCallback, {
-//       threshold,
-//     });
-
-//     // 타겟 관찰 시작
-//     observer.observe(target);
-
-//     // 관찰 멈춤
-//     return () => observer.unobserve(target);
-//   }, [observerCallback, threshold, target]);
-
-//   return { setTarget };
-// }
+    // 관찰 멈춤
+    return () => observer.disconnect();
+  }, [targetRef, threshold, hasNextPage, fetchNextPage]);
+}
