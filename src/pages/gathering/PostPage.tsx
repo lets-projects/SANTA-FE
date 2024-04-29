@@ -33,6 +33,8 @@ export function PostPage() {
     let category = '';
     if (value === 'healing') {
       category = '힐링';
+    } else if (value == 'hiking') {
+      category = '맞춤추천';
     } else if (value === 'peak') {
       category = '정상깨기';
     } else if (value === 'photo') {
@@ -76,7 +78,8 @@ export function PostPage() {
 
   useEffect(() => {
     const newData = { ...postData };
-    newData.image = imgFile;
+    // newData.image = imgFile;
+    newData.image = 'img';
     setPostData(newData);
   }, [imgFile]);
 

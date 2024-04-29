@@ -15,7 +15,7 @@ export function GatheringList({ title, content, tag, imageUrl, mountain, capacit
       <div className={styles.image}>이미지 : {imageUrl}</div>
       <div className={styles.textContainer}>
         <div className={styles.subtitle1}>{title}</div>
-        <div className={styles.body2}>{content}</div>
+        <div className={`${styles.body2} ${styles.hidden}`}>{content}</div>
         <div className={`${styles.infoContainer} ${styles.body2}`}>
           <div className={styles.tag}>{tag}</div>
           <div>{mountain}</div>

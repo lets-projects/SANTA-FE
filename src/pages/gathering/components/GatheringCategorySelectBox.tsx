@@ -5,6 +5,7 @@ type GatheringCategorySelectBoxProps = {
 export function GatheringCategorySelectBox({ onChange }: GatheringCategorySelectBoxProps) {
   return (
     <select name="category" id="category" onChange={onChange}>
+      <option value="hiking">등산</option>
       <option value="healing">힐링</option>
       <option value="peak">정상깨기</option>
       <option value="photo">출사</option>
