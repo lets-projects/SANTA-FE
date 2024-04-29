@@ -6,17 +6,8 @@ import { IoIosArrowBack } from 'react-icons/io';
 import logo from '/images/logo.svg';
 import styles from '/src/styles/components/common/navigation.module.scss';
 import UserProfile from './UserProfile';
-import paths from '/src/utils/path';
-
-const NAVLIST = [
-  { title: '메인', path: '/' },
-  { title: '내 프로필', path: paths.PROFILE },
-  { title: '랭킹', path: paths.RANK },
-  { title: '진행중인 챌린지', path: paths.CHALLENGE },
-  { title: '내 모임 바로가기', path: paths.GATHERING },
-  { title: '실시간 채팅', path: '/livechat' },
-  { title: '로그인', path: paths.LOGIN },
-];
+import { NAVLIST } from '/src/utils/path';
+import handleLogout from '/src/utils/logout';
 
 export default function Navigation({ back }: { back: boolean }) {
   const navigate = useNavigate();
@@ -41,13 +32,6 @@ export default function Navigation({ back }: { back: boolean }) {
 
   const onClick = () => {
     setIsOpen(!isOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('user_email');
-    navigate('/');
   };
 
   const HambergerBtn = () => {
