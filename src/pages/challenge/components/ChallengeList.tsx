@@ -15,24 +15,21 @@ export default function ChallengeBox({ data, color }: { data: Challenge[]; color
 
   return (
     <>
-      {data.map((item) => {
+      {data.map((challenge) => {
         return (
           <div className={styles.gap}>
             <Card variant={color}>
               <div className={styles.container}>
                 <div className={styles.top}>
-                  <img src={item.imgUrl} />
+                  <img src={challenge.imgUrl} />
                   <div className={styles.introduce}>
-                    <p className={styles.name}>{item.name}</p>
-                    <p className={styles.description}>{item.description}</p>
+                    <p className={styles.name}>{challenge.name}</p>
+                    <p className={styles.description}>{challenge.description}</p>
                   </div>
                 </div>
                 <div className={styles.bottom}>
                   <div className={styles.progress} ref={progressRef}>
-                    <div
-                      className={color == 'green1' ? styles.percentBar_g : styles.percentBar_y}
-                      style={{ width: `${item.progress}` }}
-                    />
+                    <div className={styles.percentBar} data-color={color} style={{ width: `${challenge.progress}` }} />
                   </div>
                 </div>
               </div>

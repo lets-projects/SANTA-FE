@@ -70,7 +70,7 @@ export default function Navigation({ back }: { back: boolean }) {
             <div className={styles.linkBox}>
               <ul>
                 {NAVLIST.map((item) => (
-                  <li key={item.title}>
+                  <li key={item.path}>
                     <Link to={item.path} onClick={onClick}>
                       {item.title}
                     </Link>

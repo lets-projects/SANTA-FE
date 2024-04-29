@@ -70,15 +70,16 @@ export default function ChallengePage() {
         </button>
       </div>
       <div className={styles.middle}>
-        {tabData.map((item, index) => {
+        {tabData.map((tab, index) => {
           return (
             <button
               className={openTab == index ? styles.clickedBtn : styles.nomalBtn}
               onClick={() => {
                 setOpenTab(index);
               }}
+              key={tab.button}
             >
-              {item.button}
+              {tab.button}
             </button>
           );
         })}
