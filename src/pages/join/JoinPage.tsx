@@ -5,9 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '/src/styles/join/join.module.scss';
 import { paths } from '/src/utils/path';
-import { joinSchema } from './joinSchema';
 import { postDuplicateEmail, postDuplicateNickname, postJoin } from '/src/services/userApi';
 import { JoinData } from '/src/services/userApi';
+import { joinSchema } from './joinSchema';
 
 function JoinPage() {
   const navigate = useNavigate();
