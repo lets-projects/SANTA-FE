@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { PiMedal } from 'react-icons/pi';
+
 // import { useQuery } from '@tanstack/react-query';
 // import { getMyMountains } from '/src/services/userApi';
 
@@ -42,6 +43,7 @@ const totalSummit = RECORD.length;
 
 export default function AchievementsBox() {
   const navigate = useNavigate();
+
   // const { data: myMountains } = useQuery({
   //   queryKey: ['allChallenge'],
   //   queryFn: getMyMountains,

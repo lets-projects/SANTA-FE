@@ -7,7 +7,7 @@ import logo from '/images/logo.svg';
 import styles from '/src/styles/components/common/navigation.module.scss';
 import UserProfile from './UserProfile';
 import { NAVLIST, paths } from '/src/utils/path';
-import handleLogout from '/src/utils/logout';
+import logout from '/src/utils/logout';
 import { getRefreshToken } from '/src/services/auth';
 
 export default function Navigation({ back }: { back: boolean }) {
@@ -79,7 +79,7 @@ export default function Navigation({ back }: { back: boolean }) {
                   </li>
                 ))}
                 {isLogin ? (
-                  <li className={styles.logoutBtn} onClick={handleLogout}>
+                  <li className={styles.logoutBtn} onClick={logout}>
                     로그아웃
                   </li>
                 ) : (
