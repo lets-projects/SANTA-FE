@@ -21,8 +21,8 @@ function JoinPage() {
     mode: 'onChange',
   });
 
-  const { mutate } = useMutation({
-    mutationFn: () => postJoin(joinData),
+  const { mutate } = useMutation<Response, Error, JoinData>({
+    mutationFn: (joinData) => postJoin(joinData),
     onSuccess: () => {
       navigate(paths.LOGIN);
     },
@@ -42,8 +42,9 @@ function JoinPage() {
   // });
 
   const onSubmit = (joinData: JoinData) => {
+    //이메일 중복 확인 && 닉네임 중복 확인 성공시
     console.log(joinData);
-    // mutate();
+    // mutate(joinData);
   };
 
   return (
