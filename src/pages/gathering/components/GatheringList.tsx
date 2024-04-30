@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import styles from '../../../styles/gathering/gatheringList.module.scss';
+import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 type Props = {
   title: string;
   content: string;
@@ -8,11 +10,42 @@ type Props = {
   capacity: number;
   attendance: number;
   date: string;
+  isLast?: boolean;
+  nextPage?: () => void;
 };
-export function GatheringList({ title, content, tag, imageUrl, mountain, capacity, attendance, date }: Props) {
+export function GatheringList({
+  title,
+  content,
+  tag,
+  imageUrl,
+  mountain,
+  capacity,
+  attendance,
+  date,
+  isLast,
+  nextPage,
+}: Props) {
+  const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
+    console.log('들어왔음');
+    if (nextPage) {
+      nextPage();
+    }
+  });
+
+  useEffect(() => {
+    console.log(isLast);
+  }, [isLast]);
   return (
-    <div className={styles.gatheringListContainer}>
-      <div className={styles.image}>이미지 : {imageUrl}</div>
+    <div
+      className={styles.gatheringListContainer}
+      ref={(_ref) => {
+        if (typeof _ref !== 'function' && isLast) {
+          console.log('ref 할당');
+          _ref = targetRef.current;
+        }
+      }}
+    >
+      <div className={styles.image}>이미지</div>
       <div className={styles.textContainer}>
         <div className={styles.subtitle1}>{title}</div>
         <div className={`${styles.body2} ${styles.hidden}`}>{content}</div>

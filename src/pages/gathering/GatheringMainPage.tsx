@@ -7,64 +7,51 @@ import styles from '../../styles/gathering/gatheringMain.module.scss';
 import Thumbnail from '../../components/Thumbnail';
 import { Link } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
-import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 
 function GatheringMainPage() {
   const { category } = useCategoryStore();
 
-  const handleIntersect = () => {
-    console.log('moredata', moreData);
-    if (moreData) {
-      console.log('page update');
-      setPage((prevPage) => prevPage + 1); // 페이지 증가
-    } else {
-      setTargetRef(null);
-      console.log('done');
-    }
-  };
   //무한스크롤
-  const { setTargetRef } = useIntersectionObserver(handleIntersect);
-  const targetRef = useRef<HTMLDivElement>(null);
   const [moreData, setMoreData] = useState(true);
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
-
+  const size = 4;
+  const [totalPage, setTotalPage] = useState(0);
   const {
     data: GatheringListByCategory,
     isFetched,
     isError,
   } = useQuery({
     queryKey: ['gatheringListByCategory', category, page],
-    queryFn: () => getGatheringListByCategory(category, page, 2),
-    select: (data) => data.data.content,
-    enabled: moreData,
+    queryFn: () => getGatheringListByCategory(category, page, size),
+    select: (data) => data.data,
+    // enabled: moreData,
   });
-
+  function nextPage() {
+    console.log('nextpage update');
+    setPage((prev) => prev + 1);
+  }
   useEffect(() => {
-    //mount 될 때 targetRef를 할당해서 observer가 관측할 수 있도록 한다.
-    console.log(targetRef, targetRef.current);
-    setTargetRef(targetRef.current);
-    //근데 타입 오류남
-  }, [category]);
-
-  useEffect(() => {
-    //카테고리 바뀌면 다시 페이지 초기화
     setPage(0);
     setGatheringList([]);
   }, [category]);
 
   useEffect(() => {
-    if (isFetched && !isError && GatheringListByCategory) {
-      if (GatheringListByCategory.length === 0) {
+    const isSuccess = isFetched && !isError;
+    if (isSuccess && GatheringListByCategory?.content) {
+      setTotalPage(GatheringListByCategory.totalPages);
+      if (GatheringListByCategory.content.length === 0) {
         setMoreData(false);
+      } else {
+        setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
       }
-      setGatheringList((prevList) => [...prevList, ...GatheringListByCategory]);
     }
   }, [isFetched, isError, GatheringListByCategory]);
+
   return (
     <div className={styles.gatheringContainer}>
       <div className={styles.container}>
@@ -95,8 +82,8 @@ function GatheringMainPage() {
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
         <GatheringCategory />
         <div className={styles.gatheringList}>
-          {gatheringList?.map((item: GatheringListByCategory) => (
-            <div key={item.meetingId}>
+          {gatheringList?.map((item: GatheringListByCategory, index) => (
+            <div key={`${item.meetingId}-${item.leaderId}`}>
               <GatheringList
                 title={item.meetingName}
                 content={item.description}
@@ -106,16 +93,13 @@ function GatheringMainPage() {
                 capacity={item.headcount}
                 attendance={item.participants.length}
                 date={item.date}
+                isLast={(index + 1) % size === 0 || page === totalPage}
+                nextPage={nextPage}
               />
             </div>
           ))}
           {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
-        {moreData ? (
-          <div ref={targetRef} className={styles.target} id="target">
-            ddd
-          </div>
-        ) : null}
       </div>
     </div>
   );
