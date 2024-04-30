@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '/src/styles/login/loginPage.module.scss';
@@ -7,7 +7,8 @@ import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
-import { postUserLogin, getUserInfo } from '../../services/userApi';
+import { postUserLogin } from '../../services/userApi';
+import { paths } from '/src/utils/path';
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
@@ -22,21 +23,12 @@ function LoginPage() {
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('refresh_token', data.refreshToken);
-      // refetch();
       navigate('/');
     },
     onError: (error) => {
       console.log('login error', error);
     },
   });
-
-  // const { refetch } = useQuery({
-  //   queryKey: ['userInfo'],
-  //   queryFn: getUserInfo,
-  //   select: (data) => data.data,
-  //   staleTime: Infinity,
-  //   enabled: false,
-  // });
 
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -69,11 +61,30 @@ function LoginPage() {
             </button>
           </form>
           <div className={styles.loginMenuContainer}>
-            <div>아이디 찾기</div>
+            <div
+              onClick={() => {
+                navigate(paths.FIND_ACCOUNT);
+              }}
+            >
+              아이디 찾기
+            </div>
             <div className={styles.verticalLine}></div>
-            <div>비밀번호 찾기</div>
+            <div
+              onClick={() => {
+                navigate(paths.FIND_PASSWORD);
+              }}
+            >
+              비밀번호 찾기
+            </div>
             <div className={styles.verticalLine}></div>
-            <div className={styles.siginText}>회원가입</div>
+            <div
+              className={styles.siginText}
+              onClick={() => {
+                navigate(paths.JOIN);
+              }}
+            >
+              회원가입
+            </div>
           </div>
         </div>
         <div className={styles.socialLoginContainer}>

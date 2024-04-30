@@ -66,9 +66,7 @@ export default function Navigation({ back }: { back: boolean }) {
             <img src={logo} className={styles.logo} />
           </Link>
           <div className={styles.navContainer}>
-            <div className={styles.userBox}>
-              <UserProfile />
-            </div>
+            <div className={styles.userBox}>{!back && <UserProfile />}</div>
             <div className={styles.linkBox}>
               <ul>
                 {NAVLIST.map((item) => (
