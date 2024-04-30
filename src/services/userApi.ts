@@ -12,7 +12,7 @@ interface Email {
   email: string;
 }
 
-interface JoinData {
+export interface JoinData {
   email: string;
   password: string;
   name: string;
