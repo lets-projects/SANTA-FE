@@ -51,14 +51,8 @@ interface GatheringListResponse {
   empty: boolean;
 }
 export type GatheringCategory = '맞춤추천' | '등산' | '힐링' | '식도락' | '정상깨기' | '백패킹' | '출사' | '기타';
-export function getGatheringListByCategory(category: GatheringCategory, lastId?: number, size?: number) {
-  let cursor = '';
-  if (lastId && size) {
-    cursor = `&lastId=${lastId}`;
-  } else if (lastId && !size) {
-    cursor = `&lastId=${lastId}&size=${size}`;
-  }
-  return api.get<GatheringListResponse>(`meetings/category-search?category=${category}${cursor}`);
+export function getGatheringListByCategory(category: GatheringCategory, page?: number, size?: number) {
+  return api.get<GatheringListResponse>(`meetings/category-search?category=${category}&page=${page}&size=${size}`);
 }
 type GatheringData = {
   meetingName: string;

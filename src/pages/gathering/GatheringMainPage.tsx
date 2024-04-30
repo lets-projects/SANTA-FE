@@ -15,44 +15,43 @@ import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 
 function GatheringMainPage() {
   const { category } = useCategoryStore();
-  // const PAGE_SIZE = 5;
-  // const fetchGatheringListByCategory = ({ pageParam = 0 }) => {
-  //   return getGatheringListByCategory(category, pageParam, PAGE_SIZE);
-  // };
 
-  // const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
-  //   queryKey: ['gatheringListByCategory', category],
-  //   queryFn: fetchGatheringListByCategory,
-  //   getNextPageParam: (lastPage, allPages) => {
-  //     const { number, totalPages, last } = lastPage.data.pageable; // 이전 페이지의 데이터에서 필요한 정보 추출
-
-  //     return number < totalPages && !last ? number + 1 : undefined;
-  //   },
-  //   initialPageParam: 0,
-  //   select: (data) => data.data.content,
-  // });
-
+  const handleIntersect = () => {
+    if (moreData) {
+      setPage((prevPage) => prevPage + 1); // 페이지 증가
+    }
+  };
   //무한스크롤
+  const { setTargetRef } = useIntersectionObserver(handleIntersect);
   const targetRef = useRef<HTMLDivElement>(null);
   const [moreData, setMoreData] = useState(true);
-  const [page, setPage] = useState(1);
-  const { data, refetch } = useQuery({
-    queryKey: ['gatheringListByCategory', category, page],
-    queryFn: () => getGatheringListByCategory(category, page),
+  const [page, setPage] = useState(0);
+
+  const { data } = useQuery({
+    queryKey: ['gatheringListByCategory', category],
+    queryFn: () => getGatheringListByCategory(category, 0, 5),
     select: (data) => data.data.content,
+    enabled: moreData,
   });
 
+  // 데이터가 변경될 때마다 무한 스크롤 대상 업데이트
   useEffect(() => {
-    setPage(1);
+    if (targetRef.current) {
+      setTargetRef(targetRef);
+    }
+  }, [page]);
+
+  useEffect(() => {
+    //카테고리 바뀌면 다시 페이지 초기화
+    setPage(0);
   }, [category]);
-  useIntersectionObserver({
-    targetRef,
-    hasNextPage: moreData,
-    fetchNextPage: () => {
-      setPage((prevPage) => prevPage + 1);
+
+  // 데이터가 없는 경우 moreData를 false로 설정
+  useEffect(() => {
+    if (data && data.length === 0) {
       setMoreData(false);
-    },
-  });
+    }
+  }, [data]);
 
   return (
     <div className={styles.gatheringContainer}>
