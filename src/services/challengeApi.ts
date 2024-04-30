@@ -15,3 +15,7 @@ interface Challenge {
 export const getAllChallenge = async () => {
   return await api.get('/api/challenges');
 };
+
+export const getMyMountains = async () => {
+  return await api.get('/api/users/mountains');
+};

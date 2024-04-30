@@ -1,9 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getMyMountains } from '/src/services/challengeApi';
+
 import { PiMedal } from 'react-icons/pi';
-
-// import { useQuery } from '@tanstack/react-query';
-// import { getMyMountains } from '/src/services/userApi';
-
 import styles from './Achievements.module.scss';
 import mountain from '/images/mountain.png';
 
@@ -44,15 +43,16 @@ const totalSummit = RECORD.length;
 export default function AchievementsBox() {
   const navigate = useNavigate();
 
-  // const { data: myMountains } = useQuery({
-  //   queryKey: ['allChallenge'],
-  //   queryFn: getMyMountains,
-  //   select: (data) => data.data,
-  //   staleTime: Infinity,
-  //   refetchOnMount: false,
-  //   refetchOnWindowFocus: false,
-  // });
-  // console.log(myMountains);
+  const { data: myMountains } = useQuery({
+    queryKey: ['allChallenge'],
+    queryFn: getMyMountains,
+    select: (data) => data.data,
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+  });
+
+  console.log(myMountains.content);
 
   return (
     <div className={styles.container}>
