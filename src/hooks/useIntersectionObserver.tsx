@@ -1,7 +1,7 @@
 import { useEffect, useState, RefObject } from 'react';
 
 export default function useIntersectionObserver(onIntersect: () => void) {
-  const [targetRef, setTargetRef] = useState<RefObject<Element> | null>(null);
+  const [targetRef, setTargetRef] = useState<RefObject<HTMLDivElement> | null>(null);
   const handleIntersect: IntersectionObserverCallback = ([entry], obs) => {
     if (entry.isIntersecting) {
       obs.unobserve(entry.target);

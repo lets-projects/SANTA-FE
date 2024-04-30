@@ -18,7 +18,10 @@ function GatheringMainPage() {
 
   const handleIntersect = () => {
     if (moreData) {
+      console.log('page update');
       setPage((prevPage) => prevPage + 1); // 페이지 증가
+    } else {
+      console.log('done');
     }
   };
   //무한스크롤
@@ -26,33 +29,36 @@ function GatheringMainPage() {
   const targetRef = useRef<HTMLDivElement>(null);
   const [moreData, setMoreData] = useState(true);
   const [page, setPage] = useState(0);
+  const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
 
-  const { data } = useQuery({
-    queryKey: ['gatheringListByCategory', category],
-    queryFn: () => getGatheringListByCategory(category, 0, 5),
+  const {
+    data: GatheringListByCategory,
+    isFetched,
+    isError,
+  } = useQuery({
+    queryKey: ['gatheringListByCategory', category, page],
+    queryFn: () => getGatheringListByCategory(category, page, 2),
     select: (data) => data.data.content,
-    enabled: moreData,
+    // enabled: moreData,
   });
 
-  // 데이터가 변경될 때마다 무한 스크롤 대상 업데이트
   useEffect(() => {
-    if (targetRef.current) {
-      setTargetRef(targetRef);
-    }
-  }, [page]);
+    //mount 될 때 targetRef를 할당해서 observer가 관측할 수 있도록 한다.
+    setTargetRef(targetRef.current);
+    //근데 타입 오류남
+  }, []);
 
   useEffect(() => {
     //카테고리 바뀌면 다시 페이지 초기화
     setPage(0);
+    setGatheringList([]);
   }, [category]);
 
-  // 데이터가 없는 경우 moreData를 false로 설정
   useEffect(() => {
-    if (data && data.length === 0) {
-      setMoreData(false);
+    if (isFetched && !isError && GatheringListByCategory) {
+      setGatheringList((prevList) => [...prevList, ...GatheringListByCategory]);
     }
-  }, [data]);
-
+  }, [isFetched, isError, GatheringListByCategory]);
   return (
     <div className={styles.gatheringContainer}>
       <div className={styles.container}>
@@ -83,7 +89,7 @@ function GatheringMainPage() {
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
         <GatheringCategory />
         <div className={styles.gatheringList}>
-          {data?.map((item: GatheringListByCategory) => (
+          {gatheringList?.map((item: GatheringListByCategory) => (
             <div key={item.meetingId}>
               <GatheringList
                 title={item.meetingName}
@@ -97,9 +103,13 @@ function GatheringMainPage() {
               />
             </div>
           ))}
-          {moreData ? <div ref={targetRef}></div> : null}
-          {data?.length === 0 && <div>데이터가 없습니다.</div>}
+          {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
+        {moreData ? (
+          <div ref={targetRef} className={styles.target} id="target">
+            ddd
+          </div>
+        ) : null}
       </div>
     </div>
   );
