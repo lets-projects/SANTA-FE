@@ -17,10 +17,12 @@ function GatheringMainPage() {
   const { category } = useCategoryStore();
 
   const handleIntersect = () => {
+    console.log('moredata', moreData);
     if (moreData) {
       console.log('page update');
       setPage((prevPage) => prevPage + 1); // 페이지 증가
     } else {
+      setTargetRef(null);
       console.log('done');
     }
   };
@@ -39,14 +41,15 @@ function GatheringMainPage() {
     queryKey: ['gatheringListByCategory', category, page],
     queryFn: () => getGatheringListByCategory(category, page, 2),
     select: (data) => data.data.content,
-    // enabled: moreData,
+    enabled: moreData,
   });
 
   useEffect(() => {
     //mount 될 때 targetRef를 할당해서 observer가 관측할 수 있도록 한다.
+    console.log(targetRef, targetRef.current);
     setTargetRef(targetRef.current);
     //근데 타입 오류남
-  }, []);
+  }, [category]);
 
   useEffect(() => {
     //카테고리 바뀌면 다시 페이지 초기화
@@ -56,6 +59,9 @@ function GatheringMainPage() {
 
   useEffect(() => {
     if (isFetched && !isError && GatheringListByCategory) {
+      if (GatheringListByCategory.length === 0) {
+        setMoreData(false);
+      }
       setGatheringList((prevList) => [...prevList, ...GatheringListByCategory]);
     }
   }, [isFetched, isError, GatheringListByCategory]);
