@@ -1,25 +1,29 @@
-import { useEffect, useState, RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 
-export default function useIntersectionObserver(onIntersect: () => void) {
-  const [targetRef, setTargetRef] = useState<RefObject<HTMLDivElement> | null>(null);
-  const handleIntersect: IntersectionObserverCallback = ([entry], obs) => {
-    if (entry.isIntersecting) {
-      obs.unobserve(entry.target);
-      onIntersect();
-    }
-  };
+export default function useIntersectionObserver<T extends HTMLElement>(onIntersect: () => void) {
+  const targetRef = useRef<T | null>(null);
 
   useEffect(() => {
-    let observer: IntersectionObserver | null = null;
-    if (targetRef?.current) {
-      observer = new IntersectionObserver(handleIntersect, { threshold: 0.6 });
-      observer.observe(targetRef.current);
-      return () => {
-        if (observer) {
-          observer.disconnect();
+    const observer = new IntersectionObserver(
+      ([entry], observer) => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          onIntersect();
         }
-      };
+      },
+      { threshold: 1 },
+    );
+
+    if (targetRef?.current) {
+      observer.observe(targetRef.current);
     }
-  }, [handleIntersect, targetRef]);
-  return { setTargetRef };
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [onIntersect, targetRef]);
+
+  return { targetRef };
 }

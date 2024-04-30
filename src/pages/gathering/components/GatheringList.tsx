@@ -1,4 +1,5 @@
 import styles from '../../../styles/gathering/gatheringList.module.scss';
+import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 type Props = {
   title: string;
   content: string;
@@ -8,10 +9,34 @@ type Props = {
   capacity: number;
   attendance: number;
   date: string;
+  isLast?: boolean;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
-export function GatheringList({ title, content, tag, imageUrl, mountain, capacity, attendance, date }: Props) {
+export function GatheringList({
+  title,
+  content,
+  tag,
+  imageUrl,
+  mountain,
+  capacity,
+  attendance,
+  date,
+  isLast,
+  setPage,
+}: Props) {
+  const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
+    setPage((prev) => prev + 1);
+  });
+
   return (
-    <div className={styles.gatheringListContainer}>
+    <div
+      className={styles.gatheringListContainer}
+      ref={(_ref) => {
+        if (isLast) {
+          targetRef.current = _ref;
+        }
+      }}
+    >
       <div className={styles.image}>이미지 : {imageUrl}</div>
       <div className={styles.textContainer}>
         <div className={styles.subtitle1}>{title}</div>

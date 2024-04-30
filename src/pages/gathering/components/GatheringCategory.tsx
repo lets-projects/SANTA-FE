@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Chips } from '../../../components/common/Chips';
 import styles from '../../../styles/gathering/gatheringCategory.module.scss';
 import { useCategoryStore } from '/src/store/store';
@@ -18,22 +17,16 @@ export function GatheringCategory() {
     '백패킹',
     '기타',
   ];
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  //카테고리를 클릭해면 해당 값이 category state로 저장됨 (store 에서 관리)
-  useEffect(() => {
-    const newCategory = categoryList[selectedIndex];
-    setCategory(newCategory);
-  }, [selectedIndex]);
 
   return (
     <div className={styles.scrollContainer}>
       <div className={styles.categoryContainer}>
-        {categoryList.map((item, index) => (
+        {categoryList.map((item) => (
           <Chips
-            variant={`${item == categoryList[selectedIndex] ? 'square-green3' : 'square-green2'}`}
+            key={item}
+            variant={`${item == category ? 'square-green3' : 'square-green2'}`}
             onClick={() => {
-              setSelectedIndex(index);
+              setCategory(item);
             }}
           >
             {item}
