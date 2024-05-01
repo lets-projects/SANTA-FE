@@ -40,22 +40,22 @@ export const postUserLogin = async (loginData: LoginData) => {
 };
 
 export const getUserInfo = async () => {
-  return await api.get<UserInfo>('/users/my-info');
+  return await api.get<UserInfo>('users/my-info');
 };
 
 //중복확인 api
 export const postDuplicateEmail = async (email: Email) => {
-  const response = await api.post<boolean>('/users/duplicate/email', email);
+  const response = await api.post<boolean>('users/duplicate/email', email);
   return response.data;
 };
 
 export const postDuplicateNickname = async (nickname: Nickname) => {
-  const response = await api.post<boolean>('/users/duplicate/nickname', nickname);
+  const response = await api.post<boolean>('users/duplicate/nickname', nickname);
   return response.data;
 };
 
 //회원가입 api
 export const postJoin = async (joinData: JoinData) => {
-  const response = await api.post('/users/signup', joinData);
+  const response = await api.post('users/signup', joinData);
   return response.data;
 };

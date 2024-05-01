@@ -6,5 +6,5 @@ import { api } from './api';
 // }
 
 export const getPreferCategory = async () => {
-  return await api.get('/users/preferred-categories');
+  return await api.get('users/preferred-categories');
 };
