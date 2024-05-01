@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from '../../../styles/gathering/gatheringList.module.scss';
 import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
   attendance: number;
   date: string;
   isLast?: boolean;
-  nextPage?: () => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 };
 export function GatheringList({
   title,
@@ -23,25 +22,21 @@ export function GatheringList({
   attendance,
   date,
   isLast,
-  nextPage,
+  setPage,
 }: Props) {
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
-    console.log('들어왔음');
-    if (nextPage) {
-      nextPage();
-    }
+    setPage((prev) => prev + 1);
   });
 
-  useEffect(() => {
-    console.log(isLast);
-  }, [isLast]);
   return (
     <div
       className={styles.gatheringListContainer}
       ref={(_ref) => {
-        if (typeof _ref !== 'function' && isLast) {
+        if (isLast) {
           console.log('ref 할당');
-          _ref = targetRef.current;
+          targetRef.current = _ref;
+        } else {
+          _ref = null;
         }
       }}
     >

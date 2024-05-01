@@ -12,29 +12,28 @@ import { getGatheringListByCategory, GatheringListByCategory } from '/src/servic
 import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
 
+const PAGE_SIZE = 4;
 function GatheringMainPage() {
   const { category } = useCategoryStore();
 
   //무한스크롤
-  const [moreData, setMoreData] = useState(true);
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
-  const size = 4;
-  const [totalPage, setTotalPage] = useState(0);
   const {
     data: GatheringListByCategory,
     isFetched,
     isError,
   } = useQuery({
-    queryKey: ['gatheringListByCategory', category, page],
-    queryFn: () => getGatheringListByCategory(category, page, size),
-    select: (data) => data.data,
-    // enabled: moreData,
+    queryKey: ['gatheringListByCategory', page, category],
+    queryFn: () => getGatheringListByCategory(category, page, PAGE_SIZE),
+    select: (data) => {
+      return {
+        content: data.data.content,
+        totalPage: data.data.totalPages,
+      };
+    },
   });
-  function nextPage() {
-    console.log('nextpage update');
-    setPage((prev) => prev + 1);
-  }
+
   useEffect(() => {
     setPage(0);
     setGatheringList([]);
@@ -43,12 +42,7 @@ function GatheringMainPage() {
   useEffect(() => {
     const isSuccess = isFetched && !isError;
     if (isSuccess && GatheringListByCategory?.content) {
-      setTotalPage(GatheringListByCategory.totalPages);
-      if (GatheringListByCategory.content.length === 0) {
-        setMoreData(false);
-      } else {
-        setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
-      }
+      setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
     }
   }, [isFetched, isError, GatheringListByCategory]);
 
@@ -93,8 +87,8 @@ function GatheringMainPage() {
                 capacity={item.headcount}
                 attendance={item.participants.length}
                 date={item.date}
-                isLast={(index + 1) % size === 0 || page === totalPage}
-                nextPage={nextPage}
+                isLast={GatheringListByCategory?.totalPage !== page && gatheringList.length === index + 1}
+                setPage={setPage}
               />
             </div>
           ))}
