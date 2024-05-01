@@ -27,8 +27,6 @@ export function GatheringList({
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
     if (isLast) {
       setPage((prev) => prev + 1);
-    } else {
-      return;
     }
   });
 

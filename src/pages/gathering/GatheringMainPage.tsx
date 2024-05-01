@@ -25,7 +25,7 @@ function GatheringMainPage() {
     isFetched,
     isError,
   } = useQuery({
-    queryKey: ['gatheringListByCategory', category, page],
+    queryKey: ['gatheringListByCategory', page, category],
     queryFn: () => getGatheringListByCategory(category, page, PAGE_SIZE),
     select: (data) => {
       return {
@@ -36,15 +36,14 @@ function GatheringMainPage() {
   });
 
   useEffect(() => {
-    //카테고리 바뀌면 다시 페이지 초기화
-    setPage(0);
     setGatheringList([]);
+    setPage(0);
   }, [category]);
 
   useEffect(() => {
     const isSuccess = isFetched && !isError;
-
     if (isSuccess && GatheringListByCategory) {
+      console.log('total page', GatheringListByCategory.totalPage);
       setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
     }
   }, [isFetched, isError, GatheringListByCategory]);
@@ -90,12 +89,15 @@ function GatheringMainPage() {
                 capacity={item.headcount}
                 attendance={item.participants.length}
                 date={item.date}
-                isLast={GatheringListByCategory?.totalPage !== page && gatheringList.length === index + 1}
+                isLast={
+                  GatheringListByCategory &&
+                  GatheringListByCategory?.totalPage >= page &&
+                  gatheringList.length === index + 1
+                }
                 setPage={setPage}
               />
             </div>
           ))}
-          {GatheringListByCategory?.totalPage !== page && <div></div>}
           {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
       </div>
