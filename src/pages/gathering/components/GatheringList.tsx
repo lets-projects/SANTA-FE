@@ -25,7 +25,11 @@ export function GatheringList({
   setPage,
 }: Props) {
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
-    setPage((prev) => prev + 1);
+    if (isLast) {
+      setPage((prev) => prev + 1);
+    } else {
+      return;
+    }
   });
 
   return (
@@ -41,6 +45,7 @@ export function GatheringList({
       }}
     >
       <div className={styles.image}>이미지</div>
+
       <div className={styles.textContainer}>
         <div className={styles.subtitle1}>{title}</div>
         <div className={`${styles.body2} ${styles.hidden}`}>{content}</div>

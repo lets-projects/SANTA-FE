@@ -23,9 +23,9 @@ export function GatheringCategory() {
       <div className={styles.categoryContainer}>
         {categoryList.map((item) => (
           <Chips
-            variant={`${item === category ? 'square-green3' : 'square-green2'}`}
+            key={item}
+            variant={`${item == category ? 'square-green3' : 'square-green2'}`}
             onClick={() => {
-              console.log('카테고리 클릭', item, category);
               setCategory(item);
             }}
           >

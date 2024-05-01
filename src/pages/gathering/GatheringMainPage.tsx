@@ -13,18 +13,19 @@ import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
 
 const PAGE_SIZE = 4;
+
 function GatheringMainPage() {
   const { category } = useCategoryStore();
 
-  //무한스크롤
   const [page, setPage] = useState(0);
+
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
   const {
     data: GatheringListByCategory,
     isFetched,
     isError,
   } = useQuery({
-    queryKey: ['gatheringListByCategory', page, category],
+    queryKey: ['gatheringListByCategory', category, page],
     queryFn: () => getGatheringListByCategory(category, page, PAGE_SIZE),
     select: (data) => {
       return {
@@ -35,13 +36,15 @@ function GatheringMainPage() {
   });
 
   useEffect(() => {
+    //카테고리 바뀌면 다시 페이지 초기화
     setPage(0);
     setGatheringList([]);
   }, [category]);
 
   useEffect(() => {
     const isSuccess = isFetched && !isError;
-    if (isSuccess && GatheringListByCategory?.content) {
+
+    if (isSuccess && GatheringListByCategory) {
       setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
     }
   }, [isFetched, isError, GatheringListByCategory]);
@@ -92,6 +95,7 @@ function GatheringMainPage() {
               />
             </div>
           ))}
+          {GatheringListByCategory?.totalPage !== page && <div></div>}
           {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
       </div>
