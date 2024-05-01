@@ -20,10 +20,14 @@ interface UserInfo {
 }
 
 export const postUserLogin = async (loginData: LoginData) => {
-  const response = await api.post<LoginResponse>('/api/users/sign-in', loginData);
+  const response = await api.post<LoginResponse>('users/sign-in', loginData);
   return response.data;
 };
 
 export const getUserInfo = async () => {
-  return await api.get<UserInfo>('/api/users/my');
+  return await api.get<UserInfo>('/api/users/my-info');
+};
+
+export const getMyMountains = async () => {
+  return await api.get('/api/users/mountains');
 };
