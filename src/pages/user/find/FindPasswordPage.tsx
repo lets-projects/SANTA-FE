@@ -8,21 +8,17 @@ import styles from './FindPasswordPage.module.scss';
 import { Button } from '/src/components/common/Button';
 import { verifySchema } from './findUserSchema';
 import { Email, VertifyData, postDuplicateEmail, postEmail, postVertifyEmail } from '/src/services/userApi';
-import Timer from './Form/Timer';
+import Timer from './Timer';
 
 export default function FindPasswordPage() {
   const navigation = useNavigate();
   const [emailData, setEmailData] = useState('');
 
-  // useEffect(() => {
-  //   sendEmail({ email: emailData });
-  //   setValue('email', emailData);
-  // }, [emailData]);
-
   const {
     register,
     handleSubmit,
     setError,
+    resetField,
     getValues,
     formState: { errors },
   } = useForm({
@@ -30,49 +26,38 @@ export default function FindPasswordPage() {
     mode: 'onChange',
   });
 
-  //이메일 보내기
   const { mutate: sendEmail } = useMutation<Response, Error, Email>({
     mutationKey: ['sendEmail'],
     mutationFn: (email) => postEmail(email),
   });
 
   //이메일 중복 확인
-  const {
-    mutate: isDuplicateEmail,
-    // isError,
-    // isPending,
-  } = useMutation<boolean, Error, string>({
+  const { mutate: isDuplicateEmail } = useMutation<boolean, Error, string>({
     mutationKey: ['duplicateEmail'],
     mutationFn: (email) => postDuplicateEmail({ email: email }),
     onSuccess: (res) => {
-      //유저 정보가 있음
-      if (res) {
-        //유저 이메일 업데이트
-        setEmailData(getValues('email'));
-        //이메일 보내기
+      if (!res) {
+        resetField('email');
+        setError('email', {
+          message: '존재하지 않는 회원정보입니다.',
+        });
+      } else {
         sendEmail({ email: emailData });
       }
     },
+    onError: () => {
+      setError('email', {
+        message: '다시 시도해주세요.',
+      });
+    },
   });
 
-  // if (true) {
-  //   console.log('나 이 이메일로 인증코드 보낼거임', email);
-  //   sendEmail(email);
-  //   setEmailData(email.email);
-  // }
-  // if (false) {
-  //   resetField('email');
-  //   setError('email', {
-  //     message: '존재하지 않는 회원정보입니다.',
-  //   });
-  // } else {
-  //   setError('email', {
-  //     message: '다시 시도해주세요.',
-  //   });
-  // }
-
   //이메일 인증
-  const { mutate: vertifyEmail } = useMutation<Response, Error, VertifyData>({
+  const {
+    mutate: vertifyEmail,
+    isError,
+    isPending,
+  } = useMutation<Response, Error, VertifyData>({
     mutationKey: ['vertifyEmail'],
     mutationFn: (vetrtifyData) => postVertifyEmail(vetrtifyData),
     onSuccess: () => {
@@ -85,20 +70,18 @@ export default function FindPasswordPage() {
     },
   });
 
-  //이메일 인증 submit
-  const onSubmit = (vetrtifyData: VertifyData) => {
-    console.log('나 이 데이터로 인증할거임', vetrtifyData);
-    vertifyEmail(vetrtifyData);
-  };
-
-  //이메일코드 전송 함수
   const handleSendEmail = (email: string) => {
-    //중복 검사
     if (email !== '') {
+      setEmailData(email);
       return isDuplicateEmail(email);
     }
   };
 
+  const onSubmit = (vetrtifyData: VertifyData) => {
+    vertifyEmail(vetrtifyData);
+  };
+
+  const successSendEmail = isError && isPending;
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -114,6 +97,7 @@ export default function FindPasswordPage() {
             <div className={styles.availabilityContainer}>
               <input type="text" className={styles.availabilityInput} {...register('email')} />
               <button
+                type="button"
                 className={styles.checkBtn}
                 onClick={() => {
                   const email = getValues('email');
@@ -127,9 +111,7 @@ export default function FindPasswordPage() {
             <div className={styles.label}>인증 코드</div>
             <div className={styles.vertifyCodeInput}>
               <input type="text" className={styles.availabilityInput} {...register('authNumber')} />
-              <div className={styles.timerContainer}>
-                <Timer />
-              </div>
+              <div className={styles.timerContainer}>{successSendEmail && <Timer />}</div>
             </div>
             {errors.authNumber && <p className={styles.errorMessage}>{errors.authNumber?.message}</p>}
             <div className={styles.submitBtn}>
