@@ -16,6 +16,7 @@ export const paths = {
   FIND_PASSWORD: '/user/find_password',
   TROPHY: '/trophy',
   CATEGORY: '/user/category',
+  MOUNTAIN_VERTIFY: '/mountain/vertify',
 } as const;
 
 export const NAVLIST = [

@@ -21,6 +21,7 @@ import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
 import { PrivateRoutes, PublicRoutes } from './utils/routes';
+import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           { path: '/profile', element: <ProfilePage /> },
           { path: '/challenge', element: <ChallengePage /> },
           { path: '/user/category', element: <CategoryPage /> },
+          { path: '/mountain/vertify', element: <VertifyMountainPage /> },
         ],
       },
       {

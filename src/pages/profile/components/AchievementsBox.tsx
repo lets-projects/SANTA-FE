@@ -5,6 +5,7 @@ import { getMyMountains } from '/src/services/challengeApi';
 import { PiMedal } from 'react-icons/pi';
 import styles from './Achievements.module.scss';
 import mountain from '/images/mountain.png';
+import { paths } from '/src/utils/path';
 
 // interface Record {
 //   name: string;
@@ -50,10 +51,10 @@ export default function AchievementsBox() {
         <button
           className={styles.certificationBtn}
           onClick={() => {
-            navigate('/산인증페이지');
+            navigate(paths.MOUNTAIN_VERTIFY);
           }}
         >
-          인증하기
+          인증하러 가기
         </button>
         <div className={styles.imgContainer}>
           <img className={styles.mountainImg} src={mountain} />
