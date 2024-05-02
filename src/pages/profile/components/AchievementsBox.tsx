@@ -14,24 +14,23 @@ import { paths } from '/src/utils/path';
 //   climbDate: string;
 // }
 
-// const totalHeight = RECORD.reduce((prev, current) => {
-//   return prev + current.height;
-// }, 0);
-
-// const totalSummit = RECORD.length;
-
 export default function AchievementsBox() {
   const navigate = useNavigate();
 
-  const { data: myMountains } = useQuery({
+  const {
+    data: myMountains,
+    isError,
+    isFetched,
+  } = useQuery({
     queryKey: ['allChallenge'],
     queryFn: getMyMountains,
+    select: (data) => data.data.content,
     staleTime: Infinity,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 
-  console.log('myMountains', myMountains?.data);
+  const SUCCESS = !isError && isFetched;
 
   return (
     <div className={styles.container}>
@@ -43,9 +42,9 @@ export default function AchievementsBox() {
       </div>
       <div className={styles.records}>
         <div className={styles.achievName}>총 높이</div>
-        {/* <p>{totalHeight.toFixed(1)} M</p> */}
+        <p>{SUCCESS ? '' : 0} M</p>
         <div className={styles.achievName}>정복한 정상</div>
-        {/* <p>{totalSummit} 개</p> */}
+        <p>{SUCCESS ? myMountains.length : 0} 개</p>
       </div>
       <div className={styles.btnContainer}>
         <button
