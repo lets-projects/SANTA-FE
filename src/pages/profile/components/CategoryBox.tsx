@@ -6,10 +6,16 @@ import { FaGear } from 'react-icons/fa6';
 import styles from './CategoryBox.module.scss';
 import { paths } from '/src/utils/path';
 
-const CATEGORY = ['출사', '힐링', '아마추어'];
+interface CategoryName {
+  category: { name: string };
+}
 
 export default function CategoryBox() {
-  const { data: preferCategory } = useQuery({
+  const {
+    data: preferCategory,
+    isFetched,
+    isError,
+  } = useQuery({
     queryKey: ['preferCategory'],
     queryFn: getPreferCategory,
     select: (data) => data.data,
@@ -18,7 +24,7 @@ export default function CategoryBox() {
     refetchOnWindowFocus: false,
   });
 
-  console.log(preferCategory);
+  const Success = isFetched && !isError;
 
   return (
     <div className={styles.container}>
@@ -29,9 +35,13 @@ export default function CategoryBox() {
         </Link>
       </div>
       <div className={styles.categoryList}>
-        {CATEGORY.map((category) => {
-          return <p key={category}>#{category}</p>;
-        })}
+        {Success ? (
+          preferCategory.map((category: CategoryName) => {
+            return <p key={category.category.name}>#{category.category.name}</p>;
+          })
+        ) : (
+          <p>선호 카테고리를 설정하세요!</p>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { IoCalendarClearOutline } from 'react-icons/io5';
 import { Button } from '../../components/common/Button';
 import { IoImageOutline } from 'react-icons/io5';
 import { DatePickerComponent } from '../../components/common/DatePickerComponent';
-import { ChangeEvent, useEffect, useRef, useState } from 'react'; // ChangeEvent 추가
+import { ChangeEvent, useEffect, useState } from 'react'; // ChangeEvent 추가
 import { IoCloseOutline } from 'react-icons/io5';
 import { useMutation } from '@tanstack/react-query';
 import { postGathering } from '/src/services/gatheringApi';

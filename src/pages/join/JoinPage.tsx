@@ -59,7 +59,6 @@ function JoinPage() {
     mutationFn: (data) => postDuplicateNickname(data),
     onSuccess: (data) => {
       if (data) {
-        //이메일 중복일 경우
         resetField('nickname');
         setError('nickname', {
           message: '이미 사용중인 닉네임입니다.',
@@ -90,6 +89,7 @@ function JoinPage() {
   };
 
   const onSubmit = (joinData: JoinData) => {
+    // const { checkPassword, ...otherJoinData } = joinData;
     if (!checkEmail) {
       return setError('email', {
         message: '이메일 중복 확인을 해 주세요.',
@@ -122,7 +122,6 @@ function JoinPage() {
             </div>
           </div>
           {errors.email && <p className={styles.errorMessage}>{errors.email?.message}</p>}
-          {}
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.label}>비밀번호</div>

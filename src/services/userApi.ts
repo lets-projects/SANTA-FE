@@ -12,6 +12,16 @@ export interface Email {
   email: string;
 }
 
+export interface VertifyData {
+  email: string;
+  authNumber?: string;
+}
+
+export interface ResetPasswordData {
+  email: string;
+  authNumber: string;
+}
+
 export interface JoinData {
   email: string;
   password: string;
@@ -57,5 +67,23 @@ export const postDuplicateNickname = async (nickname: Nickname) => {
 //회원가입 api
 export const postJoin = async (joinData: JoinData) => {
   const response = await api.post('users/signup', joinData);
+  return response.data;
+};
+
+//이메일 전송 api
+export const postEmail = async (email: Email) => {
+  const response = await api.post('users/send-email', email);
+  return response.data;
+};
+
+//이메일 인증 api
+export const postVertifyEmail = async (vertifyData: VertifyData) => {
+  const response = await api.post('users/verify-email', vertifyData);
+  return response.data;
+};
+
+//비밀번호 리셋 api
+export const postResetPassword = async (resetPasswordData: ResetPasswordData) => {
+  const response = await api.post('users/reset-passwords', resetPasswordData);
   return response.data;
 };
