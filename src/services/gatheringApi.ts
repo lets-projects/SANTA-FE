@@ -56,7 +56,12 @@ export function getGatheringListByCategory(category: GatheringCategory, page?: n
 }
 
 export async function postGathering(data: FormData) {
-  await api.post('meetings', data);
+  await api.post('meetings', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }
+  );
 }
 
 export async function getGatheringSearchResult(tag: string) {

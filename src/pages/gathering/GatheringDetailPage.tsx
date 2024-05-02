@@ -14,23 +14,21 @@ import { getGatheringDetailById } from '/src/services/gatheringApi';
 
 export function GatheringDetailPage() {
   const [searchParams] = useSearchParams();
-  const [meetingId, setMeetingId] = useState<string | null>('');
+  const [meetingId, setMeetingId] = useState<string>('');
   useEffect(() => {
+    const keyword = searchParams.get('meetingid');
+    if (keyword) {
+      setMeetingId(keyword);
+    } else {
+      setMeetingId('');
+    }
+  }, [searchParams])
 
-    setMeetingId(searchParams.get('meetingid'));
-
-
-  }, [])
-  /**
-   * @tanstack_react-query.js?v=da488e68:825 Query data cannot be undefined. Please make sure to return a value other than undefined from your query function. Affected query key: ["gatheringDetail",null]
-   * 이건 어떻게 ?????
-   */
   const { data: gatheringDetail, isLoading, error } = useQuery({
     queryKey: ['gatheringDetail', meetingId],
     queryFn: () => {
-      if (meetingId) {
-        return getGatheringDetailById(meetingId);
-      }
+      return getGatheringDetailById(meetingId);
+
     },
     select: (data) => data?.data,
   })

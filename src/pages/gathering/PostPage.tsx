@@ -32,10 +32,8 @@ export function PostPage() {
 
   function handleCategoryInput(e: ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
-    let category = '';
-    category = value;
     // gatheringFormData.append('categoryName',category)
-    setPostData(prevData => ({ ...prevData, categoryName: category }));
+    setPostData(prevData => ({ ...prevData, categoryName: value }));
   }
   function handleMountainInput(e: ChangeEvent<HTMLInputElement>) {
     // gatheringFormData.append('mountainName',e.target.value)

@@ -21,6 +21,7 @@ import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
 import { PrivateRoutes, PublicRoutes } from './utils/routes';
+import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
       { path: '/gathering', element: <GatheringMainPage /> },
       { path: '/gathering/search', element: <GatheringSearchPage /> },
+      { path: '/gathering/search/result', element: <GatheringSearchResultPage /> },
       { path: '/gathering/participate', element: <ParticipatingGroupPage /> },
       { path: '/gathering/post', element: <PostPage /> },
       { path: '/gathering/detail', element: <GatheringDetailPage /> },
