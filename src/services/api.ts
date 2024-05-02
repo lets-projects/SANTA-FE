@@ -22,3 +22,5 @@ api.interceptors.request.use((config) => {
 
   return config;
 });
+
+//interceptor 분리시 -> 로그인, 새로고침 해야 헤더에 토큰 적용되는 에러 발생함
