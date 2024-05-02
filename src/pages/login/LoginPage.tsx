@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 // import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '/src/styles/login/loginPage.module.scss';
@@ -9,27 +9,28 @@ import kakaoIcon from '/images/kakao.png';
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
 import { LoginResponse, postUserLogin } from '../../services/userApi';
-import { paths } from '/src/utils/path';
+// import { paths } from '/src/utils/path';
 // import { loginSchema } from './loginSchema';
 import { LoginData } from '../../services/userApi';
 
 function LoginPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    // resolver: yupResolver(loginSchema),
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({
+  //   resolver: yupResolver(loginSchema),
+  // });
 
   const navigate = useNavigate();
 
-  const onSubmit = (loginData: LoginData) => {
-    mutate(loginData);
-    console.log(loginData);
-  };
+  // const onSubmit = (loginData: LoginData) => {
+  //   mutate(loginData);
+  //   console.log(loginData);
+  // };
 
-  const { mutate, isError } = useMutation<LoginResponse, Error, LoginData>({
+  // const { mutate, isError } = useMutation<LoginResponse, Error, LoginData>({
+  const { isError } = useMutation<LoginResponse, Error, LoginData>({
     mutationFn: (loginData) => postUserLogin(loginData),
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.accessToken);
