@@ -27,13 +27,12 @@ export default function FindPasswordPage() {
     mode: 'onChange',
   });
 
-  //이메일 전송
+  //이메일 전송 후 버튼 disable 구현 필요
   const { mutate: sendEmail, isSuccess } = useMutation<Response, Error, Email>({
     mutationKey: ['sendEmail'],
     mutationFn: (email) => postEmail(email),
   });
 
-  //이메일 중복 확인
   const { mutate: isDuplicateEmail } = useMutation<boolean, Error, string>({
     mutationKey: ['duplicateEmail'],
     mutationFn: (email) => postDuplicateEmail({ email: email }),
@@ -54,7 +53,6 @@ export default function FindPasswordPage() {
     },
   });
 
-  //이메일 인증
   const { mutate: vertifyEmail } = useMutation<Response, Error, VertifyData>({
     mutationKey: ['vertifyEmail'],
     mutationFn: (vetrtifyData) => postVertifyEmail(vetrtifyData),
@@ -75,10 +73,8 @@ export default function FindPasswordPage() {
   });
 
   const handleSendEmail = (email: string) => {
-    if (email !== '') {
-      setEmailData(email);
-      return isDuplicateEmail(email);
-    }
+    setEmailData(email);
+    return isDuplicateEmail(email);
   };
 
   const onSubmit = (vetrtifyData: VertifyData) => {
@@ -103,8 +99,7 @@ export default function FindPasswordPage() {
                 type="button"
                 className={styles.checkBtn}
                 onClick={() => {
-                  const email = getValues('email');
-                  handleSendEmail(email);
+                  handleSendEmail(getValues('email'));
                 }}
               >
                 코드 발송

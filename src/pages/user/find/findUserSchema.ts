@@ -20,6 +20,6 @@ export const passwordSchema = object({
     ),
   checkPassword: string()
     .required('비밀번호를 한번 더 입력해 주세요.')
-    .oneOf([ref('password'), ''], '비밀번호가 일치하지 않습니다.'),
+    .oneOf([ref('newPassword'), ''], '비밀번호가 일치하지 않습니다.'),
 });
 /* eslint-enable */
