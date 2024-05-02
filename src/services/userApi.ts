@@ -17,8 +17,8 @@ export interface VertifyData {
 }
 
 export interface ResetPasswordData {
-  email: string;
-  authNumber: string;
+  email: string | null;
+  newPassword: string;
 }
 
 export interface JoinData {

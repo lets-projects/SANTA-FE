@@ -8,11 +8,11 @@ export const verifySchema = object({
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
       '이메일 형식을 확인해 주세요.',
     ),
-  authNumber: string(),
+  authNumber: string().required('인증 코드를 입력 해 주세요.'),
 });
 
 export const passwordSchema = object({
-  password: string()
+  newPassword: string()
     .required('비밀번호는 필수 입력값입니다.')
     .matches(
       /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}[^\s]*$/,

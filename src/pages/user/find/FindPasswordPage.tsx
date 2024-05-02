@@ -9,6 +9,7 @@ import { Button } from '/src/components/common/Button';
 import { verifySchema } from './findUserSchema';
 import { Email, VertifyData, postDuplicateEmail, postEmail, postVertifyEmail } from '/src/services/userApi';
 import Timer from './Timer';
+import { paths } from '/src/utils/path';
 
 export default function FindPasswordPage() {
   const navigation = useNavigate();
@@ -26,7 +27,8 @@ export default function FindPasswordPage() {
     mode: 'onChange',
   });
 
-  const { mutate: sendEmail } = useMutation<Response, Error, Email>({
+  //이메일 전송
+  const { mutate: sendEmail, isSuccess } = useMutation<Response, Error, Email>({
     mutationKey: ['sendEmail'],
     mutationFn: (email) => postEmail(email),
   });
@@ -53,19 +55,21 @@ export default function FindPasswordPage() {
   });
 
   //이메일 인증
-  const {
-    mutate: vertifyEmail,
-    isError,
-    isPending,
-  } = useMutation<Response, Error, VertifyData>({
+  const { mutate: vertifyEmail } = useMutation<Response, Error, VertifyData>({
     mutationKey: ['vertifyEmail'],
     mutationFn: (vetrtifyData) => postVertifyEmail(vetrtifyData),
-    onSuccess: () => {
-      navigation('비번 초기화 페이지');
+    onSuccess: (res) => {
+      if (!res) {
+        return setError('authNumber', {
+          message: '인증 코드를 다시 확인 해 주세요.',
+        });
+      }
+      sessionStorage.setItem('email', emailData);
+      navigation(paths.RESET_PASSWORD);
     },
     onError: () => {
       setError('authNumber', {
-        message: '인증 코드를 다시 확인 해 주세요.',
+        message: '다시 시도해 주세요.',
       });
     },
   });
@@ -81,7 +85,6 @@ export default function FindPasswordPage() {
     vertifyEmail(vetrtifyData);
   };
 
-  const successSendEmail = isError && isPending;
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -111,7 +114,7 @@ export default function FindPasswordPage() {
             <div className={styles.label}>인증 코드</div>
             <div className={styles.vertifyCodeInput}>
               <input type="text" className={styles.availabilityInput} {...register('authNumber')} />
-              <div className={styles.timerContainer}>{successSendEmail && <Timer />}</div>
+              <div className={styles.timerContainer}>{isSuccess && <Timer />}</div>
             </div>
             {errors.authNumber && <p className={styles.errorMessage}>{errors.authNumber?.message}</p>}
             <div className={styles.submitBtn}>
