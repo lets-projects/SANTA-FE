@@ -2,7 +2,6 @@ import { useRef } from 'react';
 
 import { Card } from '/src/components/common/Card';
 import styles from './ChallengeList.module.scss';
-
 interface Category {
   name: string;
 }
