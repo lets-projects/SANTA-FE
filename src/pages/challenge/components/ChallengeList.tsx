@@ -10,13 +10,13 @@ interface Challenge {
   id: number;
   name: string;
   description: string;
-  imag: string;
+  image: string;
   clearStandard: number;
   category: Category;
 }
 //: { data: Challenge[]; color: string }
 
-export default function ChallengeList({ data, color }) {
+export default function ChallengeList({ data, color }: { data: Challenge[]; color: 'green3' | 'yellow' }) {
   const progressRef = useRef<HTMLDivElement | null>(null);
 
   return (

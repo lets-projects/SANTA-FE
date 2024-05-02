@@ -5,10 +5,10 @@ export interface LoginData {
   password: string;
 }
 
-interface Nickname {
+export interface Nickname {
   nickname: string;
 }
-interface Email {
+export interface Email {
   email: string;
 }
 

@@ -5,16 +5,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '/src/styles/join/join.module.scss';
 import { paths } from '/src/utils/path';
-import { postDuplicateEmail, postDuplicateNickname, postJoin } from '/src/services/userApi';
-import { JoinData } from '/src/services/userApi';
+import { Nickname, postDuplicateEmail, postDuplicateNickname, postJoin } from '/src/services/userApi';
+import { JoinData, Email } from '/src/services/userApi';
 import { joinSchema } from './joinSchema';
+import { useState } from 'react';
 
 function JoinPage() {
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkNickname, setCheckNickname] = useState(false);
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    trigger,
+    setError,
+    getValues,
+    resetField,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(joinSchema),
@@ -31,20 +38,71 @@ function JoinPage() {
     },
   });
 
-  // const { mutate: isDuplicateEmail } = useMutation({
-  //   mutationKey: ['duplicateEmail', { email: joinData.email }],
-  //   mutationFn: () => postDuplicateEmail({ email: joinData.email }),
-  // });
+  const { mutate: isDuplicateEmail } = useMutation<boolean, Error, Email>({
+    mutationKey: ['duplicateEmail'],
+    mutationFn: (data) => postDuplicateEmail(data),
+    onSuccess: (data) => {
+      if (data) {
+        //이메일 중복일 경우
+        resetField('email');
+        setError('email', {
+          message: '이미 등록된 이메일입니다.',
+        });
+      } else {
+        setCheckEmail(true);
+      }
+    },
+  });
 
-  // const { mutate: isDuplicateNickName } = useMutation({
-  //   mutationKey: ['duplicateNickName', { nickname: joinData.nickname }],
-  //   mutationFn: () => postDuplicateNickname({ nickname: joinData.nickname }),
-  // });
+  const { mutate: isDuplicateNickName } = useMutation<boolean, Error, Nickname>({
+    mutationKey: ['duplicateNickName'],
+    mutationFn: (data) => postDuplicateNickname(data),
+    onSuccess: (data) => {
+      if (data) {
+        //이메일 중복일 경우
+        resetField('nickname');
+        setError('nickname', {
+          message: '이미 사용중인 닉네임입니다.',
+        });
+      } else {
+        setCheckNickname(true);
+      }
+    },
+  });
+
+  //이메일 중복 체크
+  const handleDuplicateCheckEmail = async (email: string) => {
+    //이메일 유효성 검사
+    const isVaild = await trigger('email');
+    if (!isVaild) {
+      return;
+    }
+    //유효성 통과시 api 호출
+    isDuplicateEmail({ email: email });
+  };
+
+  const handleDuplicateCheckNickname = async (nickname: string) => {
+    const isVaild = await trigger('nickname');
+    if (!isVaild) {
+      return;
+    }
+    isDuplicateNickName({ nickname: nickname });
+  };
 
   const onSubmit = (joinData: JoinData) => {
-    //이메일 중복 확인 && 닉네임 중복 확인 성공시
-    console.log(joinData);
-    // mutate(joinData);
+    if (!checkEmail) {
+      return setError('email', {
+        message: '이메일 중복 확인을 해 주세요.',
+      });
+    }
+    if (!checkNickname) {
+      return setError('nickname', {
+        message: '닉네임 중복 확인을 해 주세요.',
+      });
+    }
+    if (checkNickname && checkNickname) {
+      return mutate(joinData);
+    }
   };
 
   return (
@@ -56,14 +114,15 @@ function JoinPage() {
             <input type="text" className={styles.availabilityInput} {...register('email')} />
             <div
               className={styles.checkBtn}
-              // onClick={() => {
-              //   isDuplicateEmail(joinData.email);
-              // }}
+              onClick={() => {
+                handleDuplicateCheckEmail(getValues('email'));
+              }}
             >
               중복확인
             </div>
           </div>
           {errors.email && <p className={styles.errorMessage}>{errors.email?.message}</p>}
+          {}
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.label}>비밀번호</div>
@@ -86,9 +145,9 @@ function JoinPage() {
             <input type="text" className={styles.availabilityInput} {...register('nickname')} />
             <div
               className={styles.checkBtn}
-              // onClick={() => {
-              //   isDuplicateNickName(joinData.nickname);
-              // }}
+              onClick={() => {
+                handleDuplicateCheckNickname(getValues('nickname'));
+              }}
             >
               중복확인
             </div>

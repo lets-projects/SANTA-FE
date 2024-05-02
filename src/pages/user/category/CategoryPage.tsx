@@ -22,7 +22,7 @@ interface CategoryItem {
   name: string;
 }
 
-export default function Category() {
+export default function CategoryPage() {
   const name = '엘리스';
 
   return (
@@ -56,7 +56,7 @@ export default function Category() {
         </div>
       </div>
       <div className={styles.bottom}>
-        <Button>이제 시작 해 볼까요?</Button>
+        <Button variant="green1">이제 시작 해 볼까요?</Button>
       </div>
     </div>
   );

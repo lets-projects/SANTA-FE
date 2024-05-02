@@ -39,7 +39,7 @@ export default function FindPasswordPage() {
           ></Input>
         </form>
         <div className={styles.submitBtn}>
-          <Button children={'확인'} />
+          <Button variant="green3" children={'확인'} />
         </div>
       </div>
     </div>

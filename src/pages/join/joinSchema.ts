@@ -12,7 +12,7 @@ export const joinSchema = object({
     .required('비밀번호는 필수 입력값입니다.')
     .matches(
       /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}[^\s]*$/,
-      '알파벳, 숫자, 공백을 제외한 특수문자를 모두 포함한 8자리 이상 입력해주세요',
+      '알파벳, 숫자, 특수문자를 포함하여 8자리 이상 입력해주세요',
     ),
   checkPassword: string()
     .required('비밀번호를 한번 더 입력해 주세요.')
@@ -24,7 +24,3 @@ export const joinSchema = object({
     .matches(/^01(?:0|1|[6-9])(?:\d{3}|\d{4})\d{4}$/, '올바른 휴대폰 번호를 입력해 주세요.'),
 });
 /* eslint-enable */
-
-// interface Types extends InferType<typeof joinSchema> {
-//   arr?: Array<number>;
-// }
