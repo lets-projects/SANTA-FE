@@ -3,6 +3,7 @@ import { api } from './api';
 // interface Category {
 //   name: string;
 // }
+
 // interface Challenge {
 //   id: number;
 //   name: string;
@@ -12,8 +13,8 @@ import { api } from './api';
 //   category: Category;
 // }
 
-export const getAllChallenge = async () => {
-  return await api.get('challenges');
+export const getCompletion = async () => {
+  return await api.get('sers/completion');
 };
 
 export const getMyMountains = async () => {
