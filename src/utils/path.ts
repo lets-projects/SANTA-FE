@@ -12,6 +12,7 @@ export const paths = {
   LOGIN: '/login',
   JOIN: '/join',
   PROFILE: '/profile',
+  PROFILE_EDIT: '/profile/edit',
   FIND_ACCOUNT: '/user/find_account',
   FIND_PASSWORD: '/user/find_password',
   TROPHY: '/trophy',

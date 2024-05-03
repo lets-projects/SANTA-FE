@@ -24,6 +24,7 @@ import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
 import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
 import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
+import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       { path: paths.GETHERING_POST, element: <PostPage /> },
       { path: paths.GETHERING_DETAIL, element: <GatheringDetailPage /> },
       { path: paths.TROPHY, element: <TrophyPage /> },
-
+      { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
       {
         element: <PrivateRoutes />,
         children: [
