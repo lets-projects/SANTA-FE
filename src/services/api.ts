@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const getUserToken = () => {
+const getAccessToken = () => {
   // 로컬 스토리지에서 토큰을 가져온다.
-  const userToken = localStorage.getItem('access_token');
-  return userToken;
+  const accessToken = localStorage.getItem('access_token');
+  return accessToken;
 };
 
 export const api = axios.create({
@@ -13,7 +13,7 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   // 로컬 스토리지에서 토큰을 가져온다.
-  const userToken = getUserToken();
+  const userToken = getAccessToken();
 
   if (userToken) {
     config.headers.Authorization = `Bearer ${userToken}`;

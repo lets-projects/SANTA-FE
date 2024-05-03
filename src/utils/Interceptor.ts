@@ -1,15 +1,20 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
-export const getUserToken = () => {
-  const userToken = localStorage.getItem('access_token');
-  return userToken;
+export const getAccessToken = () => {
+  const accessToken = localStorage.getItem('access_token');
+  return accessToken;
+};
+
+export const getRefreshToken = () => {
+  const refreshToken = localStorage.getItem('refresh_token');
+  return refreshToken;
 };
 
 export const requestIntercepter = (config: InternalAxiosRequestConfig<unknown>) => {
-  const userToken = getUserToken();
+  const accessToken = getAccessToken();
 
-  if (userToken) {
-    config.headers.Authorization = `Bearer ${userToken}`;
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
   }
   config.headers['Content-Type'] = 'application/json';
 
@@ -20,7 +25,6 @@ export const responseIntercepter = (response: AxiosResponse) => {
   return response;
 };
 
-//loader 적용시
 export interface ErrorType extends Error {
   code?: number;
 }
