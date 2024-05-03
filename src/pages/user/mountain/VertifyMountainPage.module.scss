@@ -20,11 +20,11 @@
   border-style: none;
   border-radius: 10px;
 
-  background-color: $green3;
-
   width: 8.25rem;
   height: 2.8rem;
-  margin: 20px 10px;
+  margin: 20px 10px 0;
+
+  background-color: var(--main-bg-color);
 
   @include font-subtitle1;
   color: $white;

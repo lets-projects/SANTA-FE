@@ -16,7 +16,6 @@ const INCLUDE_BACK_BTN_PATH = [
   '/user/find_account',
   '/user/category',
   '/join',
-  '/mountain/vertify',
 ];
 
 export default function Layout() {

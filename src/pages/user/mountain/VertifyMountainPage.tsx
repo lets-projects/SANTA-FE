@@ -59,8 +59,17 @@ export default function VertifyMountainPage() {
         <>
           <div className={styles.title}>산 정상에 계신가요?</div>
           <img className={styles.image} src={loadingImg} />
-          <button className={styles.vertifyBtn} onClick={onVertifyClick}>
+          <button className={styles.vertifyBtn} onClick={onVertifyClick} style={{ backgroundColor: '#FBC241' }}>
             네! 인증할래요
+          </button>
+          <button
+            className={styles.vertifyBtn}
+            style={{ backgroundColor: '#C1D95F' }}
+            onClick={() => {
+              navigation(-1);
+            }}
+          >
+            아니요
           </button>
         </>
       )}

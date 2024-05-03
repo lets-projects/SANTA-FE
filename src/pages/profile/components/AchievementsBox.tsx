@@ -1,20 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getMyMountains } from '/src/services/challengeApi';
+import { VertifyMountain, getMyMountains } from '/src/services/challengeApi';
+import { useState } from 'react';
 
 import { PiMedal } from 'react-icons/pi';
 import styles from './Achievements.module.scss';
 import mountain from '/images/mountain.png';
 import { paths } from '/src/utils/path';
 
-// interface Record {
-//   name: string;
-//   height: number;
-//   location: string;
-//   climbDate: string;
-// }
+const getTotalHeight = (data: VertifyMountain[]) => {
+  const totalHeight = data.reduce((prev, current) => {
+    return prev + current.mountain.height;
+  }, 0);
+  return totalHeight.toFixed(1);
+};
 
 export default function AchievementsBox() {
+  const [totalHeight, setTotalHeight] = useState('');
   const navigate = useNavigate();
 
   const {
@@ -22,7 +24,7 @@ export default function AchievementsBox() {
     isError,
     isFetched,
   } = useQuery({
-    queryKey: ['allChallenge'],
+    queryKey: ['myMountains'],
     queryFn: getMyMountains,
     select: (data) => data.data.content,
     staleTime: Infinity,
@@ -31,6 +33,10 @@ export default function AchievementsBox() {
   });
 
   const SUCCESS = !isError && isFetched;
+
+  if (SUCCESS) {
+    setTotalHeight(getTotalHeight(myMountains));
+  }
 
   return (
     <div className={styles.container}>
@@ -42,7 +48,7 @@ export default function AchievementsBox() {
       </div>
       <div className={styles.records}>
         <div className={styles.achievName}>총 높이</div>
-        <p>{SUCCESS ? '' : 0} M</p>
+        <p>{SUCCESS ? totalHeight : 0} M</p>
         <div className={styles.achievName}>정복한 정상</div>
         <p>{SUCCESS ? myMountains.length : 0} 개</p>
       </div>
