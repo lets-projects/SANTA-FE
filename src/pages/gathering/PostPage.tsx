@@ -133,7 +133,7 @@ export function PostPage() {
       console.log(`${key}: ${value}`);
     });
     if (imgFile) {
-      gatheringFormData.append('image', imgFile); // 이미지 파일 추가
+      gatheringFormData.append('imageFile', imgFile); // 이미지 파일 추가
     }
     mutate(gatheringFormData);
   }
