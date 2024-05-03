@@ -26,18 +26,18 @@ import ResetPasswordPage from './pages/user/find/ResetPasswordPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: paths.HOME,
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <MainPage /> },
       { path: paths.RANK, element: <RankPage /> },
       { path: paths.GATHERING, element: <GatheringMainPage /> },
-      { path: '/livechat', element: <>실시간 채팅 페이지 입니다</> },
-      { path: '/gathering/search', element: <GatheringSearchPage /> },
-      { path: '/gathering/participate', element: <ParticipatingGroupPage /> },
-      { path: '/gathering/post', element: <PostPage /> },
-      { path: '/gathering/detail', element: <GatheringDetailPage /> },
+      { path: paths.LIVECHAT, element: <>실시간 채팅 페이지 입니다</> },
+      { path: paths.GETHERING_SEARCH, element: <GatheringSearchPage /> },
+      { path: paths.GETHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
+      { path: paths.GETHERING_POST, element: <PostPage /> },
+      { path: paths.GETHERING_DETAIL, element: <GatheringDetailPage /> },
       { path: paths.TROPHY, element: <TrophyPage /> },
 
       {
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/',
+    path: paths.HOME,
     element: <PublicRoutes />,
     children: [{ path: paths.LOGIN, element: <LoginPage /> }],
   },
