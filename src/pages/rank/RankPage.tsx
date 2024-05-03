@@ -7,7 +7,6 @@ import { getRankUsers, getMyRank } from '/src/services/ranks';
 import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 
 import { Rank } from '/src/services/ranks';
-import { UserProfile_small } from '/src/components/common/UserProfile_small';
 
 export default function RankPage() {
   const [page, setPage] = useState(0);
@@ -66,14 +65,14 @@ export default function RankPage() {
         <div className={styles.titleWrapper}>
           <p className={styles.title}>랭킹🏅</p>
           <div className={styles.subtitleWrapper}>
-            <p className={styles.subtitle}>이달의 랭킹을 확인해보세요. &nbsp 랭킹은 매달 1일 초기화됩니다.</p>
+            <p className={styles.subtitle}>이달의 랭킹을 확인해보세요. 랭킹은 매달 1일 초기화됩니다.</p>
           </div>
         </div>
-        <Top3UserRank />
+        <Top3UserRank top3users={ranks} />
         <div className={styles.myScoreInfo}>
           <div className={styles.userRank}>{myRank?.rank}</div>
           <div className={styles.profileImg}>
-            <UserProfile_small name={`${myRank?.nickname}`} imageUrl={`${myRank?.image}`} />
+            <img src={`${myRank?.image}`} />
           </div>
           <div className={styles.nickname}>{myRank?.nickname}님</div>
           <div className={styles.score}>{myRank?.score}</div>
@@ -90,8 +89,8 @@ export default function RankPage() {
                 <div className={styles.userRankItem} key={user.id}>
                   <div className={styles.rankWrapper}>
                     <div className={styles.userRank}>{user.rank}</div>
-                    <div className={styles.profileImgContainer}>
-                      <UserProfile_small name={`${user.nickname}`} imageUrl={`${user.image}`} />
+                    <div className={styles.profileImgWrapper}>
+                      <img src={`${user.image}`} className={styles.userImg} />
                     </div>
                   </div>
                   <div className={styles.userNickname}>{user.nickname}</div>
@@ -100,7 +99,7 @@ export default function RankPage() {
               ))}
             </>
           ) : (
-            <>Loading..</>
+            <>조회할 유저가 없습니다.</>
           )}
         </div>
       </div>
