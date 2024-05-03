@@ -1,7 +1,6 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { VertifyMountain, getMyMountains } from '/src/services/challengeApi';
-import { useState } from 'react';
 
 import { PiMedal } from 'react-icons/pi';
 import styles from './Achievements.module.scss';
@@ -16,8 +15,7 @@ const getTotalHeight = (data: VertifyMountain[]) => {
 };
 
 export default function AchievementsBox() {
-  const [totalHeight, setTotalHeight] = useState('');
-  const navigate = useNavigate();
+  const navigation = useNavigate();
 
   const {
     data: myMountains,
@@ -34,21 +32,20 @@ export default function AchievementsBox() {
 
   const SUCCESS = !isError && isFetched;
 
-  if (SUCCESS) {
-    setTotalHeight(getTotalHeight(myMountains));
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>
         <p>나의 기록</p>
-        <Link to="/나의업적페이지">
-          <PiMedal className={styles.icon} />
-        </Link>
+        <PiMedal
+          className={styles.icon}
+          onClick={() => {
+            navigation(paths.MOUNTAIN_RECORD);
+          }}
+        />
       </div>
       <div className={styles.records}>
         <div className={styles.achievName}>총 높이</div>
-        <p>{SUCCESS ? totalHeight : 0} M</p>
+        <p>{SUCCESS ? getTotalHeight(myMountains) : 0} M</p>
         <div className={styles.achievName}>정복한 정상</div>
         <p>{SUCCESS ? myMountains.length : 0} 개</p>
       </div>
@@ -56,7 +53,7 @@ export default function AchievementsBox() {
         <button
           className={styles.certificationBtn}
           onClick={() => {
-            navigate(paths.MOUNTAIN_VERTIFY);
+            navigation(paths.MOUNTAIN_VERTIFY);
           }}
         >
           인증하러 가기

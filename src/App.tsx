@@ -23,6 +23,7 @@ import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
 import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
+import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
           { path: paths.CHALLENGE, element: <ChallengePage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
+          { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
         ],
       },
       {
