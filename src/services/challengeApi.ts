@@ -1,6 +1,6 @@
 import { api } from './api';
 
-export interface ThumnailChallenge {
+export interface ThumbnailChallenge {
   id: number;
   name: string;
   image: string;
@@ -8,7 +8,7 @@ export interface ThumnailChallenge {
 interface Category {
   name: string;
 }
-interface Challenge extends ThumnailChallenge {
+interface Challenge extends ThumbnailChallenge {
   description: string;
   clearStandard: number;
   category: Category;
@@ -55,7 +55,7 @@ export const getMyMountains = async () => {
   return await api.get('users/mountains');
 };
 
-export const getChallengeList = async (): Promise<ThumnailChallenge[]> => {
+export const getChallengeList = async (): Promise<ThumbnailChallenge[]> => {
   const url = `challenges?page=${0}&size=${3}`;
   const res = await api.get(url);
   return res.data.content;
