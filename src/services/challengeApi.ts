@@ -1,17 +1,5 @@
 import { api } from './api';
 
-// interface Category {
-//   name: string;
-// }
-// interface Challenge {
-//   id: number;
-//   name: string;
-//   description: string;
-//   imag: string;
-//   clearStandard: number;
-//   category: Category;
-// }
-
 export interface VertifyMountain {
   id: number;
   climbDate: string;
@@ -28,8 +16,23 @@ export interface VertifyData {
   longitude?: number;
 }
 
+export interface Challenge {
+  id: 0;
+  name: string;
+  description: string;
+  image: string;
+  clearStandard: 0;
+  category: {
+    name: string;
+  };
+}
+
 export const getAllChallenge = async () => {
   return await api.get('challenges');
+};
+
+export const getUserChallenge = async (completion: boolean) => {
+  return await api.get(`users/completion?completion=${completion}`);
 };
 
 export const getMyMountains = async () => {

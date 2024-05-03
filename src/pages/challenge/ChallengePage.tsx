@@ -4,31 +4,39 @@ import { useState } from 'react';
 
 import styles from './ChallengePage.module.scss';
 import { UserProfile_small } from '/src/components/common/UserProfile_small';
-//import ChallengeList from './components/ChallengeList';
+import ChallengeList from './components/ChallengeList';
 import { paths } from '/src/utils/path';
-import { getAllChallenge } from '/src/services/challengeApi';
+import { getAllChallenge, getUserChallenge } from '/src/services/challengeApi';
+import ProgressChallengeList from './components/ProgressChallengeList';
 
 export default function ChallengePage() {
-  const { data: allchallenge } = useQuery({
+  const {
+    data: allChallenge,
+    isError,
+    isFetched,
+  } = useQuery({
     queryKey: ['allChallenge'],
     queryFn: getAllChallenge,
-    select: (data) => data.data,
+    select: (data) => data.data.content,
     staleTime: Infinity,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
   });
 
-  const tabData = [
-    { button: '진행중인 챌린지', data: allchallenge, color: 'green1' },
-    { button: '시작 전 챌린지', data: allchallenge, color: 'yellow' },
-  ];
+  const { data: progressChallenge } = useQuery({
+    queryKey: ['userChallenge', false],
+    queryFn: () => getUserChallenge(false),
+    select: (data) => data.data.content,
+    staleTime: Infinity,
+  });
 
   const [openTab, setOpenTab] = useState(0);
   const navigate = useNavigate();
 
-  console.log(allchallenge);
-  // const challengeList = allchallenge.content;
-  // console.log(challengeList);
+  const SUCCESS = !isError && isFetched;
+
+  const tabData = [
+    { button: '진행중인 챌린지', data: progressChallenge, color: 'green1', progress: true },
+    { button: '전체 챌린지', data: allChallenge, color: 'yellow', progress: false },
+  ];
 
   return (
     <div className={styles.container}>
@@ -43,24 +51,32 @@ export default function ChallengePage() {
           나의 트로피 보러 가기
         </button>
       </div>
-      <div className={styles.middle}>
-        {tabData.map((tab, index) => {
-          return (
-            <button
-              className={openTab == index ? styles.clickedBtn : styles.nomalBtn}
-              onClick={() => {
-                setOpenTab(index);
-              }}
-              key={tab.button}
-            >
-              {tab.button}
-            </button>
-          );
-        })}
-      </div>
-      <div className={styles.bottom}>
-        {/* <ChallengeList data={tabData[openTab].data} color={tabData[openTab].color} /> */}
-      </div>
+      {SUCCESS && (
+        <>
+          <div className={styles.middle}>
+            {tabData.map((tab, index) => {
+              return (
+                <button
+                  className={openTab == index ? styles.clickedBtn : styles.nomalBtn}
+                  onClick={() => {
+                    setOpenTab(index);
+                  }}
+                  key={tab.button}
+                >
+                  {tab.button}
+                </button>
+              );
+            })}
+          </div>
+          <div className={styles.bottom}>
+            {tabData[openTab].progress ? (
+              <ProgressChallengeList Challengedata={tabData[openTab].data} color={'green2'} />
+            ) : (
+              <ChallengeList Challengedata={tabData[openTab].data} color={'yellow'} />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
