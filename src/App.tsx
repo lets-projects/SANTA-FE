@@ -4,6 +4,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './styles/_global.scss';
 import './styles/_reset.scss';
 import Layout from './utils/Layout';
+import { paths } from './utils/path';
+import { PrivateRoutes, PublicRoutes } from './utils/routes';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import MainPage from './pages/main/MainPage';
@@ -20,9 +22,6 @@ import FindPasswordPage from './pages/user/find/FindPasswordPage';
 import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
-import { PrivateRoutes, PublicRoutes } from './utils/routes';
-
-import { paths } from './utils/path';
 import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
 
 const router = createBrowserRouter([
@@ -47,7 +46,7 @@ const router = createBrowserRouter([
           { path: paths.PROFILE, element: <ProfilePage /> },
           { path: paths.CHALLENGE, element: <ChallengePage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
-          { path: '/mountain/vertify', element: <VertifyMountainPage /> },
+          { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
         ],
       },
       {
