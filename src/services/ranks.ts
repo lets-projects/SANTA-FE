@@ -47,6 +47,6 @@ export const getMyRank = async (): Promise<Rank> => {
   const url = `/ranks/rankings`;
   const res = await api.get(url);
   console.log('로그인 유저 랭킹 ---------------');
-  console.log(res.data.userRankings);
-  return res.data.userRankings;
+  console.log(res.data.userRanking);
+  return res.data.userRanking;
 };
