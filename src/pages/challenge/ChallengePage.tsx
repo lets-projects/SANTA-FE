@@ -11,6 +11,7 @@ import { getAllChallenge, getUserChallenge } from '/src/services/challengeApi';
 import { getUserInfo } from '/src/services/userApi';
 
 export default function ChallengePage() {
+  const navigation = useNavigate();
   const {
     data: allChallenge,
     isError,
@@ -36,7 +37,6 @@ export default function ChallengePage() {
   });
 
   const [openTab, setOpenTab] = useState(0);
-  const navigate = useNavigate();
 
   const SUCCESS = !isError && isFetched;
 
@@ -52,7 +52,7 @@ export default function ChallengePage() {
         <button
           className={styles.myTrophyBtn}
           onClick={() => {
-            navigate(paths.TROPHY);
+            navigation(paths.TROPHY);
           }}
         >
           나의 트로피 보러 가기

@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       { path: paths.GETHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
       { path: paths.GETHERING_POST, element: <PostPage /> },
       { path: paths.GETHERING_DETAIL, element: <GatheringDetailPage /> },
-      { path: paths.TROPHY, element: <TrophyPage /> },
+
       { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
       {
         element: <PrivateRoutes />,
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
           { path: paths.CATEGORY, element: <CategoryPage /> },
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
           { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
+          { path: paths.TROPHY, element: <TrophyPage /> },
         ],
       },
       {
