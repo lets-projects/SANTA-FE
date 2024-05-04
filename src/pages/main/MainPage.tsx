@@ -9,7 +9,7 @@ import UserRankList from './components/MainRankList';
 import styles from './mainPage.module.scss';
 
 import { getMeetings } from '/src/services/meeting';
-import { getRanks } from '/src/services/ranks';
+import { getMainPagesRanks } from '/src/services/ranks';
 import { getChallengeList } from '/src/services/challengeApi';
 
 import { useQuery } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ import { paths } from '/src/utils/path';
 
 export default function Main() {
   const { data: meetings } = useQuery({ queryKey: ['meetings'], queryFn: getMeetings });
-  const { data: ranks } = useQuery({ queryKey: ['ranks'], queryFn: getRanks });
+  const { data: ranks } = useQuery({ queryKey: ['ranks'], queryFn: getMainPagesRanks });
   const { data: challenges } = useQuery({ queryKey: ['challenges'], queryFn: getChallengeList });
 
   if (!meetings || !ranks || !challenges) return <>Loading...</>;
