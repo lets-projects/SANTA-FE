@@ -67,14 +67,18 @@ export default function RankPage() {
           </div>
         </div>
         <Top3UserRank top3users={top3Rank} />
-        <div className={styles.myScoreInfo}>
-          <div className={styles.userRank}>{myRank?.rank}</div>
-          <div className={styles.myprofileImgWrapper}>
-            <img src={`${myRank?.image}`} className={styles.userImg} />
+        {myRank ? (
+          <div className={styles.myScoreInfo}>
+            <div className={styles.userRank}>{myRank?.rank}</div>
+            <div className={styles.myprofileImgWrapper}>
+              <img src={`${myRank?.image}`} className={styles.userImg} />
+            </div>
+            <div className={styles.nickname}>{myRank?.nickname}님</div>
+            <div className={styles.score}>{myRank?.score}</div>
           </div>
-          <div className={styles.nickname}>{myRank?.nickname}님</div>
-          <div className={styles.score}>{myRank?.score}</div>
-        </div>
+        ) : (
+          <div className={styles.myScoreInfo}>로그인을 해주세요.</div>
+        )}
         <div className={styles.userRankBoxTitle}>
           <div>순위</div>
           <div>닉네임</div>

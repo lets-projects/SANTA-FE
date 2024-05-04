@@ -22,36 +22,44 @@ export default function Main() {
 
   if (!meetings || !ranks || !challenges) return <>Loading...</>;
   return (
-    <div className={styles.container}>
-      <SliderBannerImg />
-      <div className={styles.flex}>
-        <div className={styles.buttonWrapper}>
-          <Button onClick={() => {}} variant="yellow">
-            내 인증 바로가기
-          </Button>
-        </div>
-        <div className={styles.sectionWrapper}>
-          <SectionTitle
-            title="챌린지 둘러보기"
-            subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
-            goToPage={paths.CHALLENGE}
-          />
-          <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} />
-        </div>
-        <div>
+    <>
+      <div className={styles.bannerWrapper}>
+        <SliderBannerImg />
+      </div>
+      <div className={styles.container}>
+        <div className={styles.flex}>
+          <div className={styles.buttonWrapper}>
+            <Button onClick={() => {}} variant="yellow">
+              내 인증 바로가기
+            </Button>
+          </div>
           <div className={styles.sectionWrapper}>
-            <div className={styles.toggleWrapper}>
-              <Toggle />
+            <SectionTitle
+              title="챌린지 둘러보기"
+              subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
+              goToPage={paths.CHALLENGE}
+            />
+            <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} />
+          </div>
+          <div>
+            <div className={styles.sectionWrapper}>
+              <div className={styles.toggleWrapper}>
+                <Toggle />
+              </div>
+              <SectionTitle
+                title="신규 모임"
+                subtitle="현재 진행중인 모임을 확인해보세요."
+                goToPage={paths.GATHERING}
+              />
+              <MeetingList meetings={meetings} />
             </div>
-            <SectionTitle title="신규 모임" subtitle="현재 진행중인 모임을 확인해보세요." goToPage={paths.GATHERING} />
-            <MeetingList meetings={meetings} />
+          </div>
+          <div>
+            <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" goToPage={paths.RANK} />
+            <UserRankList ranks={ranks} />
           </div>
         </div>
-        <div>
-          <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" goToPage={paths.RANK} />
-          <UserRankList ranks={ranks} />
-        </div>
       </div>
-    </div>
+    </>
   );
 }
