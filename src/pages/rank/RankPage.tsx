@@ -3,7 +3,7 @@ import styles from './rankPage.module.scss';
 
 import { useEffect, useState, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getRankUsers, getMyRank } from '/src/services/ranks';
+import { getRankUsers, getMyRank, getTop3Ranks } from '/src/services/ranks';
 import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 
 import { Rank } from '/src/services/ranks';
@@ -12,6 +12,7 @@ export default function RankPage() {
   const [page, setPage] = useState(0);
   const [ranks, setRanks] = useState<Rank[]>([]);
 
+  const { data: top3Rank } = useQuery({ queryKey: ['top3Rank'], queryFn: getTop3Ranks });
   const { data: myRank } = useQuery({ queryKey: ['myrank'], queryFn: getMyRank });
 
   const {
@@ -54,10 +55,7 @@ export default function RankPage() {
     }
   }, [fetchData]);
 
-  // useEffect(() => {
-  //   console.log('------page change-----');
-  //   console.log(page);
-  // }, [page]);
+  if (!top3Rank) return <>Loading...</>;
 
   return (
     <div className={styles.container}>
@@ -68,11 +66,11 @@ export default function RankPage() {
             <p className={styles.subtitle}>이달의 랭킹을 확인해보세요. 랭킹은 매달 1일 초기화됩니다.</p>
           </div>
         </div>
-        <Top3UserRank top3users={ranks} />
+        <Top3UserRank top3users={top3Rank} />
         <div className={styles.myScoreInfo}>
           <div className={styles.userRank}>{myRank?.rank}</div>
-          <div className={styles.profileImg}>
-            <img src={`${myRank?.image}`} />
+          <div className={styles.myprofileImgWrapper}>
+            <img src={`${myRank?.image}`} className={styles.userImg} />
           </div>
           <div className={styles.nickname}>{myRank?.nickname}님</div>
           <div className={styles.score}>{myRank?.score}</div>
