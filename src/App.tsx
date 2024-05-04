@@ -24,6 +24,7 @@ import { PrivateRoutes, PublicRoutes } from './utils/routes';
 import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
 
 import { paths } from './utils/path';
+import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPage';
 
 const router = createBrowserRouter([
   {
@@ -35,11 +36,12 @@ const router = createBrowserRouter([
       { path: paths.RANK, element: <RankPage /> },
       { path: paths.GATHERING, element: <GatheringMainPage /> },
       { path: paths.LIVECHAT, element: <>실시간 채팅 페이지 입니다</> },
-      { path: paths.GETHERING_SEARCH, element: <GatheringSearchPage /> },
-      { path: paths.GETHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
-      { path: paths.GETHERING_POST, element: <PostPage /> },
-      { path: paths.GETHERING_DETAIL, element: <GatheringDetailPage /> },
-      { path: paths.GETHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
+      { path: paths.GATHERING_SEARCH, element: <GatheringSearchPage /> },
+      { path: paths.GATHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
+      { path: paths.GATHERING_POST, element: <PostPage /> },
+      { path: paths.GATHERING_DETAIL, element: <GatheringDetailPage /> },
+      { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
+      { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
       { path: paths.TROPHY, element: <TrophyPage /> },
 
       {

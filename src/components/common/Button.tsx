@@ -6,6 +6,9 @@ type Props = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: "button" | "submit" | "reset" | undefined
 };
+interface DeleteBtnProps {
+  onClick: () => void;
+}
 
 export const Button = ({ variant, onClick, children, type }: PropsWithChildren<Props>) => {
   return (
@@ -16,15 +19,15 @@ export const Button = ({ variant, onClick, children, type }: PropsWithChildren<P
 };
 
 
-export const DeleteBtn = (onClick: () => void) => {
-
+export const DeleteBtn: React.FC<DeleteBtnProps> = ({ onClick }) => {
   return (
     <div onClick={onClick} className={styles.deleteBtn}>
       삭제
     </div>
-  )
-}
-export const EditBtn = (onClick: () => void) => {
+  );
+};
+
+export const EditBtn: React.FC<DeleteBtnProps> = ({ onClick }) => {
   return (
     <div onClick={onClick} className={styles.editBtn}>
       수정
