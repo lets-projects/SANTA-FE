@@ -3,8 +3,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import './styles/_global.scss';
 import './styles/_reset.scss';
-import Layout from './utils/Layout';
 import { paths } from './utils/path';
+import Layout from './utils/Layout';
 import { PrivateRoutes, PublicRoutes } from './utils/routes';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
@@ -22,6 +22,7 @@ import FindPasswordPage from './pages/user/find/FindPasswordPage';
 import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
+import ResetPasswordPage from './pages/user/find/ResetPasswordPage';
 import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
 import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
 import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
@@ -40,7 +41,6 @@ const router = createBrowserRouter([
       { path: paths.GETHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
       { path: paths.GETHERING_POST, element: <PostPage /> },
       { path: paths.GETHERING_DETAIL, element: <GatheringDetailPage /> },
-
       { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
       {
         element: <PrivateRoutes />,
@@ -59,6 +59,7 @@ const router = createBrowserRouter([
           { path: paths.JOIN, element: <JoinPage /> },
           { path: paths.FIND_ACCOUNT, element: <FindAccountPage /> },
           { path: paths.FIND_PASSWORD, element: <FindPasswordPage /> },
+          { path: paths.RESET_PASSWORD, element: <ResetPasswordPage /> },
         ],
       },
     ],
