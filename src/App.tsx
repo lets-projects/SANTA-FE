@@ -3,7 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import './styles/_global.scss';
 import './styles/_reset.scss';
+import { paths } from './utils/path';
 import Layout from './utils/Layout';
+import { PrivateRoutes, PublicRoutes } from './utils/routes';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import MainPage from './pages/main/MainPage';
@@ -20,11 +22,12 @@ import FindPasswordPage from './pages/user/find/FindPasswordPage';
 import CategoryPage from './pages/user/category/CategoryPage';
 import ErrorPage from './pages/error/ErrorPage';
 import LoginPage from './pages/login/LoginPage';
-import { PrivateRoutes, PublicRoutes } from './utils/routes';
-import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
-
-import { paths } from './utils/path';
+import ResetPasswordPage from './pages/user/find/ResetPasswordPage';
+import VertifyMountainPage from './pages/user/mountain/VertifyMountainPage';
+import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
+import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
 import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPage';
+import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
 
 const router = createBrowserRouter([
   {
@@ -38,18 +41,21 @@ const router = createBrowserRouter([
       { path: paths.LIVECHAT, element: <>실시간 채팅 페이지 입니다</> },
       { path: paths.GATHERING_SEARCH, element: <GatheringSearchPage /> },
       { path: paths.GATHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
-      { path: paths.GATHERING_POST, element: <PostPage /> },
       { path: paths.GATHERING_DETAIL, element: <GatheringDetailPage /> },
       { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
       { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
+      { path: paths.GATHERING_POST, element: <PostPage /> },
+      { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
       { path: paths.TROPHY, element: <TrophyPage /> },
-
       {
         element: <PrivateRoutes />,
         children: [
           { path: paths.PROFILE, element: <ProfilePage /> },
           { path: paths.CHALLENGE, element: <ChallengePage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
+          { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
+          { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
+          { path: paths.TROPHY, element: <TrophyPage /> },
         ],
       },
       {
@@ -58,6 +64,7 @@ const router = createBrowserRouter([
           { path: paths.JOIN, element: <JoinPage /> },
           { path: paths.FIND_ACCOUNT, element: <FindAccountPage /> },
           { path: paths.FIND_PASSWORD, element: <FindPasswordPage /> },
+          { path: paths.RESET_PASSWORD, element: <ResetPasswordPage /> },
         ],
       },
     ],

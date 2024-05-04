@@ -45,7 +45,7 @@ export function GatheringDetailPage() {
     setIsProfileClicked(isProfileArray);
   }, [gatheringDetail])
   //유저 id정보 
-  const { data: userInfo, refetch } = useQuery({
+  const { data: userInfo } = useQuery({
     queryKey: ['userInfo'],
     queryFn: getUserInfo,
     staleTime: Infinity

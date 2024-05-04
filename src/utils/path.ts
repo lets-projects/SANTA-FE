@@ -13,10 +13,14 @@ export const paths = {
   LOGIN: '/login',
   JOIN: '/join',
   PROFILE: '/profile',
-  FIND_ACCOUNT: '/user/find_account',
-  FIND_PASSWORD: '/user/find_password',
+  PROFILE_EDIT: '/profile/edit',
+  FIND_ACCOUNT: '/user/find-account',
+  FIND_PASSWORD: '/user/find-password',
+  RESET_PASSWORD: '/user/reset-password',
   TROPHY: '/trophy',
   CATEGORY: '/user/category',
+  MOUNTAIN_VERTIFY: '/mountain/vertify',
+  MOUNTAIN_RECORD: '/mountain/record',
 } as const;
 
 export const NAVLIST = [
