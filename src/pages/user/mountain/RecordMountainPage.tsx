@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import styles from './RecordMountainPage.module.scss';
 import { PiMedal } from 'react-icons/pi';
-import { getMyMountains } from '/src/services/challengeApi';
+import { getMyMountains } from '/src/services/mountainAPi';
 import RecordList from './components/RecordList';
 
 export default function RecordMountainPage() {

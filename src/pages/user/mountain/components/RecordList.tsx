@@ -1,6 +1,6 @@
 import styles from './RecordList.module.scss';
 import { Card } from '/src/components/common/Card';
-import { VertifyMountain } from '/src/services/challengeApi';
+import { VertifyMountain } from '/src/services/mountainAPi';
 
 export default function RecordList({ myMountains }: { myMountains: VertifyMountain[] }) {
   return (
