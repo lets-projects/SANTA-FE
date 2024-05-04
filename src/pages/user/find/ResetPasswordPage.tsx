@@ -62,7 +62,7 @@ export default function FindPasswordPage() {
           <form onSubmit={handleSubmit(onSubmit)} className={styles.formContainer}>
             <div className={styles.label}>비밀번호</div>
             <div className={styles.availabilityContainer}>
-              <input type="newPassword" className={styles.availabilityInput} {...register('newPassword')} />
+              <input type="password" className={styles.availabilityInput} {...register('newPassword')} />
             </div>
             {errors.newPassword && <p className={styles.errorMessage}>{errors.newPassword?.message}</p>}
             <div className={styles.label}>비밀번호 확인</div>
