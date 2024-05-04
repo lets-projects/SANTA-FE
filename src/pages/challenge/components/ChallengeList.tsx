@@ -1,12 +1,12 @@
 import { Card } from '/src/components/common/Card';
 import styles from './ChallengeList.module.scss';
-import { Challenge } from '/src/services/challengeApi';
+import { TotalChallenge } from '/src/services/challengeApi';
 
 export default function ChallengeList({
   Challengedata,
   color,
 }: {
-  Challengedata: Challenge[];
+  Challengedata: TotalChallenge[];
   color: 'green2' | 'yellow';
 }) {
   return (

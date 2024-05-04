@@ -5,9 +5,10 @@ import { useState } from 'react';
 import styles from './ChallengePage.module.scss';
 import { UserProfile_small } from '/src/components/common/UserProfile_small';
 import ChallengeList from './components/ChallengeList';
+import ProgressChallengeList from './components/ProgressChallengeList';
 import { paths } from '/src/utils/path';
 import { getAllChallenge, getUserChallenge } from '/src/services/challengeApi';
-import ProgressChallengeList from './components/ProgressChallengeList';
+import { getUserInfo } from '/src/services/userApi';
 
 export default function ChallengePage() {
   const {
@@ -25,6 +26,12 @@ export default function ChallengePage() {
     queryKey: ['userChallenge', false],
     queryFn: () => getUserChallenge(false),
     select: (data) => data.data.content,
+  });
+
+  const { data: userInfo } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: getUserInfo,
+    select: (data) => data.data,
     staleTime: Infinity,
   });
 
@@ -41,7 +48,7 @@ export default function ChallengePage() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <UserProfile_small name={'산악대'} />
+        {userInfo && <UserProfile_small name={userInfo.nickname} imageUrl={userInfo.image} />}
         <button
           className={styles.myTrophyBtn}
           onClick={() => {
