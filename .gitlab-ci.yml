@@ -27,7 +27,7 @@ deploy-to-s3:
   stage: deploy
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-    - aws s3 sync build s3://d1xcphd0q4kb63.cloudfront.net/ --acl public-read
+    - aws s3 sync build s3://santa-front/ --acl public-read
   only:
     - feat/pipeline_check
   when: manual
@@ -36,7 +36,7 @@ purge:
   stage: purge
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-    - aws cloudfront create-invalidation --distribution-id $PROD_CLOUDFRONT_DIST --paths "/*"
+    - aws cloudfront create-invalidation --distribution-id E26WBTJ562JB29 --paths "/*"
   only:
     - feat/pipeline_check
   when: manual
