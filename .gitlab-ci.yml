@@ -1,5 +1,9 @@
-image: node:latest
-pages:
+stages:
+  - build
+  - deploy
+  - purge
+
+build:
   stage: build
   cache:
     key:
@@ -30,7 +34,7 @@ deploy-to-s3:
 
 purge:
   image: python:latest
-  stage: deploy
+  stage: purge
   script:
     - pip install awscli
     - aws cloudfront create-invalidation --distribution-id $PROD_CLOUDFRONT_DIST --paths "/*"
