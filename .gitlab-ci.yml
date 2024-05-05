@@ -15,6 +15,7 @@ build:
   before_script:
     - source ~/.nvm/nvm.sh
     - nvm use --lts
+    - echo "VITE_BASE_URL=$VITE_BASE_URL" >> .env
   script:
     - npm install
     - npm run build
