@@ -32,7 +32,7 @@ export default function Main() {
         </div>
         <div className={styles.sectionWrapper}>
           <SectionTitle
-            title="챌린지 둘러보기"
+            title="챌린지 둘러보기!!!!!"
             subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
             targetPageUrl={paths.CHALLENGE}
           />
