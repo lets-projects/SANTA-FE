@@ -62,9 +62,12 @@ export const getUserInfo = async () => {
   return result.data;
 };
 
-export const patchUserInfo = async (editData: EditData) => {
-  const response = await api.patch('users/my-info', editData);
-  return response.data;
+export const patchUserInfo = async (editData: FormData) => {
+  await api.patch('users/my-info', editData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const postDuplicateEmail = async (email: Email) => {

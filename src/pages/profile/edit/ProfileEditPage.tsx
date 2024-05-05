@@ -12,6 +12,7 @@ import useUserInfo from '/src/hooks/useUserInfo';
 export default function ProfileEditPage() {
   const [imgPreview, setImgPreview] = useState('');
   const queryClient = useQueryClient();
+  // const formData = new FormData();
   const {
     register,
     handleSubmit,
@@ -29,11 +30,11 @@ export default function ProfileEditPage() {
     if (userInfo?.nickname) setValue('nickname', userInfo.nickname);
     if (userInfo?.phoneNumber) setValue('phoneNumber', userInfo.phoneNumber);
     if (userInfo?.image) setValue('image', userInfo.image);
-  }, [setValue, userInfo]);
+  }, [userInfo]);
 
-  const { mutate } = useMutation<Response, Error, EditData>({
-    mutationKey: ['duplicateNickName'],
-    mutationFn: (editData) => patchUserInfo(editData),
+  const { mutate } = useMutation<Response, Error, FormData>({
+    //@ts-expect-error 김경혜...11
+    mutationFn: (formData) => patchUserInfo(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo'] });
     },
@@ -44,14 +45,30 @@ export default function ProfileEditPage() {
   useEffect(() => {
     if (newImg && newImg.length > 0) {
       const file = newImg[0];
-      //@ts-expect-error 김경혜...
-      setImgPreview(URL.createObjectURL(file));
+      //@ts-expect-error 김경혜...222
+      const imgUrl = URL.createObjectURL(file);
+      // setValue('image', imgUrl);
+      setImgPreview(imgUrl);
     }
   }, [newImg]);
 
+  // 데이터를 formData로 변환해주는 함수
+  function createFormData(editData: EditData) {
+    const form = new FormData();
+
+    form.append('image', editData.image);
+    form.append('imageFile', newImg[0]);
+    form.append('nickname', editData.nickname);
+    form.append('phoneNumber', editData.phoneNumber);
+
+    return form;
+  }
+
   const onSubmit = (editData: EditData) => {
-    console.log('나 이 데이터로 변경할거임', editData);
-    mutate(editData);
+    console.log('요청보낼 데이터', editData);
+    const formData = createFormData(editData);
+    console.log(formData);
+    mutate(formData);
   };
 
   return (
