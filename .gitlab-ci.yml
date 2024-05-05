@@ -4,6 +4,7 @@ stages:
   - purge
 
 build:
+  image: node:latest
   stage: build
   cache:
     key:
