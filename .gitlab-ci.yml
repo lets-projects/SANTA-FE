@@ -1,5 +1,3 @@
-image: node:latest
-
 stages:
   - build
   - deploy
@@ -30,20 +28,18 @@ build:
       - public
 
 deploy-to-s3:
-  image: python:latest
   stage: deploy
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-    - pip install awscli
     - aws s3 sync build s3://d1xcphd0q4kb63.cloudfront.net/ --acl public-read
   only:
     - feat/pipeline_check
   when: manual
 
 purge:
-  image: python:latest
   stage: purge
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-    - pip install awscli
     - aws cloudfront create-invalidation --distribution-id $PROD_CLOUDFRONT_DIST --paths "/*"
   only:
     - feat/pipeline_check
