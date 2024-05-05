@@ -19,6 +19,8 @@ build:
   artifacts:
     paths:
       - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 deploy-to-s3:
   image: python:latest
