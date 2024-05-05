@@ -23,14 +23,20 @@ build:
   artifacts:
     paths:
       - public/
-  only:
-    - feat/pipeline_check
 
 deploy-to-s3:
   stage: deploy
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
     - aws s3 sync public/ s3://santa-front/
+  only:
+    - feat/pipeline_check
+  when: manual
+
+purge:
+  stage: purge
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
     - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/*"
   only:
     - feat/pipeline_check
