@@ -8,11 +8,14 @@ import styles from './ProfileEditPage.module.scss';
 import { Button } from '/src/components/common/Button';
 import { profileEditSchema } from './profileEditSchema';
 import useUserInfo from '/src/hooks/useUserInfo';
+import { paths } from '/src/utils/path';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProfileEditPage() {
   const [imgPreview, setImgPreview] = useState('');
   const queryClient = useQueryClient();
-  // const formData = new FormData();
+  const navigation = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -37,6 +40,10 @@ export default function ProfileEditPage() {
     mutationFn: (formData) => patchUserInfo(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo'] });
+      navigation(paths.PROFILE);
+    },
+    onError: () => {
+      alert('다시 시도 해 주세요.');
     },
   });
 
