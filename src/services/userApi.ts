@@ -35,12 +35,14 @@ export interface LoginResponse {
   refreshToken: string;
 }
 
-interface UserInfo {
+export interface UserInfo {
+  id: number;
   email: string;
   nickname: string;
   name: string;
   phoneNumber: string;
   image: string;
+  accumulatedHeight: number;
 }
 
 export interface EditData {
@@ -56,7 +58,8 @@ export const postUserLogin = async (loginData: LoginData) => {
 };
 
 export const getUserInfo = async () => {
-  return await api.get<UserInfo>('users/my-info');
+  const result = await api.get<UserInfo>('users/my-info');
+  return result.data;
 };
 
 export const patchUserInfo = async (editData: EditData) => {

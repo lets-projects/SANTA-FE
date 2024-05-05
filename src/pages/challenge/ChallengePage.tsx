@@ -8,7 +8,7 @@ import ChallengeList from './components/ChallengeList';
 import ProgressChallengeList from './components/ProgressChallengeList';
 import { paths } from '/src/utils/path';
 import { getAllChallenge, getUserChallenge } from '/src/services/challengeApi';
-import { getUserInfo } from '/src/services/userApi';
+import useUserInfo from '/src/hooks/useUserInfo';
 
 export default function ChallengePage() {
   const navigation = useNavigate();
@@ -29,12 +29,7 @@ export default function ChallengePage() {
     select: (data) => data.data.content,
   });
 
-  const { data: userInfo } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn: getUserInfo,
-    select: (data) => data.data,
-    staleTime: Infinity,
-  });
+  const userInfo = useUserInfo();
 
   const [openTab, setOpenTab] = useState(0);
 
