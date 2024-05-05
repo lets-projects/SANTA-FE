@@ -25,7 +25,7 @@ deploy-to-s3:
     - pip install awscli
     - aws s3 sync build s3://d1xcphd0q4kb63.cloudfront.net/ --acl public-read
   only:
-    - dev
+    - feat/pipeline_check
   when: manual
 
 purge:
@@ -35,5 +35,5 @@ purge:
     - pip install awscli
     - aws cloudfront create-invalidation --distribution-id $PROD_CLOUDFRONT_DIST --paths "/*"
   only:
-    - dev
+    - feat/pipeline_check
   when: manual
