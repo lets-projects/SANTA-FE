@@ -1,3 +1,4 @@
+// import axios from 'axios';
 import { api } from './api';
 export interface LoginData {
   email: string;
@@ -51,6 +52,8 @@ export interface EditData {
   image: string;
   imageFile: string;
 }
+
+// 소셜 로그인 api
 
 export const postUserLogin = async (loginData: LoginData) => {
   const response = await api.post<LoginResponse>('users/sign-in', loginData);
