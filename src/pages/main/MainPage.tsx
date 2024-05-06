@@ -1,7 +1,7 @@
 import SliderBannerImg from './components/SliderBannerImg';
 import { Button } from '../../components/common/Button';
 import SectionTitle from '../../components/SectionTitle';
-import Thumbnail from '../../components/Thumbnail2';
+import Thumbnail from '../../components/Thumbnail';
 import Toggle from './components/Toggle';
 import MeetingList from './components/MainMeetingList';
 import UserRankList from './components/MainRankList';
