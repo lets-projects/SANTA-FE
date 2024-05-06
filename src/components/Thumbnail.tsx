@@ -1,52 +1,35 @@
 import IssueChip from './IssueChip';
 import styles from '../styles/components/thumbnail.module.scss';
+import { ThumbnailChallenge } from '../services/challengeApi';
 
-interface ThumnailProps {
-  img: string;
-  title: string;
+interface ThumbnailItems extends ThumbnailChallenge {}
+interface ThumbnailProps {
+  data: ThumbnailItems[];
   isHotTopic: boolean;
   isIndexChip: boolean;
 }
-export default function Thumbnail({ img, title, isHotTopic, isIndexChip }: ThumnailProps) {
-  // todo api 연결 후 map으로 출력, img 태그 변경
+export default function Thumbnail({ data, isHotTopic, isIndexChip }: ThumbnailProps) {
   return (
     <div className={styles.thumnailContainer}>
-      <div className={styles.thumnailItemBox}>
-        {isIndexChip ? <div className={styles.indexBadge}>1</div> : ''}
-        {isHotTopic ? (
-          <div className={styles.chipWrapper}>
-            <IssueChip />
+      {data.map((item, index) => (
+        <div className={styles.thumnailItemBox} key={item.id}>
+          {isIndexChip && (
+            <div className={styles.badgeContainer}>
+              <img src="images/thumbnail-label.png" alt={`${index + 1}`} className={styles.indexBadge} />
+              <p className={styles.indexText}>{`${index + 1}`}</p>
+            </div>
+          )}
+          {isHotTopic && (
+            <div className={styles.chipWrapper}>
+              <IssueChip />
+            </div>
+          )}
+          <div className={styles.imgWrapper}>
+            <img className={styles.img} src={item.image} />
           </div>
-        ) : (
-          ''
-        )}
-        <div className={styles.img}>{img}</div>
-        <p className={styles.thumnailTitle}>{title}</p>
-      </div>
-      <div className={styles.thumnailItemBox}>
-        <div className={styles.indexBadge}>1</div>
-        {isHotTopic ? (
-          <div className={styles.chipWrapper}>
-            <IssueChip />
-          </div>
-        ) : (
-          ''
-        )}
-        <div className={styles.img}>{img}</div>
-        <p className={styles.thumnailTitle}>{title}</p>
-      </div>{' '}
-      <div className={styles.thumnailItemBox}>
-        <div className={styles.indexBadge}>1</div>
-        {isHotTopic ? (
-          <div className={styles.chipWrapper}>
-            <IssueChip />
-          </div>
-        ) : (
-          ''
-        )}
-        <div className={styles.img}>{img}</div>
-        <p className={styles.thumnailTitle}>{title}</p>
-      </div>
+          <p className={styles.thumnailTitle}>{item.name}</p>
+        </div>
+      ))}
     </div>
   );
 }
