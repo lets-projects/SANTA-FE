@@ -1,19 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import styles from './UserProfile.module.scss';
-import useUserInfo from '/src/hooks/useUserInfo';
 
-//유저 랭킹도 요구
-const USERANK = 7777;
+import useUserInfo from '/src/hooks/useUserInfo';
+import { getUserRank } from '/src/services/userApi';
 
 export default function UserProfile() {
+  const { data: userRank } = useQuery({ queryKey: ['userRank'], queryFn: getUserRank });
   const userInfo = useUserInfo();
+
+  console.log(userRank);
 
   return (
     <div className={styles.profileContainer}>
       <div className={styles.userProfile}>
         <img src={userInfo?.image} alt="유저 이미지" />
         <div className={styles.rankBox}>
-          <p>내 랭킹🏅</p>
-          <p>{USERANK}</p>
+          <p>내 점수🏅</p>
+          <p>{userRank?.score}</p>
         </div>
       </div>
       <div className={styles.textBox}>

@@ -53,6 +53,14 @@ export interface EditData {
   imageFile: string;
 }
 
+export interface UserRank {
+  id: number;
+  rank: number;
+  nickname: string;
+  image: string;
+  score: number;
+}
+
 // 소셜 로그인 api
 
 export const postUserLogin = async (loginData: LoginData) => {
@@ -100,5 +108,10 @@ export const postVertifyEmail = async (vertifyData: VertifyData) => {
 
 export const postResetPassword = async (resetPasswordData: ResetPasswordData) => {
   const response = await api.post('users/reset-passwords', resetPasswordData);
+  return response.data;
+};
+
+export const getUserRank = async () => {
+  const response = await api.get<UserRank>('users/ranking');
   return response.data;
 };
