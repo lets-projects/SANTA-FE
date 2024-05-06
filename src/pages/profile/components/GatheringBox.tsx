@@ -1,19 +1,47 @@
-import { FaUsers } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 import styles from './GatheringBox.module.scss';
 import { paths } from '/src/utils/path';
+import { FaUsers } from 'react-icons/fa6';
+import { getUserGathering } from '/src/services/gatheringApi';
 
 export default function GatheringBox() {
+  const navigation = useNavigate();
+  const { data: myGethering, isSuccess } = useQuery({
+    queryKey: ['userGethering'],
+    queryFn: getUserGathering,
+    select: (data) => data.data.content,
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
         <p>참여중인 모임</p>
-        <Link to={paths.GATHERING_PARTICIPATE}>
-          <FaUsers className={styles.icon} />
-        </Link>
+        <FaUsers
+          className={styles.icon}
+          onClick={() => {
+            navigation(paths.GATHERING);
+          }}
+        />
       </div>
-      <div className={styles.recentGathering}></div>
+      <div className={styles.recentGathering}>
+        {isSuccess && (
+          <div
+            className={styles.thumnailContainer}
+            onClick={() => {
+              navigation(`/gathering/detail?meetingid=${myGethering[0].meetingId}`);
+            }}
+          >
+            <div className={styles.thumnailItemBox} key={myGethering[0].meetingId}>
+              <div className={styles.imgWrapper}>
+                <img className={styles.img} src={myGethering[0].image} />
+              </div>
+              <p className={styles.thumnailTitle}>{myGethering[0].meetingName}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
