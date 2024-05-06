@@ -47,8 +47,12 @@ const SliderBannerImg = () => {
           ))}
         </div>
       </div>
-      <div className={styles.sliderButtonLeft} onClick={() => handleClick(true)}></div>
-      <div className={styles.sliderButtonRight} onClick={() => handleClick(false)}></div>
+      <div className={styles.sliderButtonLeft} onClick={() => handleClick(true)}>
+        <img src="/images/btn-left.png" alt="<" className={styles.btnImg} />
+      </div>
+      <div className={styles.sliderButtonRight} onClick={() => handleClick(false)}>
+        <img src="/images/btn-right.png" alt=">" className={styles.btnImg} />
+      </div>
     </div>
   );
 };
