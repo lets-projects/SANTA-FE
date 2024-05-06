@@ -24,10 +24,15 @@ export default function () {
         </Link>
       </div>
       <div className={styles.trophyList}>
-        {isSuccess &&
+        {isSuccess && sucessChallenge.length !== 0 ? (
           sucessChallenge.map((trophy: ProgressChallengeData) => {
             return <img key={trophy.challenge.name} className={styles.trophyImg} src={trophy.challenge.image} />;
-          })}
+          })
+        ) : (
+          <div className={styles.textContainer}>
+            <div className={styles.nothingData}>아직 획득한 트로피가 없어요!</div>
+          </div>
+        )}
       </div>
     </div>
   );
