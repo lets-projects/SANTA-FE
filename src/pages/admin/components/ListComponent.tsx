@@ -13,7 +13,7 @@ interface ListComponentProps {
     setPage?: React.Dispatch<React.SetStateAction<number>>;
 }
 export function ListComponent({ title, subtitle, content, report, isLast,
-    setPage, }: ListComponentProps) {
+    setPage, onClickDelete }: ListComponentProps) {
     const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
         if (isLast && setPage) {
             setPage((prev) => prev + 1);
@@ -42,7 +42,7 @@ export function ListComponent({ title, subtitle, content, report, isLast,
                 <div className={styles.body}>{content}</div>
             </div>
             <div>
-                <DeleteBtn onClick={() => { }} />
+                {onClickDelete && <DeleteBtn onClick={onClickDelete} />}
             </div>
         </div>
     )

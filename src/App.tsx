@@ -30,6 +30,7 @@ import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPa
 import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
 import { AdminMainPage } from './pages/admin/AdminMainPage';
 import { AdminUserPage } from './pages/admin/AdminUserPage';
+import { AdminReportPage } from './pages/admin/AdminReportPage';
 
 const router = createBrowserRouter([
   {
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       { path: paths.TROPHY, element: <TrophyPage /> },
       { path: paths.ADMIN, element: <AdminMainPage /> },
       { path: paths.ADMIN_USER, element: <AdminUserPage /> },
-      { path: paths.ADMIN_REPORT, element: <AdminMainPage /> },
+      { path: paths.ADMIN_REPORT, element: <AdminReportPage /> },
       { path: paths.ADMIN_CATEGORY, element: <AdminMainPage /> },
       { path: paths.ADMIN_CHALLENGE, element: <AdminMainPage /> },
       {
