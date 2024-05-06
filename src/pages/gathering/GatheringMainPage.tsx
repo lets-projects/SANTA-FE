@@ -19,6 +19,8 @@ function GatheringMainPage() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
+
+  //모임 목록 가져오기 
   const {
     data: GatheringListByCategory,
     isFetched,
@@ -34,6 +36,9 @@ function GatheringMainPage() {
     },
   });
 
+  //나의 모임 3개 이미지 
+
+  //인기 모임 3개 이미지 
   useEffect(() => {
     setGatheringList([]);
     setPage(0);
