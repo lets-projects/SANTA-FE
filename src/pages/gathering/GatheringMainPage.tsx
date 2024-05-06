@@ -85,14 +85,18 @@ function GatheringMainPage() {
           {gatheringList?.map((item: GatheringListByCategory, index) => (
             <div key={`${item.meetingId}-${item.leaderId}-${index}`}>
               <GatheringList
-                title={item.meetingName}
-                content={item.description}
-                tag={item.categoryName}
-                mountain={item.mountainName}
-                imageUrl={item.image}
-                capacity={item.headcount}
-                attendance={item.participants.length}
-                date={item.date}
+                gatheringInfo={{
+                  title: item.meetingName,
+                  content: item.description,
+                  tag: item.categoryName,
+                  mountain: item.mountainName,
+                  imageUrl: item.image,
+                  capacity: item.headcount,
+                  attendance: item.participants.length,
+                  date: item.date,
+                }}
+
+
                 isLast={
                   GatheringListByCategory &&
                   GatheringListByCategory?.totalPage >= page &&

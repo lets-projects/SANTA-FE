@@ -12,7 +12,7 @@ interface ListComponentProps {
     isLast?: boolean;
     setPage?: React.Dispatch<React.SetStateAction<number>>;
 }
-export function ListComponent({ title, subtitle, content, report, onClickDelete, isLast,
+export function ListComponent({ title, subtitle, content, report, isLast,
     setPage, }: ListComponentProps) {
     const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
         if (isLast && setPage) {

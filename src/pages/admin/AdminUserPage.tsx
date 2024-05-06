@@ -5,7 +5,7 @@ import { SearchInput } from '/src/components/common/Input';
 import SectionTitle from '/src/components/SectionTitle';
 import { useQuery } from '@tanstack/react-query';
 import { userSearchApi } from '/src/services/adminApi';
-import { ChangeEvent, EventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 const PAGE_SIZE = 4;
 
 export function AdminUserPage() {
