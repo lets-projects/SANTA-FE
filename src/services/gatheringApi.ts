@@ -111,3 +111,12 @@ export function editGathering(meetingId: number, data: FormData) {
     },
   })
 }
+
+export function getMyGatherings(page: number, size: number) {
+  return api.get<GatheringListResponse>(`meetings/my-meetings?page=${page}&size=${size}`)
+}
+
+export function getPopularGatherings(page: number, size: number) {
+  return api.get(`meetings/participants?page=${page}&size=${size}`)
+}
+

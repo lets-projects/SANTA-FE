@@ -12,7 +12,7 @@ export function AdminReportPage() {
     const [reportDataList, setReportDataList] = useState<reportsType[]>([])
 
     const { data: reportData, isFetched,
-        isError, } = useQuery({
+        isError, refetch } = useQuery({
             queryKey: ['userSearch', page],
             queryFn: () => getReportData(page, PAGE_SIZE),
             select: (data) => {
@@ -28,7 +28,10 @@ export function AdminReportPage() {
     }, [reportData])
 
     const { mutate: deleteMutation } = useMutation({
-        mutationFn: deleteReport
+        mutationFn: deleteReport,
+        onSuccess: () => {
+            refetch();
+        }
     });
     function handleDeleteBtn(reportId: number) {
         console.log('삭제!!!!!!!!!!');

@@ -31,6 +31,7 @@ import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResu
 import { AdminMainPage } from './pages/admin/AdminMainPage';
 import { AdminUserPage } from './pages/admin/AdminUserPage';
 import { AdminReportPage } from './pages/admin/AdminReportPage';
+import { AdminCategoryPage } from './pages/admin/AdminCategoryPage';
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
       { path: paths.ADMIN, element: <AdminMainPage /> },
       { path: paths.ADMIN_USER, element: <AdminUserPage /> },
       { path: paths.ADMIN_REPORT, element: <AdminReportPage /> },
-      { path: paths.ADMIN_CATEGORY, element: <AdminMainPage /> },
+      { path: paths.ADMIN_CATEGORY, element: <AdminCategoryPage /> },
       { path: paths.ADMIN_CHALLENGE, element: <AdminMainPage /> },
       {
         element: <PrivateRoutes />,

@@ -3,15 +3,15 @@ import styles from '../../styles/admin/adminMain.module.scss';
 import { TitleContainer } from '../gathering/components/TitleContainer';
 import { SearchInput } from '/src/components/common/Input';
 import SectionTitle from '/src/components/SectionTitle';
-import { useQuery } from '@tanstack/react-query';
-import { userSearchApi } from '/src/services/adminApi';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { deleteUser, userSearchApi } from '/src/services/adminApi';
 import { ChangeEvent, useEffect, useState } from 'react';
 const PAGE_SIZE = 4;
 
 export function AdminUserPage() {
     const [page, setPage] = useState(0);
     const [userDataList, setUserDataList] = useState<UserListType[]>([])
-    const [searchValue, setSearchValue] = useState<string>();
+    const [searchValue, setSearchValue] = useState<string>('');
     const [inputValue, setInputValue] = useState<string>('');
     type UserListType = {
         email: string;
@@ -21,7 +21,7 @@ export function AdminUserPage() {
         reportCount: number;
     }
     const { data: userData, isFetched,
-        isError, } = useQuery({
+        isError, refetch } = useQuery({
             queryKey: ['userSearch', searchValue, page],
             queryFn: () => userSearchApi(searchValue, page, PAGE_SIZE),
             select: (data) => {
@@ -46,23 +46,33 @@ export function AdminUserPage() {
             console.log(userData)
             console.log(userData?.content);
             console.log(userData?.totalPage);
-            // if (searchValue) {
-            //     setUserDataList([...userData?.content]);
-            // } else {
             setUserDataList(prevList => [...prevList, ...userData?.content]);
-
-            // }
-
         }
 
     }, [isFetched, isError, userData, searchValue]);
 
 
+    const { mutate: deleteMutation } = useMutation({
+        mutationFn: deleteUser,
+        onSuccess: () => {
+            console.log('refetch 합니다');
+            setPage(0);
+            refetch()
+            //refetch하고, 새로운 데이터를 userDataList에 넣고싶은데 .. 타입이 다르다해서
+            // then((newData: AxiosResponse<UserListType>) => {
+            //     console.log('newData', newData);
+            // }).catch((error) => {
+            //     console.error('refetch 에러:', error);
+            // });
+        }
+    });
+    function handleDeleteBtnClick(id: number) {
+        //id를 받아서 삭제
+        console.log('삭제');
+        deleteMutation(id)
 
-    // function handleDeleteBtnClick(id: number) {
-    //     //id를 받아서 삭제
 
-    // }
+    }
     function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value);
     }
@@ -85,12 +95,9 @@ export function AdminUserPage() {
                     userData?.totalPage >= page &&
                     userDataList.length === index + 1
                 }
-                    setPage={setPage} />
+                    setPage={setPage}
+                    onClickDelete={() => handleDeleteBtnClick(userList.id)} />
             ))}
-
         </div>
     )
 }
-/**
- * 
- */

@@ -87,3 +87,11 @@ export function getReportData(page?: number, size?: number) {
 export function deleteReport(reportId: number) {
     return api.delete(`reports/${reportId}`)
 }
+
+export function deleteUser(userId: number) {
+    return api.delete(`users/${userId}`)
+}
+
+export function getCategoryList() {
+    return api.get(`categories`)
+}
