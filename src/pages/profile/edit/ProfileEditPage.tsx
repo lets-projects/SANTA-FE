@@ -22,7 +22,7 @@ export default function ProfileEditPage() {
     setValue,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<EditData>({
     resolver: yupResolver(profileEditSchema),
     mode: 'onChange',
   });
@@ -37,7 +37,7 @@ export default function ProfileEditPage() {
 
   const { mutate } = useMutation<Response, Error, FormData>({
     //@ts-expect-error 김경혜...11
-    mutationFn: (formData) => patchUserInfo(formData),
+    mutationFn: patchUserInfo,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userInfo'] });
       navigation(paths.PROFILE);

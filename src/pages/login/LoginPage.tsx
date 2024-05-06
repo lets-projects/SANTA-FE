@@ -8,7 +8,7 @@ import googleIcon from '/images/google.svg';
 import kakaoIcon from '/images/kakao.png';
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
-import { LoginResponse, postUserLogin } from '../../services/userApi';
+import { postUserLogin } from '../../services/userApi';
 import { paths } from '/src/utils/path';
 import { loginSchema } from './loginSchema';
 import { LoginData } from '../../services/userApi';
@@ -19,7 +19,7 @@ function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginData>({
     resolver: yupResolver(loginSchema),
   });
 
@@ -30,8 +30,8 @@ function LoginPage() {
     console.log(loginData);
   };
 
-  const { mutate, isError } = useMutation<LoginResponse, Error, LoginData>({
-    mutationFn: (loginData) => postUserLogin(loginData),
+  const { mutate, isError } = useMutation({
+    mutationFn: postUserLogin,
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('refresh_token', data.refreshToken);

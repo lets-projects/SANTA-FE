@@ -6,9 +6,18 @@ import { useState } from 'react';
 
 import styles from '/src/styles/join/join.module.scss';
 import { paths } from '/src/utils/path';
-import { Nickname, postDuplicateEmail, postDuplicateNickname, postJoin } from '/src/services/userApi';
-import { JoinData, Email } from '/src/services/userApi';
+import { postDuplicateEmail, postDuplicateNickname, postJoin } from '/src/services/userApi';
+import { JoinData } from '/src/services/userApi';
 import { joinSchema } from './joinSchema';
+
+export interface JoinSchema {
+  email: string;
+  checkPassword: string;
+  password: string;
+  name: string;
+  nickname: string;
+  phoneNumber: string;
+}
 
 function JoinPage() {
   const [checkEmail, setCheckEmail] = useState(false);
@@ -23,14 +32,15 @@ function JoinPage() {
     getValues,
     resetField,
     formState: { errors },
-  } = useForm({
+  } = useForm<JoinSchema>({
     resolver: yupResolver(joinSchema),
-    mode: 'onChange',
+    mode: 'onBlur',
   });
 
-  const { mutate } = useMutation<Response, Error, JoinData>({
-    mutationFn: (joinData) => postJoin(joinData),
+  const { mutate } = useMutation({
+    mutationFn: postJoin,
     onSuccess: () => {
+      alert('가입이 완료되었습니다!');
       navigate(paths.LOGIN);
     },
     onError: (error) => {
@@ -38,12 +48,11 @@ function JoinPage() {
     },
   });
 
-  const { mutate: isDuplicateEmail } = useMutation<boolean, Error, Email>({
+  const { mutate: isDuplicateEmail } = useMutation({
     mutationKey: ['duplicateEmail'],
-    mutationFn: (data) => postDuplicateEmail(data),
+    mutationFn: postDuplicateEmail,
     onSuccess: (data) => {
       if (data) {
-        //이메일 중복일 경우
         resetField('email');
         setError('email', {
           message: '이미 등록된 이메일입니다.',
@@ -54,9 +63,9 @@ function JoinPage() {
     },
   });
 
-  const { mutate: isDuplicateNickName } = useMutation<boolean, Error, Nickname>({
+  const { mutate: isDuplicateNickName } = useMutation({
     mutationKey: ['duplicateNickName'],
-    mutationFn: (data) => postDuplicateNickname(data),
+    mutationFn: postDuplicateNickname,
     onSuccess: (data) => {
       if (data) {
         resetField('nickname');
@@ -69,14 +78,12 @@ function JoinPage() {
     },
   });
 
-  //이메일 중복 체크
   const handleDuplicateCheckEmail = async (email: string) => {
-    //이메일 유효성 검사
     const isVaild = await trigger('email');
     if (!isVaild) {
       return;
     }
-    //유효성 통과시 api 호출
+
     isDuplicateEmail({ email: email });
   };
 
@@ -89,7 +96,6 @@ function JoinPage() {
   };
 
   const onSubmit = (joinData: JoinData) => {
-    // const { checkPassword, ...otherJoinData } = joinData;
     if (!checkEmail) {
       return setError('email', {
         message: '이메일 중복 확인을 해 주세요.',
