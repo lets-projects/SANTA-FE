@@ -30,7 +30,7 @@ export default function () {
           })
         ) : (
           <div className={styles.textContainer}>
-            <div className={styles.nothingData}>아직 획득한 트로피가 없어요!</div>
+            <div className={styles.nothingData}>획득한 트로피가 없어요</div>
           </div>
         )}
       </div>

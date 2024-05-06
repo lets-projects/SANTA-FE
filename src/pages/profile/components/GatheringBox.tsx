@@ -14,6 +14,8 @@ export default function GatheringBox() {
     select: (data) => data.data.content,
   });
 
+  console.log('myGethering', myGethering);
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -26,7 +28,7 @@ export default function GatheringBox() {
         />
       </div>
       <div className={styles.recentGathering}>
-        {isSuccess && (
+        {isSuccess && myGethering.length !== 0 ? (
           <div
             className={styles.thumnailContainer}
             onClick={() => {
@@ -39,6 +41,10 @@ export default function GatheringBox() {
               </div>
               <p className={styles.thumnailTitle}>{myGethering[0].meetingName}</p>
             </div>
+          </div>
+        ) : (
+          <div className={styles.textContainer}>
+            <div className={styles.nothingData}>모임이 없습니다</div>
           </div>
         )}
       </div>

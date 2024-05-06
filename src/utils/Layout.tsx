@@ -18,6 +18,8 @@ const INCLUDE_BACK_BTN_PATH = [
   '/user/category',
   '/join',
   '/mountain/record',
+  '/challenge',
+  '/profile/edit',
 ];
 
 export default function Layout() {

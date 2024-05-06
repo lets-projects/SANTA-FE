@@ -8,8 +8,6 @@ export default function UserProfile() {
   const { data: userRank } = useQuery({ queryKey: ['userRank'], queryFn: getUserRank });
   const userInfo = useUserInfo();
 
-  console.log(userRank);
-
   return (
     <div className={styles.profileContainer}>
       <div className={styles.userProfile}>

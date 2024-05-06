@@ -69,7 +69,7 @@ export default function VertifyMountainPage() {
               navigation(-1);
             }}
           >
-            아니요
+            돌아갈게요
           </button>
         </>
       )}
