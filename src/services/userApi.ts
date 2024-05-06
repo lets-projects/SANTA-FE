@@ -113,4 +113,8 @@ export const getUserRank = async () => {
   return response.data;
 };
 
+export const deleteUser = () => {
+  return api.delete('users');
+};
+
 //소셜 로그인 Api
