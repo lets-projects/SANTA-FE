@@ -72,9 +72,7 @@ export default function ProfileEditPage() {
   }
 
   const onSubmit = (editData: EditData) => {
-    console.log('요청보낼 데이터', editData);
     const formData = createFormData(editData);
-    console.log(formData);
     mutate(formData);
   };
 

@@ -18,8 +18,6 @@ export default function TrophyPage() {
     select: (data) => data.data.content,
   });
 
-  console.log('sucessChallenge', sucessChallenge);
-
   const SUCCESS = !isError && isFetched;
   return (
     <div className={styles.container}>

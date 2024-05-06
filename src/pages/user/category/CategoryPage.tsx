@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getAllCategory, postPreferCategory } from '/src/services/categoryApi';
 import { useState } from 'react';
 
@@ -12,8 +12,9 @@ const ICON = ['⛰️', '❓', '🌿', '🍽️', '👊🏻', '🎒', '📸', '�
 
 export default function CategoryPage() {
   const [selectCategory, setSelectCategory] = useState<string[]>([]);
-  const navigation = useNavigate();
+  const queryClient = useQueryClient();
   const userInfo = useUserInfo();
+  const navigation = useNavigate();
 
   const { data: allCategoryData } = useQuery({
     queryKey: ['allCategoryData'],
@@ -25,6 +26,7 @@ export default function CategoryPage() {
   const { mutate } = useMutation({
     mutationFn: postPreferCategory,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['preferCategory'] });
       alert('선호 카테고리 등록이 완료되었습니다!');
       navigation(paths.PROFILE);
     },

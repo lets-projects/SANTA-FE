@@ -13,8 +13,6 @@ export default function () {
     select: (data) => data.data.content,
   });
 
-  console.log(sucessChallenge);
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>

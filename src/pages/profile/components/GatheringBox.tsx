@@ -14,8 +14,6 @@ export default function GatheringBox() {
     select: (data) => data.data.content,
   });
 
-  console.log('myGethering', myGethering);
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>
