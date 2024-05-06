@@ -39,7 +39,7 @@ export default function ProgressChallengeList() {
                   </div>
                   <div className={styles.bottom}>
                     <div className={styles.progress} ref={progressRef}>
-                      <div className={styles.percentBar} data-color="$green3" style={{ width: `${progress}%` }} />
+                      <div className={styles.percentBar} style={{ width: `${progress}%` }} />
                     </div>
                   </div>
                 </div>

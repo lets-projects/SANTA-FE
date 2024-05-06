@@ -1,8 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './UserProfile.module.scss';
 
+import defaultImage from '/images/defaultProfile.png';
 import useUserInfo from '/src/hooks/useUserInfo';
 import { getUserRank } from '/src/services/userApi';
+
+export const onErrorImg: React.ReactEventHandler<HTMLImageElement> = (e) => {
+  const target = e.target as HTMLImageElement;
+  target.src = defaultImage;
+};
 
 export default function UserProfile() {
   const { data: userRank } = useQuery({ queryKey: ['userRank'], queryFn: getUserRank });
@@ -11,7 +17,7 @@ export default function UserProfile() {
   return (
     <div className={styles.profileContainer}>
       <div className={styles.userProfile}>
-        <img src={userInfo?.image} alt="유저 이미지" />
+        {userInfo ? <img src={userInfo?.image} /> : <img src={defaultImage} />}
         <div className={styles.rankBox}>
           <p>내 점수🏅</p>
           <p>{userRank?.score}</p>
