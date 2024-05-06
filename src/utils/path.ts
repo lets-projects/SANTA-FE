@@ -12,6 +12,7 @@ export const paths = {
   GATHERING_DETAIL_EDIT: '/gathering/detail/edit',
   LOGIN: '/login',
   JOIN: '/join',
+  OAUTH_KAKAO: '/oauth/kakao',
   PROFILE: '/profile',
   PROFILE_EDIT: '/profile/edit',
   FIND_ACCOUNT: '/user/find-account',

@@ -12,6 +12,7 @@ import { LoginResponse, postUserLogin } from '../../services/userApi';
 import { paths } from '/src/utils/path';
 import { loginSchema } from './loginSchema';
 import { LoginData } from '../../services/userApi';
+import { KAKAO_AUTH_URL } from '/src/utils/oauth';
 
 function LoginPage() {
   const {
@@ -101,10 +102,10 @@ function LoginPage() {
         <div className={styles.socialLoginContainer}>
           <div>소셜 계정으로 로그인</div>
           <div className={styles.socialLoginIcon}>
-            <Link to="http://ec2-43-200-136-37.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/kakao">
+            <Link to={KAKAO_AUTH_URL}>
               <img src={kakaoIcon} />
             </Link>
-            <Link to="http://ec2-43-200-136-37.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google">
+            <Link to="/">
               <img src={googleIcon} />
             </Link>
           </div>

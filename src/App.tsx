@@ -28,6 +28,7 @@ import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
 import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
 import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPage';
 import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
+import OauthRedirectPage from './pages/login/OauthRedirectPage';
 
 const router = createBrowserRouter([
   {
@@ -72,7 +73,10 @@ const router = createBrowserRouter([
   {
     path: paths.HOME,
     element: <PublicRoutes />,
-    children: [{ path: paths.LOGIN, element: <LoginPage /> }],
+    children: [
+      { path: paths.LOGIN, element: <LoginPage /> },
+      { path: paths.OAUTH_KAKAO, element: <OauthRedirectPage /> },
+    ],
   },
 ]);
 

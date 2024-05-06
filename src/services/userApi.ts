@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { api } from './api';
 export interface LoginData {
   email: string;
@@ -61,8 +60,6 @@ export interface UserRank {
   score: number;
 }
 
-// 소셜 로그인 api
-
 export const postUserLogin = async (loginData: LoginData) => {
   const response = await api.post<LoginResponse>('users/sign-in', loginData);
   return response.data;
@@ -115,3 +112,5 @@ export const getUserRank = async () => {
   const response = await api.get<UserRank>('users/ranking');
   return response.data;
 };
+
+//소셜 로그인 Api
