@@ -5,6 +5,8 @@ import trophyImg from '/images/trophyImg.png';
 import { ProgressChallengeData, getUserChallenge } from '/src/services/challengeApi';
 import useUserInfo from '/src/hooks/useUserInfo';
 
+// import { api } from '/src/services/api';
+
 export default function TrophyPage() {
   const userInfo = useUserInfo();
 
@@ -17,6 +19,14 @@ export default function TrophyPage() {
     queryFn: () => getUserChallenge(true),
     select: (data) => data.data.content,
   });
+
+  // const test = async () => {
+  //   const refreshToken = localStorage.getItem('refresh_token');
+  //   const response = await api.post('users/new-access-token', refreshToken);
+  //   console.log(response);
+  // };
+
+  // test();
 
   const SUCCESS = !isError && isFetched;
   return (
