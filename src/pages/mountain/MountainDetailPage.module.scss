@@ -1,0 +1,54 @@
+@import '/src/styles/global';
+@import '/src/styles/color';
+
+.container {
+  @include setting;
+  @include flex-center-col;
+}
+
+.top {
+  padding: 3rem 0 0.9rem;
+}
+
+.label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: $green3;
+
+  padding-bottom: 0.6rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $green3;
+
+  padding-bottom: 1.25rem;
+}
+
+.gpsText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding-top: 1.8rem;
+  .label {
+    padding-bottom: 0.5rem;
+  }
+  p {
+    padding: 0.1rem 0;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  width: 100%;
+  padding-top: 80%;
+}
+
+.logo {
+  opacity: 30%;
+}

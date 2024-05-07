@@ -3,7 +3,6 @@ export const paths = {
   RANK: '/rank',
   CHALLENGE: '/challenge',
   GATHERING: '/gathering',
-  LIVECHAT: '/livechat',
   GATHERING_SEARCH: '/gathering/search',
   GATHERING_SEARCHRESULT: '/gathering/search/result',
   GATHERING_PARTICIPATE: '/gathering/participate',
@@ -20,6 +19,8 @@ export const paths = {
   RESET_PASSWORD: '/user/reset-password',
   TROPHY: '/trophy',
   CATEGORY: '/user/category',
+  MOUNTAIN: '/mountain',
+  MOUNTAIN_DETAIL: '/mountain/detail',
   MOUNTAIN_VERTIFY: '/mountain/vertify',
   MOUNTAIN_RECORD: '/mountain/record',
 } as const;
@@ -30,4 +31,5 @@ export const NAVLIST = [
   { title: '진행중인 챌린지', path: paths.CHALLENGE },
   { title: '모임 바로가기', path: paths.GATHERING },
   { title: '랭킹', path: paths.RANK },
+  { title: '전체 산 목록', path: paths.MOUNTAIN },
 ];

@@ -20,6 +20,7 @@ const INCLUDE_BACK_BTN_PATH = [
   '/mountain/record',
   '/challenge',
   '/profile/edit',
+  '/mountain/detail',
 ];
 
 export default function Layout() {

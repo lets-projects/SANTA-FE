@@ -29,6 +29,8 @@ import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
 import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPage';
 import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
 import OauthRedirectPage from './pages/login/OauthRedirectPage';
+import MountainPage from './pages/mountain/MountainPage';
+import MountainDetailPage from './pages/mountain/MountainDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,6 @@ const router = createBrowserRouter([
       { index: true, element: <MainPage /> },
       { path: paths.RANK, element: <RankPage /> },
       { path: paths.GATHERING, element: <GatheringMainPage /> },
-      { path: paths.LIVECHAT, element: <>실시간 채팅 페이지 입니다</> },
       { path: paths.GATHERING_SEARCH, element: <GatheringSearchPage /> },
       { path: paths.GATHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
       { path: paths.GATHERING_DETAIL, element: <GatheringDetailPage /> },
@@ -54,9 +55,11 @@ const router = createBrowserRouter([
           { path: paths.PROFILE, element: <ProfilePage /> },
           { path: paths.CHALLENGE, element: <ChallengePage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
+          { path: paths.TROPHY, element: <TrophyPage /> },
+          { path: paths.MOUNTAIN, element: <MountainPage /> },
+          { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
           { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
-          { path: paths.TROPHY, element: <TrophyPage /> },
         ],
       },
       {
