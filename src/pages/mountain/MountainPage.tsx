@@ -1,17 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './MountainPage.module.scss';
-import { getAllMountains } from '/src/services/mountainAPi';
-// import { useNavigate } from 'react-router-dom';
+import { TotalMountain, getAllMountains } from '/src/services/mountainAPi';
 import MountainList from './component/MountainList';
 
 const PAGE_SIZE = 10;
 export default function MountainPage() {
-  const [page, _setPage] = useState(0);
-  //   const [mountainList, setMountainList] = useState<TotalMountain[]>([]);
-
-  //   const navigation = useNavigate();
+  const [page, setPage] = useState(0);
+  const [mountainList, setMountainList] = useState<TotalMountain[]>([]);
 
   const {
     data: allMountain,
@@ -23,18 +20,34 @@ export default function MountainPage() {
     select: (data) => {
       return {
         content: data.data.content,
+        //총 페이지
         totalPage: data.data.totalPages,
       };
     },
   });
 
-  console.log(allMountain);
+  useEffect(() => {
+    const isSuccess = isFetched && !isError;
+    if (isSuccess && allMountain) {
+      setMountainList((prevList) => [...prevList, ...allMountain.content]);
+      console.log('mountainList', mountainList);
+    }
+  }, [isFetched, isError, allMountain]);
 
-  //   const isLast = allMountain?.totalPage >= page && gatheringList.length === index + 1;
   const isSuccess = !isError && isFetched;
   return (
     <div className={styles.container}>
-      {isSuccess && <MountainList mountainContent={allMountain?.content} totalPage={allMountain?.totalPage} />}
+      <div className={styles.title}>전체 산 목록</div>
+      {isSuccess &&
+        mountainList.map((mauntainData, index) => {
+          return (
+            <MountainList
+              mauntainData={mauntainData}
+              setPage={setPage}
+              isLast={allMountain && allMountain.totalPage >= page && mountainList.length === index + 1}
+            />
+          );
+        })}
     </div>
   );
 }

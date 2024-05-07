@@ -8,12 +8,6 @@
   box-shadow: 1px 1px 3px $gray2;
 }
 
-.title {
-  @include font-title;
-  color: $green3;
-  padding-bottom: 1.25rem;
-}
-
 .textContainer {
   display: flex;
   flex-direction: column;

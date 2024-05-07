@@ -1,33 +1,33 @@
 import { api } from './api';
 
-// interface MountainListResponse {
-//   content: TotalMountain[];
-//   pageable: {
-//     pageNumber: number;
-//     pageSize: number;
-//     sort: {
-//       empty: boolean;
-//       sorted: boolean;
-//       unsorted: boolean;
-//     };
-//     offset: number;
-//     paged: boolean;
-//     unpaged: boolean;
-//   };
-//   totalPages: number;
-//   totalElements: number;
-//   last: boolean;
-//   size: number;
-//   number: number;
-//   sort: {
-//     empty: boolean;
-//     sorted: boolean;
-//     unsorted: boolean;
-//   };
-//   numberOfElements: number;
-//   first: boolean;
-//   empty: boolean;
-// }
+interface MountainListResponse {
+  content: TotalMountain[];
+  pageable: {
+    pageNumber: number;
+    pageSize: number;
+    sort: {
+      empty: boolean;
+      sorted: boolean;
+      unsorted: boolean;
+    };
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
+}
 export interface VertifyMountain {
   id: number;
   climbDate: string;
@@ -63,7 +63,7 @@ export interface MountainDetail {
 }
 
 export const getAllMountains = async (page?: number, size?: number) => {
-  return await api.get(`mountains?page=${page}&size=${size}`);
+  return await api.get<MountainListResponse>(`mountains?page=${page}&size=${size}`);
 };
 
 export const getMountainDetail = async (id: number) => {
