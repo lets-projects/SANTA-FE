@@ -1,15 +1,19 @@
-import axios, { AxiosInstance } from 'axios';
-// import { paths } from '../utils/path';
+import axios from 'axios';
+// import { AxiosInstance } from 'axios';
+// import logout from '../utils/logout';
+
+//토큰 만료 시간
+// const JWT_EXPIRY_TIME = 28 * 60000;
 
 const getAccessToken = () => {
   const accessToken = localStorage.getItem('access_token');
   return accessToken;
 };
 
-const getRefreshToken = () => {
-  const refreshToken = localStorage.getItem('refresh_token');
-  return refreshToken;
-};
+// const getRefreshToken = () => {
+//   const refreshToken = localStorage.getItem('refresh_token');
+//   return refreshToken;
+// };
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -42,12 +46,16 @@ api.interceptors.request.use((config) => {
 //     } = error;
 
 //     const originalRequest = config;
-
-//     if (status === 403) {
+//     //리프레쉬 만료시 로그아웃
+//     if(status === 401){
+//       logout();
+//     } else if (status === 403) {
 //       //토큰 재발급
-//       await tokenRefresh(api)
-//       const accessToken = getAccessToken();
-//       error.config.headers.Authorization = `Bearer ${accessToken}`;
+//       const newAccessToken = await tokenRefresh(api)
+//       //헤더 다시 설정
+//       error.config.headers.Authorization = `Bearer ${newAccessToken}`;
+//       localStorage.removeItem('access_token')
+//       localStorage.setItem('access_token',newAccessToken)
 //       //중단된 요청은 토큰 갱신 후 재요청
 //       return await api(originalRequest);
 //     }
@@ -55,27 +63,17 @@ api.interceptors.request.use((config) => {
 //   },
 // );
 
-//토큰 갱신 함수
-export const tokenRefresh = async (api: AxiosInstance) => {
-  const refreshToken = getRefreshToken(); // 리프레시 토큰을 가져오기
+//토큰 다시 받아오는 함수
+export const tokenRefresh = async () => {
+  //리프레쉬 토큰 가져옴
+  const refreshToken = localStorage.getItem('refresh_token');
+  const response = await api.post('users/new-access-token', {
+    refreshToken: refreshToken,
+  });
 
-  const response = await api.post('users/new-access-token', refreshToken);
-  console.log(response);
-  // const newAccessToken = response.accessToken;
-  // sessionStorage.removeItem('access_token');
-  // sessionStorage.setItem('access_token', newAccessToken); // 세션 스토리지에 액세스 토큰 저장
+  //새로 받아온 토큰 리턴
+  const newAccessToken = response.data;
+  return newAccessToken;
 };
 
 //interceptor 분리시 -> 로그인, 새로고침 해야 헤더에 토큰 적용되는 에러 발생함
-
-// const test = async () => {
-//   const refreshToken = localStorage.getItem('refresh_token');
-//   console.log('refreshToken', refreshToken);
-//   const data = {
-//     refreshToken: refreshToken,
-//   };
-//   console.log(data);
-//   const response = await api.post('users/new-access-token', data);
-// };
-
-// test();

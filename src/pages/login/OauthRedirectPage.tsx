@@ -8,6 +8,8 @@ export default function OauthRedirectPage() {
   //   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get('code');
 
+  console.log('카카오 인가 코드', code);
+
   const { mutate, data: OauthKaKaoData } = useMutation({
     mutationFn: (postData: KakaoCode) => postKakaoCode(postData),
   });
