@@ -22,7 +22,7 @@ export default function ProgressChallengeList() {
   const isSuccess = !isError && isFetched;
   return (
     <>
-      {isSuccess &&
+      {isSuccess && progressChallenge.length !== 0 ? (
         progressChallenge.map((challenge: ProgressChallengeData) => {
           const progress = (challenge.progress / challenge.challenge.clearStandard) * 100;
           console.log('progress', progress);
@@ -46,7 +46,10 @@ export default function ProgressChallengeList() {
               </Card>
             </div>
           );
-        })}
+        })
+      ) : (
+        <div className={styles.noData}>아직 진행중인 챌린지가 없네요!</div>
+      )}
     </>
   );
 }

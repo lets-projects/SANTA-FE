@@ -74,3 +74,12 @@
   border-radius: 25px;
   background-color: $yellow;
 }
+
+.noData {
+  display: flex;
+
+  padding: 3.1rem;
+
+  @include font-subtitle2;
+  color: $gray2;
+}
