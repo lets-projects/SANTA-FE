@@ -67,3 +67,15 @@ export const tokenRefresh = async (api: AxiosInstance) => {
 };
 
 //interceptor 분리시 -> 로그인, 새로고침 해야 헤더에 토큰 적용되는 에러 발생함
+
+// const test = async () => {
+//   const refreshToken = localStorage.getItem('refresh_token');
+//   console.log('refreshToken', refreshToken);
+//   const data = {
+//     refreshToken: refreshToken,
+//   };
+//   console.log(data);
+//   const response = await api.post('users/new-access-token', data);
+// };
+
+// test();
