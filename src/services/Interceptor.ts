@@ -24,8 +24,6 @@ export const responseIntercepter = (response: AxiosResponse) => {
   return response;
 };
 
-//loader 적용시
-
 export const rejectIntercepter = (_error: ErrorType) => {
   return null;
 };

@@ -31,29 +31,29 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    const {
-      config,
-      response: { status },
-    } = error;
+// api.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   async (error) => {
+//     const {
+//       config,
+//       response: { status },
+//     } = error;
 
-    const originalRequest = config;
+//     const originalRequest = config;
 
-    if (status === 403) {
-      //토큰 재발급
-      // await tokenRefresh(api)
-      // const accessToken = getAccessToken();
-      // error.config.headers.Authorization = `Bearer ${accessToken}`;
-      //중단된 요청은 토큰 갱신 후 재요청
-      return await api(originalRequest);
-    }
-    return Promise.reject(error);
-  },
-);
+//     if (status === 403) {
+//       //토큰 재발급
+//       await tokenRefresh(api)
+//       const accessToken = getAccessToken();
+//       error.config.headers.Authorization = `Bearer ${accessToken}`;
+//       //중단된 요청은 토큰 갱신 후 재요청
+//       return await api(originalRequest);
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 //토큰 갱신 함수
 export const tokenRefresh = async (api: AxiosInstance) => {
