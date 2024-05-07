@@ -60,6 +60,15 @@ export interface UserRank {
   score: number;
 }
 
+export interface KakaoCode {
+  authorizationCode: string;
+}
+
+export const postKakaoCode = async (code: KakaoCode) => {
+  const response = await api.post('/kakao', code);
+  return response;
+};
+
 export const postUserLogin = async (loginData: LoginData) => {
   const response = await api.post<LoginResponse>('users/sign-in', loginData);
   return response.data;
