@@ -14,17 +14,19 @@ export default function UserProfile() {
   const { data: userRank } = useQuery({ queryKey: ['userRank'], queryFn: getUserRank });
   const userInfo = useUserInfo();
 
+  const ROLE = localStorage.getItem('role');
+
   return (
     <div className={styles.profileContainer}>
       <div className={styles.userProfile}>
-        {userInfo ? <img src={userInfo?.image} /> : <img src={defaultImage} />}
+        {!ROLE || ROLE === 'gest' ? <img src={defaultImage} /> : <img src={userInfo?.image} />}
         <div className={styles.rankBox}>
           <p>내 점수🏅</p>
           <p>{userRank?.score}</p>
         </div>
       </div>
       <div className={styles.textBox}>
-        <p>반갑습니다 {userInfo ? userInfo?.nickname : '비회원'}님!</p>
+        <p>반갑습니다 {!ROLE ? '비회원' : ROLE === 'gest' ? '게스트' : userInfo?.nickname}님!</p>
         <p>오늘도 즐거운 등산 되세요😄</p>
       </div>
     </div>

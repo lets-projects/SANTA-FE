@@ -64,9 +64,9 @@ export default function ProfileEditPage() {
     const form = new FormData();
 
     form.append('image', editData.image);
-    form.append('imageFile', newImg[0]);
+    // 이거 없으면 안보내게 해야함 form.append('imageFile', newImg[0]);
     form.append('nickname', editData.nickname);
-    form.append('name', '바뀌나');
+    form.append('name', '테스트');
     form.append('phoneNumber', editData.phoneNumber);
 
     return form;

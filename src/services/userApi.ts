@@ -49,7 +49,8 @@ export interface EditData {
   nickname: string;
   phoneNumber: string;
   image: string;
-  imageFile: string;
+  imageFile?: string;
+  name: string;
 }
 
 export interface UserRank {

@@ -9,6 +9,14 @@ const useUserInfo = () => {
     staleTime: Infinity,
   });
 
+  if (data) {
+    if (data && data.name === null && data.nickname === null && data.phoneNumber === null) {
+      localStorage.setItem('role', 'gest');
+    } else {
+      localStorage.setItem('role', 'user');
+    }
+  }
+
   return data;
 };
 
