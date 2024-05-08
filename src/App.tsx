@@ -28,6 +28,8 @@ import RecordMountainPage from './pages/user/mountain/RecordMountainPage';
 import ProfileEditPage from './pages/profile/edit/ProfileEditPage';
 import { GatheringDetailEditPage } from './pages/gathering/GatheringDetailEditPage';
 import { GatheringSearchResultPage } from './pages/gathering/GatheringSearchResultPage';
+import AdminChallengePage from './pages/adminChallenge/AdminChallengePage';
+import EditChallengePage from './pages/adminChallenge/EditChallengePage';
 import OauthRedirectPage from './pages/login/OauthRedirectPage';
 import MountainPage from './pages/mountain/MountainPage';
 import MountainDetailPage from './pages/mountain/MountainDetailPage';
@@ -48,8 +50,13 @@ const router = createBrowserRouter([
       { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
       { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
       { path: paths.GATHERING_POST, element: <PostPage /> },
+      { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
+      { path: paths.TROPHY, element: <TrophyPage /> },
+      { path: paths.ADMIN_CHALLENGE, element: <AdminChallengePage /> },
+      { path: `${paths.ADMIN_CHALLENGE_DETAIL_EDIT}/:id`, element: <EditChallengePage /> },
       { path: paths.MOUNTAIN, element: <MountainPage /> },
       { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
+
       {
         element: <PrivateUserRoutes />,
         children: [

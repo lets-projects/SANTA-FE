@@ -23,6 +23,8 @@ export const paths = {
   MOUNTAIN_DETAIL: '/mountain/detail',
   MOUNTAIN_VERTIFY: '/mountain/vertify',
   MOUNTAIN_RECORD: '/mountain/record',
+  ADMIN_CHALLENGE: '/admin/challenges',
+  ADMIN_CHALLENGE_DETAIL_EDIT: '/admin/challenges/detail/edit',
 };
 
 export const NAVLIST = [
