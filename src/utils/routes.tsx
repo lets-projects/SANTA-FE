@@ -1,7 +1,14 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { paths } from './path';
 
-import { getAccessToken, getIsUser } from '../services/auth';
+import { getAccessToken, getIsAdmin, getIsUser } from '../services/auth';
+
+//누구나 접근 가능
+const PublicRoutes: React.FC = () => {
+  const isLogin = getAccessToken();
+
+  return isLogin ? <Navigate to={paths.HOME} /> : <Outlet />;
+};
 
 //로그인하면 접근 가능
 const PrivateRoutes: React.FC = () => {
@@ -17,11 +24,11 @@ const PrivateUserRoutes: React.FC = () => {
   return isUser ? <Outlet /> : <Navigate to={paths.LOGIN} />;
 };
 
-//누구나 접근 가능
-const PublicRoutes: React.FC = () => {
-  const isLogin = getAccessToken();
+//관리자만 접근 가능
+const PrivateAdminRoutes: React.FC = () => {
+  const isAdmin = getIsAdmin();
 
-  return isLogin ? <Navigate to={paths.HOME} /> : <Outlet />;
+  return isAdmin ? <Outlet /> : <Navigate to={paths.HOME} />;
 };
 
-export { PrivateRoutes, PublicRoutes, PrivateUserRoutes };
+export { PrivateRoutes, PublicRoutes, PrivateUserRoutes, PrivateAdminRoutes };

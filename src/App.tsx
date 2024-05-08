@@ -56,7 +56,8 @@ const router = createBrowserRouter([
       { path: `${paths.ADMIN_CHALLENGE_DETAIL_EDIT}/:id`, element: <EditChallengePage /> },
       { path: paths.MOUNTAIN, element: <MountainPage /> },
       { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
-
+      { path: paths.MOUNTAIN, element: <MountainPage /> },
+      { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
       {
         element: <PrivateUserRoutes />,
         children: [
