@@ -48,6 +48,7 @@
 .bottom {
   display: flex;
   justify-content: center;
+  width: 100%;
 
   padding-top: 1.2rem;
 }
@@ -61,18 +62,11 @@
   border-radius: 25px;
 }
 
-.precentBar[data-color='green'] {
-  height: 100%;
-
-  border-radius: 25px;
-  background-color: $green2;
-}
-
 .percentBar {
   height: 100%;
 
   border-radius: 25px;
-  background-color: $yellow;
+  background-color: $green2;
 }
 
 .noData {

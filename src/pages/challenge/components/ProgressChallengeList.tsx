@@ -24,8 +24,6 @@ export default function ProgressChallengeList() {
     <>
       {isSuccess && progressChallenge.length !== 0 ? (
         progressChallenge.map((challenge: ProgressChallengeData) => {
-          const progress = (challenge.progress / challenge.challenge.clearStandard) * 100;
-          console.log('progress', progress);
           return (
             <div key={challenge.challenge.name} className={styles.gap}>
               <Card variant="green2">
@@ -39,7 +37,10 @@ export default function ProgressChallengeList() {
                   </div>
                   <div className={styles.bottom}>
                     <div className={styles.progress} ref={progressRef}>
-                      <div className={styles.percentBar} style={{ width: `${progress}%` }} />
+                      <div
+                        className={styles.percentBar}
+                        style={{ width: `${(challenge.progress / challenge.challenge.clearStandard) * 100}%` }}
+                      />
                     </div>
                   </div>
                 </div>
