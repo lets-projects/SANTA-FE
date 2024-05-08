@@ -23,7 +23,7 @@ export const paths = {
   MOUNTAIN_DETAIL: '/mountain/detail',
   MOUNTAIN_VERTIFY: '/mountain/vertify',
   MOUNTAIN_RECORD: '/mountain/record',
-} as const;
+};
 
 export const NAVLIST = [
   { title: '메인', path: paths.HOME },
