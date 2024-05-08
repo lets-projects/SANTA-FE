@@ -66,6 +66,7 @@ export default function ProfileEditPage() {
     form.append('image', editData.image);
     form.append('imageFile', newImg[0]);
     form.append('nickname', editData.nickname);
+    form.append('name', '바뀌나');
     form.append('phoneNumber', editData.phoneNumber);
 
     return form;

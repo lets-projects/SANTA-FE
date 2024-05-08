@@ -1,5 +1,4 @@
 import { TotalMountain } from '/src/services/mountainAPi';
-
 import styles from './MountainList.module.scss';
 import { Card } from '/src/components/common/Card';
 import logo from '/images/logo.svg';

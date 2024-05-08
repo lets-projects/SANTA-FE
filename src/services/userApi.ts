@@ -65,7 +65,7 @@ export interface KakaoCode {
 }
 
 export const postKakaoCode = async (code: KakaoCode) => {
-  const response = await api.post('/kakao', code);
+  const response = await api.post('oauth2/kakao', code);
   return response;
 };
 
