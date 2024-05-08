@@ -5,7 +5,7 @@ import './styles/_global.scss';
 import './styles/_reset.scss';
 import { paths } from './utils/path';
 import Layout from './utils/Layout';
-import { PrivateRoutes, PublicRoutes } from './utils/routes';
+import { PrivateRoutes, PrivateUserRoutes, PublicRoutes } from './utils/routes';
 import JoinPage from './pages/join/JoinPage';
 import GatheringMainPage from './pages/gathering/GatheringMainPage';
 import MainPage from './pages/main/MainPage';
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
+      //조건 없이 접근 가능
       { index: true, element: <MainPage /> },
       { path: paths.RANK, element: <RankPage /> },
       { path: paths.GATHERING, element: <GatheringMainPage /> },
@@ -47,24 +48,32 @@ const router = createBrowserRouter([
       { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
       { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
       { path: paths.GATHERING_POST, element: <PostPage /> },
-      { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
-      { path: paths.TROPHY, element: <TrophyPage /> },
+      { path: paths.MOUNTAIN, element: <MountainPage /> },
+      { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
       {
-        element: <PrivateRoutes />,
+        element: <PrivateUserRoutes />,
         children: [
-          { path: paths.PROFILE, element: <ProfilePage /> },
+          //role이 user인 경우에만 접근 가능
           { path: paths.CHALLENGE, element: <ChallengePage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
           { path: paths.TROPHY, element: <TrophyPage /> },
-          { path: paths.MOUNTAIN, element: <MountainPage /> },
-          { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
           { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
+          { path: paths.TROPHY, element: <TrophyPage /> },
+        ],
+      },
+      {
+        element: <PrivateRoutes />,
+        children: [
+          //role이 user이거나 guest인 경우 접근 가능
+          { path: paths.PROFILE, element: <ProfilePage /> },
+          { path: paths.PROFILE_EDIT, element: <ProfileEditPage /> },
         ],
       },
       {
         element: <PublicRoutes />,
         children: [
+          //로그인한경우 접근 안됨
           { path: paths.JOIN, element: <JoinPage /> },
           { path: paths.FIND_ACCOUNT, element: <FindAccountPage /> },
           { path: paths.FIND_PASSWORD, element: <FindPasswordPage /> },

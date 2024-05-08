@@ -30,6 +30,7 @@ export default function ProfileEditPage() {
   const userInfo = useUserInfo();
 
   useEffect(() => {
+    if (userInfo?.name) setValue('name', userInfo.name);
     if (userInfo?.nickname) setValue('nickname', userInfo.nickname);
     if (userInfo?.phoneNumber) setValue('phoneNumber', userInfo.phoneNumber);
     if (userInfo?.image) setValue('image', userInfo.image);
@@ -64,15 +65,18 @@ export default function ProfileEditPage() {
     const form = new FormData();
 
     form.append('image', editData.image);
-    // 이거 없으면 안보내게 해야함 form.append('imageFile', newImg[0]);
     form.append('nickname', editData.nickname);
-    form.append('name', '테스트');
+    form.append('name', editData.name);
     form.append('phoneNumber', editData.phoneNumber);
+    if (newImg && newImg[0] !== undefined) {
+      form.append('imageFile', newImg[0]);
+    }
 
     return form;
   }
 
   const onSubmit = (editData: EditData) => {
+    console.log(editData);
     const formData = createFormData(editData);
     mutate(formData);
   };
@@ -99,10 +103,14 @@ export default function ProfileEditPage() {
           </div>
         </div>
         <div className={styles.defaultContainer}>
-          <div className={styles.label}>이름</div>
-          <div className={styles.defaultinput}>{userInfo?.name}</div>
           <div className={styles.label}>이메일</div>
           <div className={styles.defaultinput}>{userInfo?.email}</div>
+        </div>
+
+        <div className={styles.inputContainer}>
+          <div className={styles.label}>이름</div>
+          <input type="text" {...register('name')} />
+          {errors.name && <p className={styles.errorMessage}>{errors.name?.message}</p>}
         </div>
 
         <div className={styles.inputContainer}>

@@ -11,9 +11,9 @@ const useUserInfo = () => {
 
   if (data) {
     if (data && data.name === null && data.nickname === null && data.phoneNumber === null) {
-      localStorage.setItem('role', 'gest');
+      localStorage.setItem('role', 'GUEST');
     } else {
-      localStorage.setItem('role', 'user');
+      localStorage.setItem('role', 'USER');
     }
   }
 
