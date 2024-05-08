@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import styles from '/src/styles/login/loginPage.module.scss';
-import googleIcon from '/images/google.svg';
-import kakaoIcon from '/images/kakao.png';
+import kakao_login from '/images/kakao_login_large_wide.png';
+import logo from '/images/logo.svg';
 import { IoMailOutline } from 'react-icons/io5';
 import { IoLockOpenOutline } from 'react-icons/io5';
 import { postUserLogin } from '../../services/userApi';
@@ -78,14 +78,6 @@ function LoginPage() {
           <div className={styles.loginMenuContainer}>
             <div
               onClick={() => {
-                navigate(paths.FIND_ACCOUNT);
-              }}
-            >
-              아이디 찾기
-            </div>
-            <div className={styles.verticalLine}></div>
-            <div
-              onClick={() => {
                 navigate(paths.FIND_PASSWORD);
               }}
             >
@@ -101,17 +93,22 @@ function LoginPage() {
               회원가입
             </div>
           </div>
-        </div>
-        <div className={styles.socialLoginContainer}>
-          <div>소셜 계정으로 로그인</div>
-          <div className={styles.socialLoginIcon}>
-            <Link to={KAKAO_AUTH_URL}>
-              <img src={kakaoIcon} />
-            </Link>
-            <Link to="/">
-              <img src={googleIcon} />
-            </Link>
+          <div className={styles.socialLoginContainer}>
+            <div className={styles.socialTop}>
+              <div className={styles.line}></div>
+              <div>소셜 로그인</div>
+              <div className={styles.line}></div>
+            </div>
+            <div className={styles.socialLoginIcon}>
+              <Link to={KAKAO_AUTH_URL}>
+                <img src={kakao_login} />
+              </Link>
+            </div>
           </div>
+        </div>
+
+        <div className={styles.bottom}>
+          <img className={styles.logo} src={logo} />
         </div>
       </div>
     </div>
