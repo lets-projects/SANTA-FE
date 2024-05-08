@@ -104,7 +104,7 @@ export function deleteGathering(meetingId: number) {
   return api.delete(`meetings/${meetingId}`);
 }
 
-export function editGathering(meetingId: number, data: FormData) {
+export function editGathering({ meetingId, data }: { meetingId: number, data: FormData }) {
   return api.patch(`meetings/${meetingId}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data',

@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
-import Thumbnail from '/src/components/Thumbnail';
+// import Thumbnail from '/src/components/Thumbnail';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';

@@ -9,25 +9,21 @@ import { VerticalProfile } from './components/VerticalProfile';
 import { Button, DeleteBtn, EditBtn } from '../../components/common/Button';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteGathering, getGatheringDetailById } from '/src/services/gatheringApi';
 import { getUserInfo } from '/src/services/userApi';
 import { useUserInfo } from '/src/utils/useUserInfo';
 // import { api } from '/src/services/api';
 
+const adminId = 24;
 export function GatheringDetailPage() {
   const [searchParams] = useSearchParams();
   // const [meetingId, setMeetingId] = useState<string>('');
   const [isProfileClicked, setIsProfileClicked] = useState<Boolean[]>([])
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const keyword = searchParams.get('meetingid');
-  //   if (keyword) {
-  //     setMeetingId(keyword);
-  //   } else {
-  //     setMeetingId('');
-  //   }
-  // }, [searchParams])
+  const [showEditBtn, setShowEditBtn] = useState(false);
+  const queryClient = useQueryClient();
+
   const meetingId = searchParams.get('meetingid');
 
   //모임 상세 정보 api 
@@ -59,16 +55,26 @@ export function GatheringDetailPage() {
     staleTime: Infinity
   });
 
-  const currentUserName = useUserInfo((data) => data.name);
+  const currentUserId = useUserInfo((data) => data.id);
   useEffect(() => {
-    // console.log('userInfo', userInfo);
+    console.log('userInfo', userInfo);
     //유저 인포 받아와서 작성한 사람에게만 삭제버튼 보이도록 한다.
-    console.log(currentUserName);
-    //유저 id를 가져와서 비교해야함 
+    console.log(currentUserId);
+    //유저 id를 가져와서 비교해야함 \
+    if (gatheringDetail) {
+      if (currentUserId === gatheringDetail.leaderId || currentUserId === adminId) {
+        setShowEditBtn(true);
+      } else {
+        setShowEditBtn(false);
+      }
+    }
   }, [userInfo])
   //삭제 api 
   const { mutate: deleteMutation } = useMutation({
-    mutationFn: deleteGathering
+    mutationFn: deleteGathering,
+    onSuccess: () => {
+      navigate(-1);
+    },
   });
 
 
@@ -90,8 +96,10 @@ export function GatheringDetailPage() {
       <TitleContainer title={gatheringDetail?.meetingName} />
       <div className={styles.infoContainer}>
         <div className={`${styles.containerRow}  ${styles.deleteEditContainer}`}>
-          <EditBtn onClick={() => { if (gatheringDetail) handleEditGatheringDetail(gatheringDetail?.meetingId) }} />
-          <DeleteBtn onClick={() => { if (gatheringDetail) handleDeleteGatheringDetail(gatheringDetail?.meetingId) }} />
+          {showEditBtn && (
+
+            <><EditBtn onClick={() => { if (gatheringDetail) handleEditGatheringDetail(gatheringDetail?.meetingId); }} /><DeleteBtn onClick={() => { if (gatheringDetail) handleDeleteGatheringDetail(gatheringDetail?.meetingId); }} /></>
+          )}
         </div>
         <div className={styles.containerRow}>
           <img src={gatheringDetail?.image} className={styles.imageContainer}></img>

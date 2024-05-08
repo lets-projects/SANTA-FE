@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { api } from './api';
 
 type UserListType = {
@@ -94,4 +95,21 @@ export function deleteUser(userId: number) {
 
 export function getCategoryList() {
     return api.get(`categories`)
+}
+
+export function deleteCategoryList(categoryId: number) {
+    return api.delete(`categories/${categoryId}`)
+}
+type categoryData = {
+    name: string,
+}
+export const editCategoryList = async ({ categoryId, categoryData }: { categoryId: number, categoryData: categoryData }) => {
+    return api.patch(`categories/${categoryId}`, categoryData)
+}
+
+type newCategoryType = {
+    name: string;
+}
+export function addCategory(newCategory: newCategoryType) {
+    return api.post(`categories`, newCategory)
 }

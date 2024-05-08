@@ -12,7 +12,8 @@ const PAGE_SIZE = 4;
 export function ParticipatingGroupPage() {
   const [showInProgress, setShowInProgress] = useState(false);
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
+  const [page] = useState(0);
+  // const [page, setPage] = useState(0);
 
 
   const { data: myGatherings } = useQuery({
