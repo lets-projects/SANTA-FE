@@ -64,8 +64,14 @@ export interface KakaoCode {
   authorizationCode: string;
 }
 
+export interface kakaoLoginData {
+  accessToken: string;
+  grantType: string;
+  refreshToken: string;
+}
+
 export const postKakaoCode = async (code: KakaoCode) => {
-  const response = await api.post('oauth2/kakao', code);
+  const response = await api.post<kakaoLoginData>('oauth2/kakao', code);
   return response;
 };
 
