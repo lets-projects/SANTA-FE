@@ -14,6 +14,8 @@ export default function MountainDetailPage() {
     select: (data) => data.data,
   });
 
+  console.log(mountain);
+
   return (
     <>
       {isSuccess && (
@@ -23,12 +25,13 @@ export default function MountainDetailPage() {
           </div>
           <div className={styles.middle}>
             <div className={styles.label}>위치</div>
-            <div className={styles.location}>{mountain.location}</div>
-            <div className={styles.gpsText}>
-              <div className={styles.label}>위도 · 경도</div>
-              <p>위도 - {mountain.latitude}</p>
-              <p>경도 - {mountain.longitude}</p>
-            </div>
+            <p>{mountain.location}</p>
+            <div className={styles.label}>높이</div>
+            <p>{mountain.height} M</p>
+            <div className={styles.label}>정보</div>
+            <p>{mountain.description}</p>
+            <div className={styles.label}>등산 포인트</div>
+            <p>{mountain.point}</p>
           </div>
           <div className={styles.bottom}>
             <img className={styles.logo} src={logo} />

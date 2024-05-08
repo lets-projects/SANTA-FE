@@ -1,7 +1,7 @@
 import { api } from './api';
 
 interface MountainListResponse {
-  content: TotalMountain[];
+  content: MountainDetail[];
   pageable: {
     pageNumber: number;
     pageSize: number;
@@ -60,6 +60,9 @@ export interface MountainDetail {
   latitude: number;
   longitude: number;
   id: number;
+  description: string;
+  point: string;
+  transportation: string;
 }
 
 export const getAllMountains = async (page?: number, size?: number) => {

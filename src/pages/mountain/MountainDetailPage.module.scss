@@ -7,7 +7,7 @@
 }
 
 .top {
-  padding: 3rem 0 0.9rem;
+  padding: 2.1rem 0 0.9rem;
 }
 
 .label {
@@ -26,17 +26,14 @@
   padding-bottom: 1.25rem;
 }
 
-.gpsText {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  padding-top: 1.8rem;
+.middle {
+  width: 100%;
   .label {
-    padding-bottom: 0.5rem;
+    padding: 0.8rem 0 0.5rem;
   }
   p {
-    padding: 0.1rem 0;
+    padding: 0.1rem 0 0.8rem;
+    line-height: 1.5;
   }
 }
 
@@ -46,9 +43,10 @@
   align-items: flex-end;
 
   width: 100%;
-  padding-top: 80%;
+  padding-top: 10%;
 }
 
 .logo {
+  height: 5rem;
   opacity: 30%;
 }
