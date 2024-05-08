@@ -1,6 +1,6 @@
 import styles from './AdminChallenge.module.scss';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { TitleContainer } from '../gathering/components/TitleContainer';
 import ChallengeList from './components/ChallengeList';
@@ -17,6 +17,7 @@ export default function AdminChallengePage() {
     mutate(id);
   };
   if (!challengeList) return <>loading...</>;
+  useEffect(() => {}, [challengeList]);
   return (
     <div className={styles.container}>
       <TitleContainer title="챌린지 관리" />
