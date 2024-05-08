@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { TitleContainer } from './components/TitleContainer';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -15,7 +15,7 @@ import { Button } from '/src/components/common/Button';
 export function GatheringDetailEditPage() {
     const [searchParams] = useSearchParams();
     const [meetingId, setMeetingId] = useState('');
-
+    const navigate = useNavigate();
     const [gatheringData, setGatheringData] = useState<GatheringDetailType>({
         meetingId: 0,
         leaderId: 0,
@@ -128,8 +128,11 @@ export function GatheringDetailEditPage() {
         }
     };
 
-    const { mutate } = useMutation({
+    const { mutate: editMutation } = useMutation({
         mutationFn: editGathering,
+        onSuccess: () => {
+            navigate(-1);
+        }
     });
 
     function handleCreateBtn() {
@@ -150,7 +153,7 @@ export function GatheringDetailEditPage() {
         if (imgFile) {
             gatheringFormData.append('imageFile', imgFile); // 이미지 파일 추가
         }
-        mutate({ meetingId: Number(meetingId), data: gatheringFormData });
+        editMutation({ meetingId: Number(meetingId), data: gatheringFormData });
     }
 
     return (

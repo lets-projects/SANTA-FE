@@ -11,6 +11,8 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useMutation } from '@tanstack/react-query';
 import { postGathering } from '/src/services/gatheringApi';
 import { GatheringCategorySelectBox } from './components/GatheringCategorySelectBox';
+import { useNavigate } from 'react-router-dom';
+import { formattingDate } from '/src/utils/formattingDate';
 
 export function PostPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -18,6 +20,7 @@ export function PostPage() {
   const [tagValue, setTagValue] = useState<string>();
   const [imgFileUrl, setImgFileUrl] = useState<string>('');
   const [imgFile, setImgFile] = useState<File | null>(null);
+  const navigate = useNavigate();
   let gatheringFormData = new FormData();
   const [postData, setPostData] = useState({
     meetingName: '',
@@ -40,17 +43,16 @@ export function PostPage() {
   const handleDateChange = (date: Date) => {
     if (date) {
       setSelectedDate(date);
-      // gatheringFormData.append('date', formattingDate(date))
       setPostData(prevData => ({ ...prevData, date: formattingDate(date) }))
     }
   };
 
-  function formattingDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
+  // function formattingDate(date: Date): string {
+  //   const year = date.getFullYear();
+  //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  //   const day = date.getDate().toString().padStart(2, '0');
+  //   return `${year}-${month}-${day}`;
+  // }
 
   function handleInputTag(e: ChangeEvent<HTMLInputElement>) {
     const inputValue = e.target.value;
@@ -94,6 +96,9 @@ export function PostPage() {
 
   const { mutate } = useMutation({
     mutationFn: postGathering,
+    onSuccess: () => {
+      navigate(-1);
+    }
   });
 
   function handleCreateBtn() {

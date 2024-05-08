@@ -1,3 +1,4 @@
+import { Meeting } from './meeting';
 import { api } from './api';
 export type GatheringListByCategory = {
   leaderId: number;
@@ -67,6 +68,12 @@ export type GatheringDetailType = {
     }
   ]
 }
+
+type userReport = {
+  reason: string;
+  reportedParticipantId: number;
+
+}
 export type GatheringCategory = '맞춤추천' | '등산' | '힐링' | '식도락' | '정상깨기' | '백패킹' | '출사' | '기타';
 
 //모임 조회 api 
@@ -104,6 +111,7 @@ export function deleteGathering(meetingId: number) {
   return api.delete(`meetings/${meetingId}`);
 }
 
+//모임 수정 api
 export function editGathering({ meetingId, data }: { meetingId: number, data: FormData }) {
   return api.patch(`meetings/${meetingId}`, data, {
     headers: {
@@ -112,11 +120,26 @@ export function editGathering({ meetingId, data }: { meetingId: number, data: Fo
   })
 }
 
+//나의 모임 조회 
 export function getMyGatherings(page: number, size: number) {
   return api.get<GatheringListResponse>(`meetings/my-meetings?page=${page}&size=${size}`)
 }
-
+//인기모임 조회 
 export function getPopularGatherings(page: number, size: number) {
   return api.get(`meetings/participants?page=${page}&size=${size}`)
 }
 
+//모임 종료하기 
+export function closeGathering(meetingId: string) {
+  return api.post(`meetings/${meetingId}/end`)
+}
+
+//모임 참여하기 
+export function joinGathering(meetingId: string) {
+  return api.post(`meetings/${meetingId}/participants`)
+}
+
+//신고하기
+export function userReport(data: userReport) {
+  return api.post('reports', data)
+}

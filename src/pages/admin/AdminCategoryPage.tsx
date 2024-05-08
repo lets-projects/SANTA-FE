@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import styles from '../../styles/admin/adminMain.module.scss';
 import { TitleContainer } from '../gathering/components/TitleContainer';
 import { ListComponent } from './components/ListComponent';
