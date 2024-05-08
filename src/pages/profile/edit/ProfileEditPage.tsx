@@ -10,6 +10,7 @@ import { profileEditSchema } from './profileEditSchema';
 import useUserInfo from '/src/hooks/useUserInfo';
 import { paths } from '/src/utils/path';
 import { useNavigate } from 'react-router-dom';
+import { getIsUser } from '/src/services/auth';
 
 export default function ProfileEditPage() {
   const [imgPreview, setImgPreview] = useState('');
@@ -28,6 +29,8 @@ export default function ProfileEditPage() {
   });
 
   const userInfo = useUserInfo();
+
+  const isUser = getIsUser();
 
   useEffect(() => {
     if (userInfo?.name) setValue('name', userInfo.name);
@@ -84,7 +87,7 @@ export default function ProfileEditPage() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <div className={styles.title}>프로필 수정</div>
+        <div className={styles.title}>{isUser ? '프로필 수정' : '프로필 정보 추가'}</div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.userInfo}>

@@ -14,6 +14,7 @@ import useUserInfo from '/src/hooks/useUserInfo';
 import { useMutation } from '@tanstack/react-query';
 import { deleteUser } from '/src/services/userApi';
 import logout from '/src/utils/logout';
+import { getIsUser } from '/src/services/auth';
 
 export default function ProfilePage() {
   const navigation = useNavigate();
@@ -36,15 +37,17 @@ export default function ProfilePage() {
     }
   };
 
+  const isUser = getIsUser();
+
   return (
     <div className={styles.container}>
       <div className={styles.userInfo}>
         {userInfo && <img className={styles.userImg} src={userInfo?.image} />}
-        <div className={styles.userName}>{userInfo?.nickname}</div>
+        <div className={styles.userName}>{isUser ? userInfo?.nickname : '프로필 정보를 추가해주세요!'}</div>
         <div className={styles.btn}>
           <Button
             variant={'rounded-outline'}
-            children={'프로필 수정'}
+            children={isUser ? '프로필 수정' : '프로필 추가'}
             onClick={() => {
               navigation(paths.PROFILE_EDIT);
             }}

@@ -8,5 +8,14 @@ export function getRefreshToken() {
 
 export function getIsUser() {
   const role = localStorage.getItem('role');
-  return role == 'USER';
+  return role == 'USER' || 'AMDIN';
+}
+
+export function getUserRole() {
+  return localStorage.getItem('role');
+}
+
+export function getIsAdmin() {
+  const role = localStorage.getItem('role');
+  return role == 'ADMIN';
 }

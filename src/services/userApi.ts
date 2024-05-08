@@ -33,6 +33,7 @@ export interface LoginResponse {
   grantType: string;
   accessToken: string;
   refreshToken: string;
+  role: string;
 }
 
 export interface UserInfo {

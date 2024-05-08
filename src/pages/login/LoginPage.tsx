@@ -35,6 +35,9 @@ function LoginPage() {
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.accessToken);
       localStorage.setItem('refresh_token', data.refreshToken);
+      if (data.role === 'ADMIN') {
+        localStorage.setItem('role', 'ADMIN');
+      }
       navigate('/');
     },
     onError: (error) => {

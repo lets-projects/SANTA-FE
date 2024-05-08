@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getUserInfo } from '../services/userApi';
+import { getIsAdmin } from '../services/auth';
 
 const useUserInfo = () => {
   const { data } = useQuery({
@@ -9,7 +10,9 @@ const useUserInfo = () => {
     staleTime: Infinity,
   });
 
-  if (data) {
+  const isAdmin = getIsAdmin();
+
+  if (data && !isAdmin) {
     if (data && data.name === null && data.nickname === null && data.phoneNumber === null) {
       localStorage.setItem('role', 'GUEST');
     } else {
