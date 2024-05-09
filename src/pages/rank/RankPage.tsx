@@ -91,7 +91,7 @@ export default function RankPage() {
           {ranks ? (
             <div className={styles.li}>
               {ranks?.map((user) => (
-                <div className={styles.userRankItem} key={user.id}>
+                <div className={styles.userRankItem} key={`${user.id}-${user.score}`}>
                   <div className={styles.rankWrapper}>
                     <div className={styles.userRank}>{user.rank}</div>
                     <div className={styles.profileImgWrapper}>
