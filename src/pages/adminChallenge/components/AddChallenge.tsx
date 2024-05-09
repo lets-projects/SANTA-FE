@@ -1,14 +1,16 @@
 import styles from '../AdminChallenge.module.scss';
 import { useState, useRef, useEffect } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addChallenge } from '/src/services/adminChallengesApi';
+
 function AddChallenge() {
+  const queryClient = useQueryClient();
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState('');
-  const [categoryId, _setCategoryId] = useState(1);
+  const [categoryId, setCategoryId] = useState<number>(1);
   const [description, setDescription] = useState('');
-  const [clearStandard, _setClearStandard] = useState(1);
+  const [clearStandard, setClearStandard] = useState<number>(1);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
 
@@ -36,6 +38,13 @@ function AddChallenge() {
 
   const { mutate, data } = useMutation({
     mutationFn: fetchCreateChallenge,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['AdminchallengeList'] });
+      alert('챌린지 등록되었습니다!');
+    },
+    onError: () => {
+      alert('다시 시도해주세요');
+    },
   });
 
   const handleRefClick = () => {
@@ -70,18 +79,32 @@ function AddChallenge() {
           <img src="/images/input-img.png" alt="사진 올리기" className={styles.inputImg} />
         )}
       </div>
-      <input
-        className={styles.inputName}
-        placeholder="제목을 입력해주세요."
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        className={styles.inputDescription}
-        placeholder="내용을 입력해주세요."
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+      <div className={styles.addInputContainer}>
+        <label className={styles.label}>제목</label>
+        <input className={styles.inputName} value={name} onChange={(e) => setName(e.target.value)} />
+      </div>
+      <div className={styles.addInputContainer}>
+        <label className={styles.label}>소개</label>
+        <input className={styles.inputName} value={description} onChange={(e) => setDescription(e.target.value)} />
+      </div>
+      <div className={styles.addInputContainer}>
+        <label className={styles.label}>달성 목표</label>
+        <input
+          type="number"
+          className={styles.inputName}
+          value={clearStandard}
+          onChange={(e) => setClearStandard(e.target.valueAsNumber)}
+        />
+      </div>
+      <div className={styles.addInputContainer}>
+        <label className={styles.label}>카테고리 ID</label>
+        <input
+          type="number"
+          className={styles.inputName}
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.valueAsNumber)}
+        />
+      </div>
       <input
         className=""
         type="file"
