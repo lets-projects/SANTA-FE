@@ -2,6 +2,17 @@ import styles from '../AdminChallenge.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addChallenge } from '/src/services/adminChallengesApi';
+import { GatheringCategorySelectBox } from '../../gathering/components/GatheringCategorySelectBox';
+
+const CATEGORY = [
+  { id: 1, name: '등산' },
+  { id: 2, name: '기타' },
+  { id: 3, name: '힐링' },
+  { id: 4, name: '식도락' },
+  { id: 5, name: '정상깨기' },
+  { id: 6, name: '백패킹' },
+  { id: 7, name: '출사' },
+];
 
 function AddChallenge() {
   const queryClient = useQueryClient();
@@ -11,9 +22,7 @@ function AddChallenge() {
   const [categoryId, setCategoryId] = useState<number>(1);
   const [description, setDescription] = useState('');
   const [clearStandard, setClearStandard] = useState<number>(1);
-
   const [imageFile, setImageFile] = useState<File | null>(null);
-
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const fetchCreateChallenge = async () => {
@@ -29,7 +38,7 @@ function AddChallenge() {
         image: '',
       });
 
-      console.log(res);
+      console.log('res', res);
       return res;
     } catch (e) {
       console.error(e);
@@ -66,9 +75,19 @@ function AddChallenge() {
   const handleUpload = () => {
     mutate();
   };
+
   useEffect(() => {
     console.log(data);
   }, [data]);
+
+  const getCategoryId = (name: string) => {
+    for (let i = 0; i < CATEGORY.length; i++) {
+      if (CATEGORY[i].name === name) {
+        return CATEGORY[i].id;
+      }
+    }
+    return undefined;
+  };
 
   return (
     <div className={styles.addMiddle}>
@@ -98,11 +117,19 @@ function AddChallenge() {
       </div>
       <div className={styles.addInputContainer}>
         <label className={styles.label}>카테고리 ID</label>
-        <input
+        {/* <input
           type="number"
           className={styles.inputName}
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.valueAsNumber)}
+        /> */}
+        <GatheringCategorySelectBox
+          defaultValue="등산"
+          onChange={(e) => {
+            const categoryId = getCategoryId(e.target.value);
+            //@ts-ignore 김경혜...33
+            setCategoryId(categoryId);
+          }}
         />
       </div>
       <input
