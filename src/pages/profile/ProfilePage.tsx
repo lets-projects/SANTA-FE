@@ -40,39 +40,43 @@ export default function ProfilePage() {
   const isUser = getIsUser();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.userInfo}>
-        {userInfo && <img className={styles.userImg} src={userInfo?.image} />}
-        <div className={styles.userName}>{isUser ? userInfo?.nickname : '프로필 정보를 추가해주세요!'}</div>
-        <div className={styles.btn}>
-          <Button
-            variant={'rounded-outline'}
-            children={isUser ? '프로필 수정' : '프로필 추가'}
-            onClick={() => {
-              navigation(paths.PROFILE_EDIT);
-            }}
-          />
-        </div>
-      </div>
-      <div className={styles.infoContainer}>
-        <TrophyBox />
-        <div className={styles.middle}>
-          <div className={styles.left}>
-            <CategoryBox />
-            <GatheringBox />
-          </div>
-          <div className={styles.right}>
-            <AchievementsBox />
+    <>
+      (
+      <div className={styles.container}>
+        <div className={styles.userInfo}>
+          {userInfo && <img className={styles.userImg} src={userInfo?.image} />}
+          <div className={styles.userName}>{isUser ? userInfo?.nickname : '프로필 정보를 추가해주세요!'}</div>
+          <div className={styles.btn}>
+            <Button
+              variant={'rounded-outline'}
+              children={isUser ? '프로필 수정' : '프로필 추가'}
+              onClick={() => {
+                navigation(paths.PROFILE_EDIT);
+              }}
+            />
           </div>
         </div>
+        <div className={styles.infoContainer}>
+          <TrophyBox />
+          <div className={styles.middle}>
+            <div className={styles.left}>
+              <CategoryBox />
+              <GatheringBox />
+            </div>
+            <div className={styles.right}>
+              <AchievementsBox />
+            </div>
+          </div>
+        </div>
+        <div className={styles.bottom}>
+          {/* <LoginBtn loginType={'kakao'} imgUrl={kakaoLogo} />
+      <LoginBtn loginType={'google'} imgUrl={googleLogo} state={'연동하기'} /> */}
+          <button className={styles.withdrawalBtn} onClick={onClickDeleteBtn}>
+            회원 탈퇴
+          </button>
+        </div>
       </div>
-      <div className={styles.bottom}>
-        {/* <LoginBtn loginType={'kakao'} imgUrl={kakaoLogo} />
-        <LoginBtn loginType={'google'} imgUrl={googleLogo} state={'연동하기'} /> */}
-        <button className={styles.withdrawalBtn} onClick={onClickDeleteBtn}>
-          회원 탈퇴
-        </button>
-      </div>
-    </div>
+      )
+    </>
   );
 }

@@ -33,7 +33,6 @@ export default function MountainPage() {
     const isSuccess = isFetched && !isError;
     if (isSuccess && allMountain) {
       setMountainList((prevList) => [...prevList, ...allMountain.content]);
-      console.log('mountainList', mountainList);
     }
   }, [isFetched, isError, allMountain]);
 
