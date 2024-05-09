@@ -41,8 +41,6 @@ function AddChallenge({ setIsItPosting }: Props) {
         imageFile,
         image: '',
       });
-
-      console.log('res', res);
       return res;
     } catch (e) {
       console.error(e);
