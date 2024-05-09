@@ -37,22 +37,20 @@ export default function MountainPage() {
     }
   }, [isFetched, isError, allMountain]);
 
-  const isSuccess = !isError && isFetched;
   return (
     <div className={styles.container}>
       <div className={styles.title}>전체 산 목록</div>
-      {isSuccess &&
-        mountainList?.map((mountainData, index) => {
-          return (
-            <div key={`${mountainData.name}-${mountainData.latitude}`}>
-              <MountainList
-                mountainData={mountainData}
-                setPage={setPage}
-                isLast={allMountain && allMountain?.totalPage >= page && mountainList.length === index + 1}
-              />
-            </div>
-          );
-        })}
+      {mountainList?.map((mountainData, index) => {
+        return (
+          <div key={`${mountainData.name}-${mountainData.latitude}`}>
+            <MountainList
+              mountainData={mountainData}
+              setPage={setPage}
+              isLast={allMountain && allMountain?.totalPage >= page && mountainList.length === index + 1}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 }
