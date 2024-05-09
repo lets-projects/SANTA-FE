@@ -47,18 +47,18 @@ interface GatheringListResponse {
 }
 
 export type GatheringDetailType = {
-  meetingId: number,
-  leaderId: number,
-  userEmail: string,
-  meetingName: string,
-  categoryName: string,
-  mountainName: string,
-  description: string,
-  headcount: number,
-  date: string,
-  tags: string[],
-  image: string,
-  imageFile: string,
+  meetingId: number;
+  leaderId: number;
+  userEmail: string;
+  meetingName: string;
+  categoryName: string;
+  mountainName: string;
+  description: string;
+  headcount: number;
+  date: string;
+  tags: string[];
+  image: string;
+  imageFile: string;
   participants: [
     {
       userId: number,
@@ -75,7 +75,7 @@ type userReport = {
 }
 export type GatheringCategory = '맞춤추천' | '등산' | '힐링' | '식도락' | '정상깨기' | '백패킹' | '출사' | '기타';
 
-//모임 조회 api 
+//모임 조회 api
 export async function getGatheringList() {
   return await api.get('meetings');
 }
@@ -85,27 +85,26 @@ export function getGatheringListByCategory(category: GatheringCategory, page?: n
   return api.get<GatheringListResponse>(`meetings/category-search?category=${category}&page=${page}&size=${size}`);
 }
 
-//모임 생성 api 
+//모임 생성 api
 export async function postGathering(data: FormData) {
   await api.post('meetings', data, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-  }
-  );
+  });
 }
 
-//검색 결과 조회 api 
+//검색 결과 조회 api
 export async function getGatheringSearchResult(tag: string) {
   return await api.get(`meetings/tag-search?tag=${tag}`);
 }
 
-//모임 상세보기 api 
+//모임 상세보기 api
 export function getGatheringDetailById(meetingId: string) {
-  return api.get<GatheringDetailType>(`meetings/${meetingId}`)
+  return api.get<GatheringDetailType>(`meetings/${meetingId}`);
 }
 
-//모임 삭제 api 
+//모임 삭제 api
 export function deleteGathering(meetingId: number) {
   return api.delete(`meetings/${meetingId}`);
 }

@@ -95,7 +95,7 @@ export function AdminCategoryPage() {
                     <FaPlus className={styles.plusBtn} onClick={handlePlusBtnClick} />
                 </div>
             </div>
-            {categories && categories.map((categoryList: category, index: number) => (
+            {categories && categories.map((categoryList: category) => (
                 editingCategoryId === categoryList.id ? (
                     <div className={styles.listEdit_container}>
                         <div className={styles.listEdit_col}>
