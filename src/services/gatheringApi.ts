@@ -141,3 +141,7 @@ export function joinGathering(meetingId: string) {
 export function userReport(data: userReport) {
   return api.post('reports', data)
 }
+
+export function getUserGathering() {
+  return api.get<GatheringListResponse>('meetings/my-meetings');
+}
