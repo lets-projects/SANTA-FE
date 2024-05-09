@@ -1,4 +1,3 @@
-import { Button } from '../../main/components/Button';
 import styles from '../AdminChallenge.module.scss';
 import { useState, useRef, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -61,9 +60,10 @@ function AddChallenge() {
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   return (
-    <div className={styles.container}>
-      <div onClick={handleRefClick}>
+    <div className={styles.addMiddle}>
+      <div onClick={handleRefClick} className={styles.imgContainer}>
         {previewImage ? (
           <img src={previewImage} alt="preview" />
         ) : (
@@ -71,13 +71,13 @@ function AddChallenge() {
         )}
       </div>
       <input
-        className={styles.inputTextBox}
+        className={styles.inputName}
         placeholder="제목을 입력해주세요."
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
-        className={styles.inputTextBox}
+        className={styles.inputDescription}
         placeholder="내용을 입력해주세요."
         value={description}
         onChange={(e) => setDescription(e.target.value)}
@@ -90,7 +90,9 @@ function AddChallenge() {
         onChange={handleChangeImageFile}
         style={{ visibility: 'hidden' }}
       />
-      <Button onClick={handleUpload}>업로드</Button>
+      <button onClick={handleUpload} className={styles.editSubmitBtn}>
+        업로드
+      </button>
     </div>
   );
 }

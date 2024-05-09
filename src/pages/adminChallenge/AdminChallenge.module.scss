@@ -15,9 +15,10 @@
 
 .ClickedtabItem {
   border-bottom: #709f55 solid 2.4px;
-  width: 7.3rem;
+  width: 7rem;
   height: 30px;
   text-align: center;
+  color: $green3;
 }
 
 .tabItem {
@@ -80,6 +81,7 @@
   align-items: center;
   gap: 10px;
 }
+
 .listBtn {
   color: black;
   display: flex;
@@ -105,7 +107,7 @@
   background-color: rgb(222, 136, 136);
 }
 
-//김경혜
+//김경혜 - 챌린지 수정 ui
 .editMiddle {
   display: flex;
   flex-direction: column;
@@ -150,4 +152,43 @@
   border-style: none;
   border-radius: 10px;
   background-color: $green3;
+}
+
+//김경혜- 챌린지 등록 ui
+.addMiddle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 232px;
+  .imgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .inputImg {
+    width: 50%;
+    margin-bottom: 10px;
+  }
+  .inputName {
+    height: 40px;
+    width: 100%;
+    margin: 10px 0;
+
+    border-style: none;
+    border-radius: 10px;
+
+    background-color: #f9f9f9;
+  }
+  .inputDescription {
+    height: 150px;
+    width: 100%;
+
+    margin: 10px 0;
+
+    border-style: none;
+    border-radius: 10px;
+
+    background-color: #f9f9f9;
+  }
 }
