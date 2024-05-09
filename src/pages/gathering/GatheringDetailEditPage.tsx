@@ -7,7 +7,7 @@ import styles from '../../styles/gathering/gatheringPostPage.module.scss';
 import { editGathering, getGatheringDetailById } from '/src/services/gatheringApi';
 // import { editGathering, getGatheringDetailById } from '/src/services/gatheringApi';
 import { GatheringCategorySelectBox } from './components/GatheringCategorySelectBox';
-import { IoCalendarClearOutline, IoCloseOutline, IoImageOutline, IoPersonOutline } from 'react-icons/io5';
+import { IoCalendarClearOutline, IoCloseOutline, IoPersonOutline } from 'react-icons/io5';
 import { DatePickerComponent } from '/src/components/common/DatePickerComponent';
 import { GatheringDetailType } from '/src/services/gatheringApi';
 import { Button } from '/src/components/common/Button';
