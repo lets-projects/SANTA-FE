@@ -1,4 +1,3 @@
-import { Meeting } from './meeting';
 import { api } from './api';
 export type GatheringListByCategory = {
   leaderId: number;

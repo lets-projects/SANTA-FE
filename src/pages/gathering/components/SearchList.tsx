@@ -41,7 +41,7 @@ export function SearchList({ gatheringData }: { gatheringData: gatheringDataType
     }
   }
 
-  function returnClassName(leaderId: number, date: string) {
+  function returnClassName(date: string) {
     //작성자의 id와 모임장의 id가 같으면 styles.bgLightYellow
 
     if (isClosedGathering(date)) {
@@ -81,7 +81,7 @@ export function SearchList({ gatheringData }: { gatheringData: gatheringDataType
         </div>
       </div>
       {gatheringData.map((item) => (
-        <div key={item.meetingId} className={returnClassName(item.leaderId, item.date)}>
+        <div key={item.meetingId} className={returnClassName(item.date)}>
           <GatheringList
             gatheringInfo={{
 

@@ -106,7 +106,7 @@ export function AdminCategoryPage() {
                         </div>
                     </div>
                 ) : (
-                    <ListComponent key={index} title={categoryList.name}
+                    <ListComponent key={categoryList.id} title={categoryList.name}
                         onClickDelete={() => handleDeleteBtnClick(categoryList.id)}
                         onClickEdit={() => handleEditBtnClick(categoryList.id)}
                     />

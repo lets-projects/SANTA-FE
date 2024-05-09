@@ -1,7 +1,7 @@
 import styles from '../../styles/gathering/gatheringMain.module.scss';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { IoCheckmarkCircleSharp } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GatheringList } from './components/GatheringList';
 import { TitleContainer } from './components/TitleContainer';
 import { useNavigate } from 'react-router-dom';
@@ -16,11 +16,10 @@ export function ParticipatingGroupPage() {
   const [showInProgress, setShowInProgress] = useState(false);
   const navigate = useNavigate();
   const [page] = useState(0);
-  const [isSameUser, setIsSameUser] = useState(false);
-  const [isClosed, setIsClosed] = useState(false);
+
 
   //내가 참여중인 모임 리스트 불러오괴
-  const { data: myGatherings, isLoading } = useQuery({
+  const { data: myGatherings } = useQuery({
     queryKey: ['myGatherings'],
     queryFn: () => getMyGatherings(page, PAGE_SIZE),
     select: (data) => {

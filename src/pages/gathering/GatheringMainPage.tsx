@@ -35,7 +35,7 @@ function GatheringMainPage() {
     select: (data) => {
       return {
         content: data.data.content,
-        totalPage: data.data.totalPages,
+        totalPage: data.data.totalPages - 1,
       };
     },
   });
