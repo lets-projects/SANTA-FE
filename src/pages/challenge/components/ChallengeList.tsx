@@ -33,7 +33,6 @@ export default function ChallengeList() {
     const isSuccess = isFetched && !isError;
     if (isSuccess && allChallenge) {
       setChallengeList((prevList) => [...prevList, ...allChallenge.content]);
-      console.log('mountainList', challengeList);
     }
   }, [isFetched, isError, allChallenge]);
 

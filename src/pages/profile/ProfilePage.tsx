@@ -13,7 +13,6 @@ import { paths } from '/src/utils/path';
 import useUserInfo from '/src/hooks/useUserInfo';
 import { useMutation } from '@tanstack/react-query';
 import { deleteUser } from '/src/services/userApi';
-import logout from '/src/utils/logout';
 import { getIsUser } from '/src/services/auth';
 
 export default function ProfilePage() {
@@ -23,7 +22,9 @@ export default function ProfilePage() {
   const { mutate } = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
+      localStorage.clear();
       alert('회원 탈퇴가 완료되었습니다.');
+      navigation(paths.LOGIN);
     },
     onError: () => {
       alert('다시 시도해 주세요.');
@@ -32,7 +33,6 @@ export default function ProfilePage() {
 
   const onClickDeleteBtn = () => {
     if (window.confirm('정말 탈퇴하시겠어요?')) {
-      logout();
       mutate();
     }
   };

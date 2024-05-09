@@ -65,7 +65,6 @@ export default function RankPage() {
           <p className={styles.title}>랭킹🏅</p>
           <div className={styles.subtitleWrapper}>
             <p className={styles.subtitle}>이달의 랭킹을 확인해보세요.</p>
-            <p className={styles.subtitle}>랭킹은 매달 1일 초기화됩니다.</p>
           </div>
         </div>
         <Top3UserRank top3users={top3Rank} />
