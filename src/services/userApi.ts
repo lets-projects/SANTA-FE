@@ -33,35 +33,71 @@ export interface LoginResponse {
   grantType: string;
   accessToken: string;
   refreshToken: string;
+  role: string;
 }
 
-interface UserInfo {
+export interface UserInfo {
+  id: number;
   email: string;
   nickname: string;
   name: string;
   phoneNumber: string;
   image: string;
+  accumulatedHeight: number;
 }
 
 export interface EditData {
   nickname: string;
   phoneNumber: string;
   image: string;
-  imageFile: string;
+  imageFile?: string;
+  name: string;
 }
+
+export interface UserRank {
+  id: number;
+  rank: number;
+  nickname: string;
+  image: string;
+  score: number;
+}
+
+export interface KakaoCode {
+  authorizationCode: string;
+}
+
+export interface kakaoLoginData {
+  accessToken: string;
+  grantType: string;
+  refreshToken: string;
+}
+
+export const postKakaoCode = async (code: KakaoCode) => {
+  const response = await api.post<kakaoLoginData>('oauth2/kakao', code);
+  return response;
+};
 
 export const postUserLogin = async (loginData: LoginData) => {
   const response = await api.post<LoginResponse>('users/sign-in', loginData);
   return response.data;
 };
 
-export const getUserInfo = async () => {
-  return await api.get<UserInfo>('users/my-info');
+export const postRefreshToken = async (refreshToken: string) => {
+  const response = await api.post('users/new-access-token', refreshToken);
+  return response.data;
 };
 
-export const patchUserInfo = async (editData: EditData) => {
-  const response = await api.patch('users/my-info', editData);
-  return response.data;
+export const getUserInfo = async () => {
+  const result = await api.get<UserInfo>('users/my-info');
+  return result.data;
+};
+
+export const patchUserInfo = async (editData: FormData) => {
+  await api.patch('users/my-info', editData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const postDuplicateEmail = async (email: Email) => {
@@ -93,3 +129,14 @@ export const postResetPassword = async (resetPasswordData: ResetPasswordData) =>
   const response = await api.post('users/reset-passwords', resetPasswordData);
   return response.data;
 };
+
+export const getUserRank = async () => {
+  const response = await api.get<UserRank>('users/ranking');
+  return response.data;
+};
+
+export const deleteUser = () => {
+  return api.delete('users');
+};
+
+//소셜 로그인 Api

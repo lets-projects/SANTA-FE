@@ -2,16 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import styles from './TrophyPage.module.scss';
 import trophyImg from '/images/trophyImg.png';
-import { getUserInfo } from '/src/services/userApi';
 import { ProgressChallengeData, getUserChallenge } from '/src/services/challengeApi';
+import useUserInfo from '/src/hooks/useUserInfo';
 
 export default function TrophyPage() {
-  const { data: userInfo } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn: getUserInfo,
-    select: (data) => data.data,
-    staleTime: Infinity,
-  });
+  const userInfo = useUserInfo();
 
   const {
     data: sucessChallenge,
@@ -23,8 +18,6 @@ export default function TrophyPage() {
     select: (data) => data.data.content,
   });
 
-  console.log('sucessChallenge', sucessChallenge);
-
   const SUCCESS = !isError && isFetched;
   return (
     <div className={styles.container}>
@@ -34,7 +27,7 @@ export default function TrophyPage() {
       </div>
       <div className={styles.bottom}>
         <div className={styles.trophyList}>
-          {SUCCESS &&
+          {SUCCESS && sucessChallenge.length !== 0 ? (
             sucessChallenge.map((trophy: ProgressChallengeData) => {
               return (
                 <div className={styles.trophyContainer}>
@@ -42,7 +35,12 @@ export default function TrophyPage() {
                   <p className={styles.trophyName}>{trophy.challenge.name}</p>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <div className={styles.textContainer}>
+              <div className={styles.nothingData}>아직 획득한 트로피가 없네요!</div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
 import SliderBannerImg from './components/SliderBannerImg';
 import { Button } from '../../components/common/Button';
 import SectionTitle from '../../components/SectionTitle';
-import Thumbnail from '../../components/Thumbnail2';
-import Toggle from './components/Toggle';
+import Thumbnail from '../../components/Thumbnail';
+// import Toggle from './components/Toggle'; 김경혜
 import MeetingList from './components/MainMeetingList';
 import UserRankList from './components/MainRankList';
 
@@ -14,48 +14,60 @@ import { getChallengeList } from '/src/services/challengeApi';
 
 import { useQuery } from '@tanstack/react-query';
 import { paths } from '/src/utils/path';
+import { useNavigate } from 'react-router-dom';
 
 export default function Main() {
   const { data: meetings } = useQuery({ queryKey: ['meetings'], queryFn: getMeetings });
   const { data: ranks } = useQuery({ queryKey: ['ranks'], queryFn: getMainPagesRanks });
   const { data: challenges } = useQuery({ queryKey: ['challenges'], queryFn: getChallengeList });
+  const navigation = useNavigate();
 
   if (!meetings || !ranks || !challenges) return <>Loading...</>;
   return (
-    <div className={styles.container}>
-      <SliderBannerImg />
-      <div className={styles.flex}>
-        <div className={styles.buttonWrapper}>
-          <Button onClick={() => {}} variant="yellow">
-            내 인증 바로가기
-          </Button>
+    <>
+      <div className={styles.container}>
+        <div className={styles.bannerWrapper}>
+          <SliderBannerImg />
         </div>
-        <div className={styles.sectionWrapper}>
-          <SectionTitle
-            title="챌린지 둘러보기"
-            subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
-            targetPageUrl={paths.CHALLENGE}
-          />
-          <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} />
-        </div>
-        <div>
+        <div className={styles.flex}>
+          <div className={styles.buttonWrapper}>
+            <Button
+              onClick={() => {
+                navigation(paths.MOUNTAIN_VERTIFY);
+              }}
+              variant="yellow"
+            >
+              내 인증 바로가기
+            </Button>
+          </div>
           <div className={styles.sectionWrapper}>
-            <div className={styles.toggleWrapper}>
-              <Toggle />
-            </div>
             <SectionTitle
-              title="신규 모임"
-              subtitle="현재 진행중인 모임을 확인해보세요."
-              targetPageUrl={paths.GATHERING}
+              title="챌린지 둘러보기"
+              subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
+              targetPageUrl={paths.CHALLENGE}
             />
-            <MeetingList meetings={meetings} />
+            <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} />
+          </div>
+          <div>
+            <div className={styles.sectionWrapper}>
+              {/* 김경혜 
+              <div className={styles.toggleWrapper}>
+                <Toggle />
+              </div> */}
+              <SectionTitle
+                title="신규 모임 🙌"
+                subtitle="현재 진행중인 모임을 확인해보세요."
+                targetPageUrl={paths.GATHERING}
+              />
+              <MeetingList meetings={meetings} />
+            </div>
+          </div>
+          <div>
+            <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" targetPageUrl={paths.RANK} />
+            <UserRankList ranks={ranks} />
           </div>
         </div>
-        <div>
-          <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" targetPageUrl={paths.RANK} />
-          <UserRankList ranks={ranks} />
-        </div>
       </div>
-    </div>
+    </>
   );
 }
