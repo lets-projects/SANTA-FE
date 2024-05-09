@@ -9,7 +9,7 @@ interface Meetings {
 
 export default function MainMeetingList({ meetings }: Meetings) {
   const navigation = useNavigate();
-  console.log('meetings ', meetings);
+
   return (
     <div>
       {meetings.map((meeting: Meeting) => (

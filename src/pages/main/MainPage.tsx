@@ -25,10 +25,10 @@ export default function Main() {
   if (!meetings || !ranks || !challenges) return <>Loading...</>;
   return (
     <>
-      <div className={styles.bannerWrapper}>
-        <SliderBannerImg />
-      </div>
       <div className={styles.container}>
+        <div className={styles.bannerWrapper}>
+          <SliderBannerImg />
+        </div>
         <div className={styles.flex}>
           <div className={styles.buttonWrapper}>
             <Button

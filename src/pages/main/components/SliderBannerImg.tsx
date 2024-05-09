@@ -46,7 +46,7 @@ const SliderBannerImg = () => {
       <div className={styles.bannerContainer} ref={slideRef}>
         <div className={styles.sliderBox} ref={boxRef}>
           {_imageSrcArray.map((src, _index) => (
-            <img src={`${_path}/${src}`} className={styles.bannerImage} />
+            <img src={`${_path}/${src}`} className={styles.bannerImage} key={src} />
           ))}
         </div>
       </div>
