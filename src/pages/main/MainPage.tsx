@@ -29,7 +29,7 @@ export default function Main() {
       <div className={styles.container}>
         <div className={styles.flex}>
           <div className={styles.buttonWrapper}>
-            <Button onClick={() => {}} variant="yellow">
+            <Button onClick={() => { }} variant="yellow">
               내 인증 바로가기
             </Button>
           </div>
@@ -39,7 +39,7 @@ export default function Main() {
               subtitle="업적을 달설할 수 있는 챌린지를 확인해보세요!"
               targetPageUrl={paths.CHALLENGE}
             />
-            <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} />
+            <Thumbnail data={challenges} isHotTopic={true} isIndexChip={true} challengeLink='/challenge' />
           </div>
           <div>
             <div className={styles.sectionWrapper}>
