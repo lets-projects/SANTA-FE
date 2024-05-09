@@ -86,7 +86,8 @@ export default function Navigation({ back }: { back: boolean }) {
             {isAdmin && (
               <button
                 onClick={() => {
-                  navigation('/관리자 페이지');
+                  setIsOpen(!isOpen);
+                  navigation(paths.ADMIN);
                 }}
               >
                 관리자 페이지
