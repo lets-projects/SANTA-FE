@@ -6,7 +6,7 @@ stages:
 build:
   stage: build
   only:
-    - main
+    - dev
   cache:
     key:
       files:
@@ -32,7 +32,7 @@ deploy-to-s3:
   script:
     - aws s3 sync public/ s3://santa-front/
   only:
-    - main
+    - dev
   when: manual
 
 purge:
@@ -41,5 +41,5 @@ purge:
   script:
     - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DIST_ID --paths "/*"
   only:
-    - main
+    - dev
   when: manual
