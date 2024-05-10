@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { VertifyMountain, getMyMountains } from '/src/services/mountainAPi';
+import { getMyMountains } from '/src/services/mountainAPi';
 
 import { PiMedal } from 'react-icons/pi';
 import styles from './Achievements.module.scss';
