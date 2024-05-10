@@ -28,7 +28,6 @@ function LoginPage() {
 
   const onSubmit = (loginData: LoginData) => {
     mutate(loginData);
-    console.log(loginData);
   };
 
   const { mutate, isError } = useMutation({
@@ -110,7 +109,13 @@ function LoginPage() {
         </div>
 
         <div className={styles.bottom}>
-          <img className={styles.logo} src={logo} />
+          <img
+            className={styles.logo}
+            src={logo}
+            onClick={() => {
+              navigate(paths.HOME);
+            }}
+          />
         </div>
       </div>
     </div>

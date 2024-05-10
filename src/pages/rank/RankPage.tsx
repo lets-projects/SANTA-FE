@@ -56,6 +56,8 @@ export default function RankPage() {
     }
   }, [fetchData]);
 
+  console.log(fetchData);
+
   if (!top3Rank) return <>Loading...</>;
 
   return (
@@ -64,7 +66,7 @@ export default function RankPage() {
         <div className={styles.titleWrapper}>
           <p className={styles.title}>랭킹🏅</p>
           <div className={styles.subtitleWrapper}>
-            <p className={styles.subtitle}>이달의 랭킹을 확인해보세요. 랭킹은 매달 1일 초기화됩니다.</p>
+            <p className={styles.subtitle}>이달의 랭킹을 확인해보세요.</p>
           </div>
         </div>
         <Top3UserRank top3users={top3Rank} />
@@ -87,9 +89,9 @@ export default function RankPage() {
         </div>
         <div className={styles.userRankListWrapper}>
           {ranks ? (
-            <>
+            <div className={styles.li}>
               {ranks?.map((user) => (
-                <div className={styles.userRankItem} key={user.id}>
+                <div className={styles.userRankItem} key={`${user.id}-${user.score}`}>
                   <div className={styles.rankWrapper}>
                     <div className={styles.userRank}>{user.rank}</div>
                     <div className={styles.profileImgWrapper}>
@@ -100,7 +102,7 @@ export default function RankPage() {
                   <div className={styles.userScore}>{user.score}</div>
                 </div>
               ))}
-            </>
+            </div>
           ) : (
             <>조회할 유저가 없습니다.</>
           )}

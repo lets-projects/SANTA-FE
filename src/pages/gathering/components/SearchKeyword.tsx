@@ -1,5 +1,5 @@
 import { Chips } from '../../../components/common/Chips';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import styles from '../../../styles/gathering/gatheringSearch.module.scss';
 // import { useQuery } from '@tanstack/react-query';

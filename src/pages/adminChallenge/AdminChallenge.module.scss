@@ -166,10 +166,20 @@
     align-items: center;
     justify-content: center;
 
+    width: 120px;
+    height: 120px;
     padding-bottom: 10px;
+
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
   }
   .inputImg {
-    width: 50%;
+    width: 90%;
+    height: 90%;
     margin-bottom: 10px;
   }
   .inputName {
@@ -193,6 +203,9 @@
 
     background-color: #f9f9f9;
   }
+  .textInputCintainer {
+    padding-top: 10px;
+  }
 }
 
 .addInputContainer {
@@ -205,4 +218,9 @@
   .label {
     @include font-body2;
   }
+}
+
+.categoryLabel {
+  @include font-body2;
+  padding-bottom: 5px;
 }
