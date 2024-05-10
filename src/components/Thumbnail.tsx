@@ -1,6 +1,8 @@
 import IssueChip from './IssueChip';
 import styles from '../styles/components/thumbnail.module.scss';
 import { ThumbnailChallenge } from '../services/challengeApi';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '../utils/path';
 
 interface ThumbnailItems extends ThumbnailChallenge {}
 interface ThumbnailProps {
@@ -9,10 +11,17 @@ interface ThumbnailProps {
   isIndexChip: boolean;
 }
 export default function Thumbnail({ data, isHotTopic, isIndexChip }: ThumbnailProps) {
+  const navigation = useNavigate();
   return (
     <div className={styles.thumbnailContainer}>
       {data.map((item, index) => (
-        <div className={styles.thumbnailItemBox} key={item.id}>
+        <div
+          className={styles.thumbnailItemBox}
+          key={item.id}
+          onClick={() => {
+            navigation(`${paths.CHALLENGE_DETAIL}?id=${item.id}`);
+          }}
+        >
           {isIndexChip && (
             <div className={styles.badgeContainer}>
               {/* <img src="images/thumbnail-label.png" alt={`${index + 1}`} className={styles.indexBadge} /> 김경혜*/}

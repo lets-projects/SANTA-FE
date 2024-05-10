@@ -37,6 +37,7 @@ import EditChallengePage from './pages/adminChallenge/EditChallengePage';
 import OauthRedirectPage from './pages/login/OauthRedirectPage';
 import MountainPage from './pages/mountain/MountainPage';
 import MountainDetailPage from './pages/mountain/MountainDetailPage';
+import ChallengeDetailPage from './pages/challenge/ChallengeDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
         children: [
           //role이 user인 경우에만 접근 가능
           { path: paths.CHALLENGE, element: <ChallengePage /> },
+          { path: paths.CHALLENGE_DETAIL, element: <ChallengeDetailPage /> },
           { path: paths.CATEGORY, element: <CategoryPage /> },
           { path: paths.TROPHY, element: <TrophyPage /> },
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
