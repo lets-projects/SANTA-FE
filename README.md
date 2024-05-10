@@ -5,7 +5,7 @@
 - 다양한 종류의 챌린지를 통해 나의 업적을 기록해 보세요
 - 내 순위를 확인하고, 다른 사용자들과 겨뤄보세요.
 
-![스크린샷 2024-04-15 오전 10.59.33.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/d85fd78d-de88-4966-9b27-62e3e2e8c2a0/40f99ae7-a2e5-486f-acdc-d98c283b078d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-15_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_10.59.33.png)
+![산타로고](https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team02/santa__front/uploads/dc801ba523de5ecdfa288ded03778468/image.png)
 
 ## 실행 방법
 
@@ -159,3 +159,15 @@ npm run dev
 - 프론트엔드 : 리액트, Zustand, TanStack Query, SCSS, Husky, Gitlab CI/CD, React-hook-form
 - 백엔드: SpringBoot, SpringSecurity, JPA ,MySQL, Postman, JAVA 17, open jdk, jwt
 - 서버 : 도커, Nginx, Jenkins , AWS EC2 ,RDS, S3, ElastiCache
+
+## 역할담당
+| 훈련생 | 역할 | 담당업무 |
+| --- | --- | --- |
+| 옥찬혁 | 팀장 <br> 백엔드 |- 챌린지 <br> - 정상 인증 <br> - 랭킹 <br>- AOP 로깅 <br>- Jenkins |
+| 나정균 | 팀원<br> 백엔드 | - 유저<br>- 시큐리티<br>- Jenkins |
+| 민지원 | 팀원<br> 백엔드 | - 모임<br>- 카테고리<br>- 신고<br>- 이미지 업로드(S3)<br>- Docker<br>- Jenkins |
+| 김경혜 | 팀원<br> 프론트 |  |
+| 윤혜원 | 팀원<br> 프론트 |  |
+| 진채영 | 팀원<br> 프론트 |- husky를 통한 타입체커, lint체크 <br>- gitlab CI/CD 자동 배포<br>- Rank 페이지 api/UI<br>- Main 페이지 api/UI<br>- 관리자 챌린지 api crud |
+| 김정현 | 코치 | 주제 선정 피드백, 프로젝트 질의응답 |
+| 송재천 | 코치 | 주제 선정 피드백, 프로젝트 질의응답 |
