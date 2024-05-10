@@ -82,10 +82,6 @@ function AddChallenge({ setIsItPosting }: Props) {
     mutate();
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const getCategoryId = (name: string) => {
     for (let i = 0; i < CATEGORY.length; i++) {
       if (CATEGORY[i].name === name) {
