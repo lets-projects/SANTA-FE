@@ -3,7 +3,7 @@ import { TotalChallenge } from './challengeApi';
 
 export interface AddChallengeForm {
   name: string;
-  categoryId: string;
+  categoryName: string;
   description: string;
   clearStandard: number;
   imageFile: File;
@@ -28,13 +28,11 @@ export const addChallenge = async (addChallengeForm: AddChallengeForm) => {
     },
   };
   const res = await api.post(url, formdata, config);
-  console.log(res);
   return res;
 };
 
 export const getAllChallengList = async () => {
   const res = await api.get(url);
-  console.log(res.data.content);
   return res.data.content;
 };
 

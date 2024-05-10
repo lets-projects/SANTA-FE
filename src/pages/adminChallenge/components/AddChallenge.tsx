@@ -13,7 +13,7 @@ function AddChallenge({ setIsItPosting }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState('');
-  const [categoryId, setCategoryId] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>('');
   const [description, setDescription] = useState('');
   const [clearStandard, setClearStandard] = useState<number>(1);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -25,7 +25,7 @@ function AddChallenge({ setIsItPosting }: Props) {
     try {
       const res = await addChallenge({
         name,
-        categoryId,
+        categoryName,
         description,
         clearStandard,
         imageFile,
@@ -109,7 +109,7 @@ function AddChallenge({ setIsItPosting }: Props) {
             defaultValue="등산"
             onChange={(e) => {
               console.log(e.target.value);
-              setCategoryId(e.target.value);
+              setCategoryName(e.target.value);
             }}
           />
         </div>
