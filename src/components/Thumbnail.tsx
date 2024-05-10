@@ -9,19 +9,23 @@ interface ThumbnailProps {
   data: ThumbnailItems[];
   isHotTopic: boolean;
   isIndexChip: boolean;
+  gatheringLink?: string;
+  challengeLink?: string;
 }
-export default function Thumbnail({ data, isHotTopic, isIndexChip }: ThumbnailProps) {
-  const navigation = useNavigate();
+export default function Thumbnail({ data, isHotTopic, isIndexChip, gatheringLink, challengeLink }: ThumbnailProps) {
+  const navigate = useNavigate();
+  function handleThumbnailClick(id: number) {
+    if (gatheringLink) {
+      navigate(`/gathering/detail?meetingid=${id}`);
+    }
+    if (challengeLink) {
+      navigate(`${paths.CHALLENGE_DETAIL}?id=${id}`);
+    }
+  }
   return (
     <div className={styles.thumbnailContainer}>
       {data.map((item, index) => (
-        <div
-          className={styles.thumbnailItemBox}
-          key={item.id}
-          onClick={() => {
-            navigation(`${paths.CHALLENGE_DETAIL}?id=${item.id}`);
-          }}
-        >
+        <div className={styles.thumbnailItemBox} key={item.id}>
           {isIndexChip && (
             <div className={styles.badgeContainer}>
               {/* <img src="images/thumbnail-label.png" alt={`${index + 1}`} className={styles.indexBadge} /> 김경혜*/}
@@ -33,7 +37,7 @@ export default function Thumbnail({ data, isHotTopic, isIndexChip }: ThumbnailPr
               <IssueChip />
             </div>
           )}
-          <div className={styles.imgWrapper}>
+          <div className={styles.imgWrapper} onClick={() => handleThumbnailClick(item.id)}>
             <div className={styles.overlay}></div>
             <img className={styles.img} src={item.image} />
           </div>
