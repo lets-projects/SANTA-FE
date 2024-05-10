@@ -28,8 +28,8 @@ export function Top3Gatherings() {
     }, [top3Gatherings])
     return (
         <div className={styles.container}>
-            <div onClick={() => navigate('/gathering/participate')} className={styles.width100}>
-                <SectionTitle title="인기 모임" subtitle="참여중인 모임을 확인해보세요" isThereToggle={false} />
+            <div className={styles.width100}>
+                <SectionTitle title="인기 모임" subtitle="산타의 인기 모임을 확인해보세요" />
             </div>
             <Thumbnail data={thumbnails} isHotTopic={false} isIndexChip={false} gatheringLink='/gathering/detail?meetingId' />
         </div>
