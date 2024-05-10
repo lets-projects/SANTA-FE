@@ -45,7 +45,7 @@ export function GatheringList({
       className={styles.gatheringListContainer}
       ref={(_ref) => {
         if (isLast) {
-s          targetRef.current = _ref;
+          targetRef.current = _ref;
         }
       }}
       onClick={onClick}

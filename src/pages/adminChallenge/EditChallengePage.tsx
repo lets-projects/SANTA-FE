@@ -46,7 +46,7 @@ function EditChallengePage() {
   const queryClient = useQueryClient();
 
   /** update를 위한 useMutaion */
-  const { mutate: editMutation, data: updateData } = useMutation({
+  const { mutate: editMutation } = useMutation({
     mutationFn: updateChallenge,
     onSuccess: () => {
       alert('수정이 완료되었습니다.')

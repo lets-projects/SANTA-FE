@@ -5,7 +5,7 @@ import { ListComponent } from './components/ListComponent';
 import SectionTitle from '/src/components/SectionTitle';
 // import { SearchInput } from '/src/components/common/Input';
 import { addCategory, deleteCategoryList, editCategoryList, getCategoryList } from '/src/services/adminApi';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Input } from '/src/components/common/Input';
 import { FaPlus } from "react-icons/fa";
 import { EditBtn } from '/src/components/common/Button';
