@@ -48,13 +48,6 @@ const router = createBrowserRouter([
       //조건 없이 접근 가능
       { index: true, element: <MainPage /> },
       { path: paths.RANK, element: <RankPage /> },
-      { path: paths.GATHERING, element: <GatheringMainPage /> },
-      { path: paths.GATHERING_SEARCH, element: <GatheringSearchPage /> },
-      { path: paths.GATHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
-      { path: paths.GATHERING_DETAIL, element: <GatheringDetailPage /> },
-      { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
-      { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
-      { path: paths.GATHERING_POST, element: <PostPage /> },
       { path: paths.MOUNTAIN, element: <MountainPage /> },
       { path: paths.MOUNTAIN_DETAIL, element: <MountainDetailPage /> },
       {
@@ -68,6 +61,13 @@ const router = createBrowserRouter([
           { path: paths.MOUNTAIN_VERTIFY, element: <VertifyMountainPage /> },
           { path: paths.MOUNTAIN_RECORD, element: <RecordMountainPage /> },
           { path: paths.TROPHY, element: <TrophyPage /> },
+          { path: paths.GATHERING, element: <GatheringMainPage /> },
+          { path: paths.GATHERING_SEARCH, element: <GatheringSearchPage /> },
+          { path: paths.GATHERING_PARTICIPATE, element: <ParticipatingGroupPage /> },
+          { path: paths.GATHERING_DETAIL, element: <GatheringDetailPage /> },
+          { path: paths.GATHERING_DETAIL_EDIT, element: <GatheringDetailEditPage /> },
+          { path: paths.GATHERING_SEARCHRESULT, element: <GatheringSearchResultPage /> },
+          { path: paths.GATHERING_POST, element: <PostPage /> },
         ],
       },
       {
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
       {
         element: <PrivateAdminRoutes />,
         children: [
-          //role이 user이거나 guest인 경우 접근 가능
+          //role이 admin인 경우 접근
           { path: paths.ADMIN, element: <AdminMainPage /> },
           { path: paths.ADMIN_USER, element: <AdminUserPage /> },
           { path: paths.ADMIN_REPORT, element: <AdminReportPage /> },
