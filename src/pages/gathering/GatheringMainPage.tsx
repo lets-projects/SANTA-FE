@@ -9,7 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
 import { useEffect, useState } from 'react';
 import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
 // import Thumbnail from '/src/components/Thumbnail';
 import { MyGatherings } from './components/MyGatherings';
@@ -24,7 +24,6 @@ function GatheringMainPage() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
-  const queryClient = useQueryClient();
 
   //모임 목록 가져오기 
   const {
