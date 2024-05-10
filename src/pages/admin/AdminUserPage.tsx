@@ -21,7 +21,7 @@ export function AdminUserPage() {
         nickname: string;
         reportCount: number;
     }
-    const { data: userData, isSuccess, isFetched, isError } = useQuery({
+    const { data: userData, isFetched, isError } = useQuery({
         queryKey: ['userSearch', searchValue, page],
         queryFn: () => userSearchApi(searchValue, page, PAGE_SIZE),
         select: (data) => {
