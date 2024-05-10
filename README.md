@@ -155,15 +155,16 @@ npm run dev
             - 관리자는 등록한 챌린지를 삭제 할 수 있다.
 ## 프로젝트 구조 및 아키텍처
 ---
-![스크린샷_2024-05-11_오전_3.36.30](/uploads/71aea802f6dfa5b7f075ac997e9b6268/스크린샷_2024-05-11_오전_3.36.30.png)
+![아키텍처](https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team02/santa__front/uploads/23272b0052abda16e4bf936326657c0c/image.png)
 
 ## ERD
 ---
-![스크린샷_2024-05-11_오전_3.39.04](/uploads/82e034565814eda95f48849f43cbd125/스크린샷_2024-05-11_오전_3.39.04.png)
+![erd](https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team02/santa__back/uploads/82e034565814eda95f48849f43cbd125/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-05-11_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_3.39.04.png)
 
 ## 플로우차트
 ---
-![스크린샷_2024-05-11_오전_3.41.00](/uploads/aef3a700a86ae7adb3e6ec9057c1cecb/스크린샷_2024-05-11_오전_3.41.00.png)
+![플로우차트](https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team02/santa__front/uploads/ce581360cc46b04d3d9c321707c62ee7/image.png)
+
 
 ## 와이어프레임
 ---
