@@ -4,16 +4,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addChallenge } from '/src/services/adminChallengesApi';
 import { GatheringCategorySelectBox } from '../../gathering/components/GatheringCategorySelectBox';
 
-const CATEGORY = [
-  { id: 1, name: '등산' },
-  { id: 2, name: '기타' },
-  { id: 3, name: '힐링' },
-  { id: 4, name: '식도락' },
-  { id: 5, name: '정상깨기' },
-  { id: 6, name: '백패킹' },
-  { id: 7, name: '출사' },
-];
-
 type Props = {
   setIsItPosting: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -23,7 +13,7 @@ function AddChallenge({ setIsItPosting }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState('');
-  const [categoryId, setCategoryId] = useState<number>(1);
+  const [categoryId, setCategoryId] = useState<string>('');
   const [description, setDescription] = useState('');
   const [clearStandard, setClearStandard] = useState<number>(1);
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -86,15 +76,6 @@ function AddChallenge({ setIsItPosting }: Props) {
     console.log(data);
   }, [data]);
 
-  const getCategoryId = (name: string) => {
-    for (let i = 0; i < CATEGORY.length; i++) {
-      if (CATEGORY[i].name === name) {
-        return CATEGORY[i].id;
-      }
-    }
-    return undefined;
-  };
-
   return (
     <div className={styles.addMiddle}>
       <div onClick={handleRefClick} className={styles.imgContainer}>
@@ -127,9 +108,8 @@ function AddChallenge({ setIsItPosting }: Props) {
           <GatheringCategorySelectBox
             defaultValue="등산"
             onChange={(e) => {
-              const categoryId = getCategoryId(e.target.value);
-              //@ts-ignore 김경혜...33
-              setCategoryId(categoryId);
+              console.log(e.target.value);
+              setCategoryId(e.target.value);
             }}
           />
         </div>
