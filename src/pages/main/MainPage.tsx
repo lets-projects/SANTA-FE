@@ -37,7 +37,7 @@ export default function Main() {
     preferCategory.length == 0 && navigation(paths.CATEGORY);
   }
 
-  // if (!meetings && !ranks && !challenges) return <div>Loading...</div>;
+  if (!meetings || !ranks || !challenges) return <>Loading...</>;
   return (
     <>
       <div className={styles.container}>
@@ -78,12 +78,12 @@ export default function Main() {
                 subtitle="현재 진행중인 모임을 확인해보세요."
                 targetPageUrl={paths.GATHERING}
               />
-              {meetings && <MeetingList meetings={meetings} />}
+              <MeetingList meetings={meetings} />
             </div>
           </div>
           <div>
             <SectionTitle title="랭킹🏅" subtitle="이달의 랭킹을 확인해보세요!" targetPageUrl={paths.RANK} />
-            {ranks && <UserRankList ranks={ranks} />}
+            <UserRankList ranks={ranks} />
           </div>
         </div>
       </div>
