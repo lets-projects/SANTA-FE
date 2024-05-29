@@ -13,6 +13,7 @@ import { useCategoryStore } from '/src/store/store';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';
+import { Alert } from '/src/components/common/Alert';
 
 const PAGE_SIZE = 10;
 
@@ -59,6 +60,7 @@ function GatheringMainPage() {
 
   return (
     <div className={styles.gatheringContainer}>
+      <Alert variant="info">오류메세지가 길어지면 어떻게 될까~~~~~~~~~~~~</Alert>
       <div className={styles.container}>
         <div className={styles.profileContainer}>
           <UserProfile_small name={currentUserInfo?.nickname} imageUrl={currentUserInfo?.image} />
