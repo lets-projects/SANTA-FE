@@ -37,6 +37,7 @@ export default function Main() {
     preferCategory.length == 0 && navigation(paths.CATEGORY);
   }
 
+  //김경혜 - 메인페이지 안보이는 오류 수정
   // if (!meetings && !ranks && !challenges) return <div>Loading...</div>;
   return (
     <>
