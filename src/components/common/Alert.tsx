@@ -4,11 +4,25 @@ import { RiInformationLine } from 'react-icons/ri';
 import { RiCheckboxCircleLine } from 'react-icons/ri';
 
 import alert from '../../styles/components/common/alert.module.scss';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 type Props = {
   variant: 'error' | 'info' | 'success';
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 };
-export function Alert({ variant, children }: PropsWithChildren<Props>) {
+export function Alert({ variant, children, isOpen, setIsOpen }: PropsWithChildren<Props>) {
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        setIsOpen(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, setIsOpen]);
+
+  if (!isOpen) {
+    return null;
+  }
   return (
     <div className={`${alert.container} ${alert[variant]}`}>
       <div className={alert.icon}>
@@ -17,7 +31,7 @@ export function Alert({ variant, children }: PropsWithChildren<Props>) {
         {variant === 'success' && <RiCheckboxCircleLine size={'100%'} />}
       </div>
       <div className={alert.text}>{children}</div>
-      <div className={alert.close}>
+      <div className={alert.close} onClick={() => setIsOpen(false)}>
         <IoCloseOutline size={'100%'} />
       </div>
     </div>

@@ -22,7 +22,10 @@ function GatheringMainPage() {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
-
+  const [isOpen, setIsOpen] = useState(false);
+  // const showAlert = () => {
+  //   setIsOpen(true);
+  // };
   //모임 목록 가져오기
   const {
     data: GatheringListByCategory,
@@ -60,7 +63,10 @@ function GatheringMainPage() {
 
   return (
     <div className={styles.gatheringContainer}>
-      <Alert variant="info">오류메세지가 길어지면 어떻게 될까~~~~~~~~~~~~</Alert>
+      {/* <button onClick={showAlert}>클릭</button> */}
+      <Alert variant="error" setIsOpen={setIsOpen} isOpen={isOpen}>
+        오류메세지
+      </Alert>
       <div className={styles.container}>
         <div className={styles.profileContainer}>
           <UserProfile_small name={currentUserInfo?.nickname} imageUrl={currentUserInfo?.image} />
