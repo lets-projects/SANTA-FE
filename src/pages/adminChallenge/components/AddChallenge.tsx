@@ -13,9 +13,9 @@ function AddChallenge({ setIsItPosting }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState('');
-  const [categoryName, setCategoryName] = useState<string>('');
+  const [categoryName, setCategoryName] = useState('');
   const [description, setDescription] = useState('');
-  const [clearStandard, setClearStandard] = useState<number>(1);
+  const [clearStandard, setClearStandard] = useState(1);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
@@ -107,7 +107,6 @@ function AddChallenge({ setIsItPosting }: Props) {
           <label className={styles.categoryLabel}>카테고리 명</label>
           <GatheringCategorySelectBox
             onChange={(e) => {
-              console.log(e.target.value);
               setCategoryName(e.target.value);
             }}
           />

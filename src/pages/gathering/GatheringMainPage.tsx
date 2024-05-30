@@ -4,28 +4,29 @@ import { UserProfile_small } from '../../components/common/UserProfile_small';
 import { IoSearch } from 'react-icons/io5';
 import { Button } from '../../components/common/Button';
 import styles from '../../styles/gathering/gatheringMain.module.scss';
-// import Thumbnail from '../../components/Thumbnail';
 import { Link, useNavigate } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
 import { useEffect, useState } from 'react';
 import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
 import { useCategoryStore } from '/src/store/store';
-// import Thumbnail from '/src/components/Thumbnail';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';
-// import { useCategoryList } from '/src/utils/useCategoryList';
+import { Alert } from '/src/components/common/Alert';
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 10;
 
 function GatheringMainPage() {
   const { category } = useCategoryStore();
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
-
-  //모임 목록 가져오기 
+  const [isOpen, setIsOpen] = useState(false);
+  // const showAlert = () => {
+  //   setIsOpen(true);
+  // };
+  //모임 목록 가져오기
   const {
     data: GatheringListByCategory,
     isFetched,
@@ -41,29 +42,31 @@ function GatheringMainPage() {
     },
   });
 
-
   useEffect(() => {
     setGatheringList([]);
     setPage(0);
+    // queryClient.invalidateQueries({ queryKey: ['gatheringListByCategory', page, category], });
   }, [category]);
-
 
   useEffect(() => {
     const isSuccess = isFetched && !isError;
 
     if (isSuccess && GatheringListByCategory) {
       if (page === 0) {
-        setGatheringList([...GatheringListByCategory.content]);
-
+        setGatheringList([...GatheringListByCategory?.content]);
       } else {
-        setGatheringList((prevList) => [...prevList, ...GatheringListByCategory.content]);
+        setGatheringList((prevList) => [...prevList, ...GatheringListByCategory?.content]);
       }
     }
-  }, [isFetched, isError, GatheringListByCategory]);
+  }, [isFetched, isError, GatheringListByCategory, category]);
   const currentUserInfo = useUserInfo((data) => data);
 
   return (
     <div className={styles.gatheringContainer}>
+      {/* <button onClick={showAlert}>클릭</button> */}
+      <Alert variant="error" setIsOpen={setIsOpen} isOpen={isOpen}>
+        오류메세지
+      </Alert>
       <div className={styles.container}>
         <div className={styles.profileContainer}>
           <UserProfile_small name={currentUserInfo?.nickname} imageUrl={currentUserInfo?.image} />
@@ -97,11 +100,9 @@ function GatheringMainPage() {
                   attendance: item.participants.length,
                   date: item.date,
                 }}
-
-
                 isLast={
                   GatheringListByCategory &&
-                  GatheringListByCategory?.totalPage >= page &&
+                  GatheringListByCategory?.totalPage > page &&
                   gatheringList.length === index + 1
                 }
                 setPage={setPage}
@@ -112,7 +113,7 @@ function GatheringMainPage() {
           {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
