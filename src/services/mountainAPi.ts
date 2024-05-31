@@ -1,4 +1,3 @@
-import { verifySchema } from '../pages/user/find/findUserSchema';
 import { api } from './api';
 
 interface MountainListResponse {
