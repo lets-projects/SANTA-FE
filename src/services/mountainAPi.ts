@@ -1,3 +1,4 @@
+import { verifySchema } from '../pages/user/find/findUserSchema';
 import { api } from './api';
 
 interface MountainListResponse {
@@ -65,6 +66,14 @@ export interface MountainDetail {
   transportation: string;
 }
 
+interface verifyMountain {
+  climbDate: string;
+  id: number;
+  mountainHeight: number;
+  mountainLocation: string;
+  mountainName: string;
+}
+
 export const getAllMountains = async (page?: number, size?: number) => {
   return await api.get<MountainListResponse>(`mountains?page=${page}&size=${size}`);
 };
@@ -74,7 +83,7 @@ export const getMountainDetail = async (id: number) => {
 };
 
 export const postVertifyMountain = async (vertifyMountainData: VertifyData) => {
-  return await api.post('mountains/verify', vertifyMountainData);
+  return await api.post<verifyMountain>('mountains/verify', vertifyMountainData);
 };
 
 export const getMyMountains = async () => {
