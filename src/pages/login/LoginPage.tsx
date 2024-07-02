@@ -14,7 +14,7 @@ import { postUserLogin } from '../../services/userApi';
 import { paths } from '/src/utils/path';
 import { loginSchema } from './loginSchema';
 import { LoginData } from '../../services/userApi';
-import { KAKAO_AUTH_URL } from '/src/utils/oauth';
+import { GOOGLE_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL } from '/src/utils/oauth';
 import { getVaildTime } from '/src/services/auth';
 
 function LoginPage() {
@@ -103,13 +103,13 @@ function LoginPage() {
               <div className={styles.line}></div>
             </div>
             <div className={styles.socialLoginIcon}>
-              <Link to={'/'}>
+              <Link to={GOOGLE_AUTH_URL}>
                 <img src={googleLogo} />
               </Link>
               <Link to={KAKAO_AUTH_URL}>
                 <img src={kakaoLogo} />
               </Link>
-              <Link to={'/'}>
+              <Link to={NAVER_AUTH_URL}>
                 <img src={naverLogo} />
               </Link>
             </div>

@@ -63,7 +63,7 @@ export interface UserRank {
 }
 
 export interface KakaoCode {
-  authorizationCode: string;
+  authorizationCode: string | null;
 }
 
 export interface kakaoLoginData {
