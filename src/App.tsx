@@ -110,6 +110,7 @@ const router = createBrowserRouter([
       { path: paths.LOGIN, element: <LoginPage /> },
       { path: paths.OAUTH_KAKAO, element: <OauthRedirectPage /> },
       { path: paths.OAUTH_GOOGLE, element: <OauthRedirectPage /> },
+      { path: paths.OAUTH_NAVER, element: <OauthRedirectPage /> },
     ],
   },
 ]);

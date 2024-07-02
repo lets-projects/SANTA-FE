@@ -36,6 +36,11 @@ export default function OauthRedirectPage() {
       console.log(socialName);
       console.log(code);
     }
+
+    if (code && socialName == 'naver') {
+      console.log(socialName);
+      console.log(code);
+    }
   }, [code]);
 
   return (
