@@ -11,7 +11,7 @@ export default function OauthRedirectPage() {
   const code = new URL(window.location.href).searchParams.get('code');
   const socialName = window.location.pathname.replace('/oauth/', '');
 
-  const { mutate } = useMutation({
+  const { mutate: kakaoLogin } = useMutation({
     mutationFn: (postData: KakaoCode) => postKakaoCode(postData),
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.data.accessToken);
@@ -20,24 +20,29 @@ export default function OauthRedirectPage() {
       navigate(paths.HOME);
     },
     onError: () => {
+      alert('다시 시도 해 주세요.');
       navigate(paths.LOGIN);
     },
   });
 
   useEffect(() => {
-    if (code && socialName == 'kakao') {
+    if (!code) {
+      return;
+    }
+
+    if (socialName == 'kakao') {
       const postData = {
         authorizationCode: code,
       };
-      return mutate(postData);
+      return kakaoLogin(postData);
     }
 
-    if (code && socialName == 'google') {
+    if (socialName == 'google') {
       console.log(socialName);
       console.log(code);
     }
 
-    if (code && socialName == 'naver') {
+    if (socialName == 'naver') {
       console.log(socialName);
       console.log(code);
     }
