@@ -7,7 +7,9 @@ import { paths } from '/src/utils/path';
 
 export default function OauthRedirectPage() {
   const navigate = useNavigate();
+
   const code = new URL(window.location.href).searchParams.get('code');
+  const socialName = window.location.pathname.replace('/oauth/', '');
 
   const { mutate } = useMutation({
     mutationFn: (postData: KakaoCode) => postKakaoCode(postData),
@@ -23,13 +25,29 @@ export default function OauthRedirectPage() {
   });
 
   useEffect(() => {
-    if (code) {
+    if (code && socialName == 'kakao') {
       const postData = {
         authorizationCode: code,
       };
       return mutate(postData);
     }
+
+    if (code && socialName == 'google') {
+      console.log(socialName);
+      console.log(code);
+    }
   }, [code]);
 
-  return <></>;
+  return (
+    <>
+      {code && socialName ? (
+        <div>
+          <div>소셜 이름 : {socialName}</div>
+          <div>인가코드 : {code}</div>
+        </div>
+      ) : (
+        <div>뭔가 에러생김</div>
+      )}
+    </>
+  );
 }
