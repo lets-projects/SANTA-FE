@@ -108,6 +108,7 @@ function GatheringMainPage() {
                 }
                 setPage={setPage}
                 onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
+                state='default'
               />
             </div>
           ))}

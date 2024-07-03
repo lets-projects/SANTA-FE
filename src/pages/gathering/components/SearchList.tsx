@@ -94,6 +94,7 @@ export function SearchList({ gatheringData }: { gatheringData: gatheringDataType
               date: item.date,
             }}
             onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
+            state='default'
           />
         </div>
       ))}

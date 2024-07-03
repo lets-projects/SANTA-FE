@@ -7,6 +7,7 @@ import styles from './Achievements.module.scss';
 import mountain from '/images/mountain.png';
 import { paths } from '/src/utils/path';
 import useUserInfo from '/src/hooks/useUserInfo';
+import { Button } from '/src/components/common/Button';
 
 export default function AchievementsBox() {
   const userInfo = useUserInfo();
@@ -43,14 +44,16 @@ export default function AchievementsBox() {
         <p>{isSuccess ? myMountains.length : 0} 개</p>
       </div>
       <div className={styles.btnContainer}>
-        <button
-          className={styles.certificationBtn}
-          onClick={() => {
-            navigation(paths.MOUNTAIN_VERTIFY);
-          }}
-        >
-          인증하러 가기
-        </button>
+        
+        <Button
+        onClick={() => {
+          navigation(paths.MOUNTAIN_VERTIFY);
+        }}
+        size='fluent'
+        color='primary'
+        variant='rounded'
+        
+        >인증하러 가기</Button>
         <div className={styles.imgContainer}>
           <img className={styles.mountainImg} src={mountain} />
         </div>

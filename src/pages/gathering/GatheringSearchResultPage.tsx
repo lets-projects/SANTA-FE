@@ -140,6 +140,7 @@ export function GatheringSearchResultPage() {
                 isLast={gatheringList && gatheringList?.totalPage > page && searchLists.length === index + 1}
                 setPage={setPage}
                 onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
+                state='default'
               />
             </div>
           ))}
