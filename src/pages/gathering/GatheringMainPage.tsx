@@ -79,7 +79,7 @@ function GatheringMainPage() {
           </Link>
         </div>
         <Link to={'/gathering/post'} className={styles.width100}>
-          <Button variant="green3">모임 만들기</Button>
+          <Button variant="rectangular" color='primary' size='large'>모임 만들기</Button>
         </Link>
       </div>
       <MyGatherings />

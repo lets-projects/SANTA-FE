@@ -51,7 +51,9 @@ export default function Main() {
               onClick={() => {
                 navigation(paths.MOUNTAIN_VERTIFY);
               }}
-              variant="yellow"
+              color="danger"
+              size='fluent'
+              variant='rounded'
             >
               내 인증 바로가기
             </Button>

@@ -47,7 +47,9 @@ export default function ProfilePage() {
           <div className={styles.userName}>{isUser ? userInfo?.nickname : '프로필 정보를 추가해주세요!'}</div>
           <div className={styles.btn}>
             <Button
-              variant={'rounded-outline'}
+              variant='outlined'
+              size='fluent'
+              color='none'
               children={isUser ? '프로필 수정' : '프로필 추가'}
               onClick={() => {
                 navigation(paths.PROFILE_EDIT);
