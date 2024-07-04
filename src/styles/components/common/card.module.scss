@@ -3,25 +3,24 @@
 
 // variant?: 'green1' | 'green2' | 'green3' | 'yellow' ;
 
-.card{
-    width:20.8rem;
-    height:8.8rem;
-    background-color: gray;
-    border-radius: 0.6rem;
-    @include flex-center-col;
-    @include font-body1;
+.card {
+  width: 20.8rem;
+  height: 8.8rem;
+  background-color: gray;
+  border-radius: 0.6rem;
+  @include flex-center-col;
+  @include font-body1;
 }
-.green1{
-    background-color: #F5F7CE;
-    
+.green1 {
+  background-color: #f5f7ce;
 }
 
-.green2{
-    background-color: #EAEF9D;
+.green2 {
+  background-color: #eaef9d;
 }
-.green3{
-    background-color: #C1D95F;
+.green3 {
+  background-color: #c1d95f;
 }
-.yellow{
-    background-color: #FDE1A0;
+.yellow {
+  background-color: #fde1a0;
 }

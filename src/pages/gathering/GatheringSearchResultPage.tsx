@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getGatheringSearchResult } from '/src/services/gatheringApi';
 import { SearchNoResult } from './components/SearchNoResults';
 import { TitleContainer } from './components/TitleContainer';
-import { IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from 'react-icons/io5';
 import { GatheringList } from './components/GatheringList';
 import { isClosedGathering } from '/src/utils/isClosedGathering';
 import { GatheringListByCategory } from '/src/types/gatheringTypes';
+import FilterShowAndHide from './components/FilterShowAndHide';
 const PAGE_SIZE = 10;
 export function GatheringSearchResultPage() {
   const [searchParams] = useSearchParams();
@@ -77,19 +77,17 @@ export function GatheringSearchResultPage() {
     }
   }
 
-  function returnClassName(date: string) {
-    //작성자의 id와 모임장의 id가 같으면 styles.bgLightYellow
-
+  function returnState(date: string) {
     if (isClosedGathering(date)) {
+      console.log('모임생성날짜/참여중인 모임', date);
       //활동 완료된 모임 숨기기 버튼 클릭시 display:none
       if (!showInProgress) {
-        return `${styles.width100}`;
-      } else {
-        return `${styles.width100} ${styles.displayNone}`;
+        //종료된 모임 gray
+        return `completedGatherings`;
       }
-    } else {
-      return `${styles.width100}`;
     }
+
+    return 'default';
   }
 
   return (
@@ -99,16 +97,11 @@ export function GatheringSearchResultPage() {
       </div>
       {isNoResult && searchKeyword && <SearchNoResult keyword={searchKeyword} />}
       {searchLists && (
-        <div className={styles.containerCol}>
+        <div className={styles.gatheringListContainer}>
           <div className={styles.containerRow}>
-            <div className={`${styles.iconTextContainer} ${styles.pointer}`} onClick={clickShowInProgress}>
-              {showInProgress ? (
-                <IoCheckmarkCircleSharp color="#498428" />
-              ) : (
-                <IoCheckmarkCircleOutline color="#498428" />
-              )}
-              <div className={styles.body1}>모집중인 모임만 보기</div>
-            </div>
+            <FilterShowAndHide onClick={clickShowInProgress} isHide={showInProgress}>
+              모집중인 모임만 보기
+            </FilterShowAndHide>
             <div className={`${styles.filterContainer} ${styles.subtitle2}`}>
               <div
                 className={`${styles.pointer} ${sortByLatest ? styles.green3Font : ''}`}
@@ -125,7 +118,12 @@ export function GatheringSearchResultPage() {
             </div>
           </div>
           {searchLists.map((item, index) => (
-            <div key={item.meetingId} className={returnClassName(item.date)}>
+            <div
+              key={item.meetingId}
+              className={
+                isClosedGathering(item.date) && showInProgress ? `${styles.displayNone}` : `${styles.width100}`
+              }
+            >
               <GatheringList
                 gatheringInfo={{
                   title: item.meetingName,
@@ -140,7 +138,7 @@ export function GatheringSearchResultPage() {
                 isLast={gatheringList && gatheringList?.totalPage > page && searchLists.length === index + 1}
                 setPage={setPage}
                 onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
-                state='default'
+                state={returnState(item.date)}
               />
             </div>
           ))}

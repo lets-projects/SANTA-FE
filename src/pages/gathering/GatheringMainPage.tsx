@@ -9,32 +9,31 @@ import { GatheringCategory } from './components/GatheringCategory';
 import { useEffect, useState } from 'react';
 import { getGatheringListByCategory } from '/src/services/gatheringApi';
 import { useQuery } from '@tanstack/react-query';
-import { useCategoryStore } from '/src/store/store';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';
 import { Alert } from '/src/components/common/Alert';
-import { GatheringListByCategory } from '../../types/gatheringTypes';
+import { GatheringCategoryType, GatheringListByCategory } from '../../types/gatheringTypes';
 
 const PAGE_SIZE = 10;
 
 function GatheringMainPage() {
-  const { category } = useCategoryStore();
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  // const showAlert = () => {
-  //   setIsOpen(true);
-  // };
+
+  //선택된 카테고리 값을 저장하는 state
+  const [selectedCategory, setSelectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
+
   //모임 목록 가져오기
   const {
     data: GatheringListByCategory,
     isFetched,
     isError,
   } = useQuery({
-    queryKey: ['gatheringListByCategory', page, category],
-    queryFn: () => getGatheringListByCategory(category.name, page, PAGE_SIZE),
+    queryKey: ['gatheringListByCategory', page, selectedCategory],
+    queryFn: () => getGatheringListByCategory(selectedCategory.name, page, PAGE_SIZE),
     select: (data) => {
       return {
         content: data.data.content,
@@ -47,7 +46,7 @@ function GatheringMainPage() {
     setGatheringList([]);
     setPage(0);
     // queryClient.invalidateQueries({ queryKey: ['gatheringListByCategory', page, category], });
-  }, [category]);
+  }, [selectedCategory]);
 
   useEffect(() => {
     const isSuccess = isFetched && !isError;
@@ -59,7 +58,7 @@ function GatheringMainPage() {
         setGatheringList((prevList) => [...prevList, ...GatheringListByCategory?.content]);
       }
     }
-  }, [isFetched, isError, GatheringListByCategory, category]);
+  }, [isFetched, isError, GatheringListByCategory, selectedCategory]);
   const currentUserInfo = useUserInfo((data) => data);
 
   return (
@@ -86,7 +85,7 @@ function GatheringMainPage() {
       <Top3Gatherings />
       <div className={`${styles.container} ${styles.gap}`}>
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
-        <GatheringCategory />
+        <GatheringCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         <div className={styles.gatheringList}>
           {gatheringList?.map((item: GatheringListByCategory, index) => (
             <div key={`${item.meetingId}-${item.leaderId}-${index}`}>

@@ -3,127 +3,125 @@
 @import '../reset';
 
 .gatheringContainer {
-    @include flex-center-col;
-    justify-content: start;
-    @include setting;
-    margin-bottom: 5rem;
-    // height:100vh;
-    
+  @include flex-center-col;
+  justify-content: start;
+  @include setting;
+  margin-bottom: 5rem;
+  // height:100vh;
 }
 
 .container {
-    width: 100%;
-    // height:7.3rem;
-    @include flex-between-col;
-    margin: 2rem 0;
-    .profileHeight {
-        height: 7.3rem;
-    }
+  width: 100%;
+  // height:7.3rem;
+  @include flex-between-col;
+  margin: 2rem 0;
+  .profileHeight {
+    height: 7.3rem;
+  }
 }
 
 .profileContainer {
-    @include flex-between-row;
-    width: 100%;
-    margin: 1rem 0;
+  @include flex-between-row;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .searchBtn {
-    @include flex-center-row;
-    @include font-body1;
-    color: $green3;
-    border-radius: 1.2rem;
-    border: 0.1rem solid $green3;
-    padding: 0.5rem 1rem;
-    gap: 0.2rem;
-    cursor: pointer;
+  @include flex-center-row;
+  @include font-body1;
+  color: $green3;
+  border-radius: 1.2rem;
+  border: 0.1rem solid $green3;
+  padding: 0.5rem 1rem;
+  gap: 0.2rem;
+  cursor: pointer;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .gap {
-    gap: 1rem;
+  gap: 1rem;
 }
 
 .width100 {
-    width: 100%;
-    @extend a;
+  width: 100%;
+  @extend a;
 }
-.gatheringListContainer{
-    width:100%;
-    text-decoration:none;
-
+.gatheringListContainer {
+  width: 100%;
+  text-decoration: none;
 }
 .titleContainer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
-    .title {
-        margin: 0 auto;
-        @include font-title;
-        color: $green3;
-    }
+  .title {
+    margin: 0 auto;
+    @include font-title;
+    color: $green3;
+  }
 }
 
 .backBtn {
-    cursor: pointer;
-    // margin-right:auto;
+  cursor: pointer;
+  // margin-right:auto;
 }
 
-.iconTextContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0 0.2rem;
-    gap: 0.3rem;
-    @include font-body1;
-    color: $green3;
-}
+// .iconTextContainer {
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     width: 100%;
+//     padding: 0 0.2rem;
+//     gap: 0.3rem;
+//     @include font-body1;
+//     color: $green3;
+// }
 
 .bgLightYellow {
-    background-color: #F5F7CE;
+  background-color: #f5f7ce;
 }
 
 .bgLightGreen {
-    background-color: #EAEF9D;
+  background-color: #eaef9d;
 }
 
 .bgGray {
-    background-color: $gray1;
+  background-color: $gray1;
 }
 
 .borderRadius {
-    border-radius: 1rem;
+  border-radius: 1rem;
 }
 
 .padding {
-    padding: 0.2rem 1rem;
+  padding: 0.2rem 1rem;
 }
 
 .gatheringList {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .target {
-    background-color: red;
-    height: 10rem;
-    width: 10rem;
+  background-color: red;
+  height: 10rem;
+  width: 10rem;
 }
 
 .displayNone {
-    display: none;
+  display: none;
 }
 
 .noGatheringText {
-    text-align: center;
-    @include font-body1;
-    padding: 1rem;
-    line-height: 1rem;
-    color: $gray2;
+  text-align: center;
+  @include font-body1;
+  padding: 1rem;
+  line-height: 1rem;
+  color: $gray2;
 }

@@ -1,6 +1,5 @@
 import styles from '../../styles/gathering/gatheringMain.module.scss';
-import { IoCheckmarkCircleOutline } from 'react-icons/io5';
-import { IoCheckmarkCircleSharp } from 'react-icons/io5';
+
 import { useEffect, useState } from 'react';
 import { GatheringList } from './components/GatheringList';
 import { TitleContainer } from './components/TitleContainer';
@@ -11,6 +10,7 @@ import { useUserInfo } from '/src/utils/useUserInfo';
 import { compareUserAndLeader } from '/src/utils/compareUserAndLeader';
 import { isClosedGathering } from '/src/utils/isClosedGathering';
 import { GatheringListByCategory } from '/src/types/gatheringTypes';
+import FilterShowAndHide from './components/FilterShowAndHide';
 const PAGE_SIZE = 10;
 
 export function ParticipatingGroupPage() {
@@ -57,15 +57,14 @@ export function ParticipatingGroupPage() {
     setShowInProgress(!showInProgress);
   }
 
-
-  function returnState(leaderId:number,date:string){
+  function returnState(leaderId: number, date: string) {
     if (isClosedGathering(date)) {
       console.log('모임생성날짜/참여중인 모임', date);
       //활동 완료된 모임 숨기기 버튼 클릭시 display:none
       if (!showInProgress) {
         //종료된 모임 gray
         return `completedGatherings`;
-      } 
+      }
     } else {
       //작성자 == 모임장 이면 bgLightYellow
       if (compareUserAndLeader(currentUserId, 0, leaderId)) {
@@ -75,18 +74,24 @@ export function ParticipatingGroupPage() {
         return `attendingGatherings`;
       }
     }
-    return 'default'
+    return 'default';
   }
   return (
     <div className={styles.gatheringContainer}>
       <TitleContainer title="참여중인 모임" />
       <div className={`${styles.container} ${styles.gap}`}>
-        <div className={`${styles.iconTextContainer} ${styles.pointer}`} onClick={clickShowInProgress}>
-          {showInProgress ? <IoCheckmarkCircleSharp color="#498428" /> : <IoCheckmarkCircleOutline color="#498428" />}
-          <div className={styles.body1}>활동 완료된 모임 숨기기</div>
-        </div>
+        <FilterShowAndHide isHide={showInProgress} onClick={clickShowInProgress}>
+          활동 완료된 모임 숨기기
+        </FilterShowAndHide>
         {gatheringList?.map((item, index) => (
-          <div key={item.meetingId} className={showInProgress ? `${styles.displayNone}`:`${styles.gatheringListContainer}`}>
+          <div
+            key={item.meetingId}
+            className={
+              isClosedGathering(item.date) && showInProgress
+                ? `${styles.displayNone}`
+                : `${styles.gatheringListContainer}`
+            }
+          >
             <GatheringList
               gatheringInfo={{
                 title: item.meetingName,
@@ -101,7 +106,7 @@ export function ParticipatingGroupPage() {
               isLast={myGatherings && myGatherings?.totalPage > page && gatheringList.length === index + 1}
               setPage={setPage}
               onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
-              state={returnState(item.leaderId,item.date)}
+              state={returnState(item.leaderId, item.date)}
             />
           </div>
         ))}
