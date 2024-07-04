@@ -1,6 +1,5 @@
 import styles from '../../styles/gathering/gatheringMain.module.scss';
-import { IoCheckmarkCircleOutline } from 'react-icons/io5';
-import { IoCheckmarkCircleSharp } from 'react-icons/io5';
+
 import { useEffect, useState } from 'react';
 import { GatheringList } from './components/GatheringList';
 import { TitleContainer } from './components/TitleContainer';
@@ -11,6 +10,7 @@ import { useUserInfo } from '/src/utils/useUserInfo';
 import { compareUserAndLeader } from '/src/utils/compareUserAndLeader';
 import { isClosedGathering } from '/src/utils/isClosedGathering';
 import { GatheringListByCategory } from '/src/types/gatheringTypes';
+import FilterShowAndHide from './components/FilterShowAndHide';
 const PAGE_SIZE = 10;
 
 export function ParticipatingGroupPage() {
@@ -83,10 +83,9 @@ export function ParticipatingGroupPage() {
     <div className={styles.gatheringContainer}>
       <TitleContainer title="참여중인 모임" />
       <div className={`${styles.container} ${styles.gap}`}>
-        <div className={`${styles.iconTextContainer} ${styles.pointer}`} onClick={clickShowInProgress}>
-          {showInProgress ? <IoCheckmarkCircleSharp color="#498428" /> : <IoCheckmarkCircleOutline color="#498428" />}
-          <div className={styles.body1}>활동 완료된 모임 숨기기</div>
-        </div>
+        <FilterShowAndHide isHide={showInProgress} onClick={clickShowInProgress}>
+          활동 완료된 모임 숨기기
+        </FilterShowAndHide>
         {gatheringList?.map((item, index) => (
           <div key={item.meetingId} className={returnClassName(item.leaderId, item.date)}>
             <GatheringList

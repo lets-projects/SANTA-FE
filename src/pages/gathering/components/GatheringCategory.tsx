@@ -14,15 +14,15 @@ export function GatheringCategory({ selectedCategory, setSelectedCategory }: Gat
     <div className={styles.scrollContainer}>
       <div className={styles.categoryContainer}>
         {categoryList &&
-          [{ id: 0, name: '맞춤추천' }, ...categoryList].map((_category: GatheringCategoryType) => (
+          [{ id: 0, name: '맞춤추천' }, ...categoryList].map((category: GatheringCategoryType) => (
             <Chips
-              key={_category.id}
-              variant={`${_category.name == selectedCategory.name ? 'square-green3' : 'square-green2'}`}
+              key={category.id}
+              variant={`${category.name == selectedCategory.name ? 'square-green3' : 'square-green2'}`}
               onClick={() => {
-                setSelectedCategory({ id: _category.id, name: _category.name });
+                setSelectedCategory({ id: category.id, name: category.name });
               }}
             >
-              {_category.name}
+              {category.name}
             </Chips>
           ))}
       </div>

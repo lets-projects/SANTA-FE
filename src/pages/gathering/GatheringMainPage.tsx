@@ -26,9 +26,6 @@ function GatheringMainPage() {
   //선택된 카테고리 값을 저장하는 state
   const [selectedCategory, setSelectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
 
-  // const showAlert = () => {
-  //   setIsOpen(true);
-  // };
   //모임 목록 가져오기
   const {
     data: GatheringListByCategory,
