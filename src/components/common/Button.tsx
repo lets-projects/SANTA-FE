@@ -2,22 +2,28 @@ import { PropsWithChildren } from 'react';
 import styles from '../../styles/components/common/button.module.scss';
 
 type Props = {
-  variant: 'green1' | 'green3' | 'gray' | 'yellow' | 'rounded-outline' | 'rounded-color';
+  size:'fixed'|'large'|'fluent'
+  variant: 'rectangular'| 'rounded'| 'outlined'|'outlined-icon';
+  color: 'primary'|'secondary'| 'disabled'| 'danger'| 'none'
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  type?: "button" | "submit" | "reset" | undefined
+  type?:'button'|'submit'|'reset'|undefined;
 };
 interface DeleteBtnProps {
   onClick: () => void;
 }
 
-export const Button = ({ variant, onClick, children, type }: PropsWithChildren<Props>) => {
+
+export const Button = ({ children, onClick, size, variant, color,type }: PropsWithChildren<Props>) => {
   return (
-    <button className={`${styles.button} ${styles[variant]}`} onClick={onClick} type={type}>
+    <button
+      className={`${styles.button} ${styles[variant]} ${styles[size]} ${styles[color]}`} 
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </button>
   );
-};
-
+}
 
 export const DeleteBtn: React.FC<DeleteBtnProps> = ({ onClick }) => {
   return (

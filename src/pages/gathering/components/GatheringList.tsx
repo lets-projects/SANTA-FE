@@ -5,6 +5,7 @@ type Props = {
   isLast?: boolean;
   setPage?: React.Dispatch<React.SetStateAction<number>>;
   onClick: () => void;
+  state:'default'|'myGatherings' | 'attendingGatherings'|'completedGatherings';
 };
 type GatheringInfoType = {
   title: string;
@@ -33,6 +34,7 @@ export function GatheringList({
   isLast,
   setPage,
   onClick,
+  state
 }: Props) {
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
     if (isLast && setPage) {
@@ -42,7 +44,7 @@ export function GatheringList({
 
   return (
     <div
-      className={styles.gatheringListContainer}
+      className={`${styles.gatheringList} ${styles[state]}`}
       ref={(_ref) => {
         if (isLast) {
           targetRef.current = _ref;
@@ -52,9 +54,9 @@ export function GatheringList({
     >
       <img className={styles.image} src={gatheringInfo.imageUrl}></img>
       <div className={styles.textContainer}>
-        <div className={styles.subtitle1}>{gatheringInfo.title}</div>
-        <div className={`${styles.body2} ${styles.hidden}`}>{gatheringInfo.content}</div>
-        <div className={`${styles.infoContainer} ${styles.body2}`}>
+        <div className={styles.title}>{gatheringInfo.title}</div>
+        <div className={`${styles.content} ${styles.hidden}`}>{gatheringInfo.content}</div>
+        <div className={`${styles.infoContainer}`}>
           <div className={styles.tag}>{gatheringInfo.tag}</div>
           {/* 5글자 까지만 들어가도록 */}
           <div>{gatheringInfo.mountain}</div>

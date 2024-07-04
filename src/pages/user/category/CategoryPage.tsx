@@ -103,7 +103,7 @@ export default function CategoryPage() {
         </div>
       </div>
       <div className={styles.bottom}>
-        <Button variant="green1" onClick={handleSubmit}>
+        <Button variant='rectangular' color="secondary" size='large' onClick={handleSubmit}>
           {isEdit ? '수정 완료' : '이제 시작 해 볼까요?'}
         </Button>
       </div>

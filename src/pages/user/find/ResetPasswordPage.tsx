@@ -71,7 +71,7 @@ export default function FindPasswordPage() {
             </div>
             {errors.checkPassword && <p className={styles.errorMessage}>{errors.checkPassword?.message}</p>}
             <div className={styles.submitBtn}>
-              <Button variant="green3" children={'비밀번호 변경'} />
+              <Button variant='rectangular' size='large' color='primary' children={'비밀번호 변경'} />
             </div>
           </form>
         </div>

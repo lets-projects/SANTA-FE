@@ -111,7 +111,7 @@ export default function FindPasswordPage() {
             </div>
             {errors.authNumber && <p className={styles.errorMessage}>{errors.authNumber?.message}</p>}
             <div className={styles.submitBtn}>
-              <Button variant="green3" children={'인증하기'} />
+              <Button variant="rectangular" size='large' color='primary' children={'인증하기'} />
             </div>
           </form>
         </div>

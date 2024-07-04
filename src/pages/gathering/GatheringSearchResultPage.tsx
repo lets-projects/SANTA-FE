@@ -77,19 +77,17 @@ export function GatheringSearchResultPage() {
     }
   }
 
-  function returnClassName(date: string) {
-    //작성자의 id와 모임장의 id가 같으면 styles.bgLightYellow
-
+  function returnState(date: string) {
     if (isClosedGathering(date)) {
+      console.log('모임생성날짜/참여중인 모임', date);
       //활동 완료된 모임 숨기기 버튼 클릭시 display:none
       if (!showInProgress) {
-        return `${styles.width100}`;
-      } else {
-        return `${styles.width100} ${styles.displayNone}`;
+        //종료된 모임 gray
+        return `completedGatherings`;
       }
-    } else {
-      return `${styles.width100}`;
     }
+
+    return 'default';
   }
 
   return (
@@ -99,7 +97,7 @@ export function GatheringSearchResultPage() {
       </div>
       {isNoResult && searchKeyword && <SearchNoResult keyword={searchKeyword} />}
       {searchLists && (
-        <div className={styles.containerCol}>
+        <div className={styles.gatheringListContainer}>
           <div className={styles.containerRow}>
             <FilterShowAndHide onClick={clickShowInProgress} isHide={showInProgress}>
               모집중인 모임만 보기
@@ -120,7 +118,12 @@ export function GatheringSearchResultPage() {
             </div>
           </div>
           {searchLists.map((item, index) => (
-            <div key={item.meetingId} className={returnClassName(item.date)}>
+            <div
+              key={item.meetingId}
+              className={
+                isClosedGathering(item.date) && showInProgress ? `${styles.displayNone}` : `${styles.width100}`
+              }
+            >
               <GatheringList
                 gatheringInfo={{
                   title: item.meetingName,
@@ -135,6 +138,7 @@ export function GatheringSearchResultPage() {
                 isLast={gatheringList && gatheringList?.totalPage > page && searchLists.length === index + 1}
                 setPage={setPage}
                 onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
+                state={returnState(item.date)}
               />
             </div>
           ))}
