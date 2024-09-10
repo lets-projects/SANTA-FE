@@ -12,17 +12,14 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';
-import { Alert } from '/src/components/common/Alert';
-import { GatheringCategoryType, GatheringListByCategory } from '../../types/gatheringTypes';
+import { GatheringCategoryType, GatheringListByCategory } from '/src/types/gatheringTypes';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 2;
 
 function GatheringMainPage() {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-
   //선택된 카테고리 값을 저장하는 state
-  const [selectedCategory, setSelectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
+  const [selectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
   const currentUserInfo = useUserInfo((data) => data);
   const fetchGatheringList = async (pageParam: number) => {
     const res = await getGatheringListByCategory(selectedCategory.name, pageParam, PAGE_SIZE);
@@ -54,10 +51,6 @@ function GatheringMainPage() {
   const gatheringList: GatheringListByCategory[] = data?.pages || [];
   return (
     <div className={styles.gatheringContainer}>
-      {/* <button onClick={showAlert}>클릭</button> */}
-      <Alert variant="error" setIsOpen={setIsOpen} isOpen={isOpen}>
-        오류메세지
-      </Alert>
       <div className={styles.container}>
         <div className={styles.profileContainer}>
           <UserProfile_small name={currentUserInfo?.nickname} imageUrl={currentUserInfo?.image} />
@@ -78,7 +71,7 @@ function GatheringMainPage() {
       <Top3Gatherings />
       <div className={`${styles.container} ${styles.gap}`}>
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
-        <GatheringCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+        <GatheringCategory />
         <div className={styles.gatheringList}>
           {gatheringList?.map((item: GatheringListByCategory, index) => (
             <div key={`${item.meetingId}-${item.leaderId}-${index}`}>
@@ -100,7 +93,8 @@ function GatheringMainPage() {
               />
             </div>
           ))}
-          {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
+          {!gatheringList.length && !isFetching && <div>데이터가 없습니다.</div>}
+          {isFetching && <div>Loading more...</div>}
         </div>
       </div>
     </div>
