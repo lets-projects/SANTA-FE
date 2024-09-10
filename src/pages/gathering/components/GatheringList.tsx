@@ -3,9 +3,9 @@ import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 type Props = {
   gatheringInfo: GatheringInfoType;
   isLast?: boolean;
-  setPage?: React.Dispatch<React.SetStateAction<number>>;
+  setPage?: () => void;
   onClick: () => void;
-  state:'default'|'myGatherings' | 'attendingGatherings'|'completedGatherings';
+  state: 'default' | 'myGatherings' | 'attendingGatherings' | 'completedGatherings';
 };
 type GatheringInfoType = {
   title: string;
@@ -16,7 +16,7 @@ type GatheringInfoType = {
   capacity: number;
   attendance: number;
   date: string;
-}
+};
 /**
  * 
  * @param param0 title,
@@ -29,16 +29,10 @@ type GatheringInfoType = {
   date,
  * @returns 
  */
-export function GatheringList({
-  gatheringInfo,
-  isLast,
-  setPage,
-  onClick,
-  state
-}: Props) {
+export function GatheringList({ gatheringInfo, isLast, setPage, onClick, state }: Props) {
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
     if (isLast && setPage) {
-      setPage((prev) => prev + 1);
+      setPage();
     }
   });
 
