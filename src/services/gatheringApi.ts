@@ -7,7 +7,7 @@ export async function getGatheringList() {
 }
 
 //카테고리별 모임 조회 api
-export function getGatheringListByCategory(category: string, page?: number, size?: number) {
+export function getGatheringListByCategory(category: string, page: number = 0, size: number = 2) {
   return api.get<GatheringListResponse>(`meetings/category-search?category=${category}&page=${page}&size=${size}`);
 }
 

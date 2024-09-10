@@ -2,28 +2,27 @@ import { PropsWithChildren } from 'react';
 import styles from '../../styles/components/common/button.module.scss';
 
 type Props = {
-  size:'fixed'|'large'|'fluent'
-  variant: 'rectangular'| 'rounded'| 'outlined'|'outlined-icon';
-  color: 'primary'|'secondary'| 'disabled'| 'danger'| 'none'
+  size: 'fixed' | 'large' | 'fluent';
+  variant: 'rectangular' | 'rounded' | 'outlined' | 'outlined-icon';
+  color: 'primary' | 'secondary' | 'disabled' | 'danger' | 'none';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  type?:'button'|'submit'|'reset'|undefined;
+  type?: 'button' | 'submit' | 'reset' | undefined;
 };
 interface DeleteBtnProps {
   onClick: () => void;
 }
 
-
-export const Button = ({ children, onClick, size, variant, color,type }: PropsWithChildren<Props>) => {
+export const Button = ({ children, onClick, size, variant, color, type }: PropsWithChildren<Props>) => {
   return (
     <button
-      className={`${styles.button} ${styles[variant]} ${styles[size]} ${styles[color]}`} 
+      className={`${styles.button} ${styles[variant]} ${styles[size]} ${styles[color]}`}
       onClick={onClick}
       type={type}
     >
       {children}
     </button>
   );
-}
+};
 
 export const DeleteBtn: React.FC<DeleteBtnProps> = ({ onClick }) => {
   return (
@@ -38,5 +37,5 @@ export const EditBtn: React.FC<DeleteBtnProps> = ({ onClick }) => {
     <div onClick={onClick} className={styles.editBtn}>
       수정
     </div>
-  )
-}
+  );
+};
