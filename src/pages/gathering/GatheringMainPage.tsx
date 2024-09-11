@@ -6,57 +6,49 @@ import { Button } from '../../components/common/Button';
 import styles from '../../styles/gathering/gatheringMain.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { GatheringCategory } from './components/GatheringCategory';
-import { useEffect, useState } from 'react';
-import { getGatheringListByCategory, GatheringListByCategory } from '/src/services/gatheringApi';
-import { useQuery } from '@tanstack/react-query';
-import { useCategoryStore } from '/src/store/store';
+import { useState } from 'react';
+import { getGatheringListByCategory } from '/src/services/gatheringApi';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { MyGatherings } from './components/MyGatherings';
 import { Top3Gatherings } from './components/Top3Gatherings';
 import { useUserInfo } from '/src/utils/useUserInfo';
+import { GatheringCategoryType, GatheringListByCategory } from '/src/types/gatheringTypes';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 2;
 
 function GatheringMainPage() {
-  const { category } = useCategoryStore();
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
-  const [gatheringList, setGatheringList] = useState<GatheringListByCategory[]>([]);
+  //선택된 카테고리 값을 저장하는 state
+  const [selectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
+  const currentUserInfo = useUserInfo((data) => data);
+  const fetchGatheringList = async (pageParam: number) => {
+    const res = await getGatheringListByCategory(selectedCategory.name, pageParam, PAGE_SIZE);
+    return {
+      content: res.data.content,
+      nextCursor: res.data.pageable.pageNumber + 1,
+      hasNextPage: res.data.pageable.pageNumber < res.data.totalPages - 1,
+      pageParams: {
+        pageNumber: res.data.pageable.pageNumber,
+        pageSize: res.data.pageable.pageSize,
+      },
+    };
+  };
 
-  //모임 목록 가져오기
-  const {
-    data: GatheringListByCategory,
-    isFetched,
-    isError,
-  } = useQuery({
-    queryKey: ['gatheringListByCategory', page, category],
-    queryFn: () => getGatheringListByCategory(category.name, page, PAGE_SIZE),
-    select: (data) => {
-      return {
-        content: data.data.content,
-        totalPage: data.data.totalPages - 1,
-      };
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
+    queryKey: ['gatheringListByCategory', selectedCategory.name],
+    queryFn: ({ pageParam }) => fetchGatheringList(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNextPage ? lastPage.nextCursor : undefined;
     },
+    select: (data) => ({
+      gatheringList: data.pages,
+      pages: data?.pages.flatMap((page) => page.content) || [],
+      pageParams: data?.pages.map((page) => page.pageParams).filter(Boolean) || [],
+    }),
   });
 
-  useEffect(() => {
-    setGatheringList([]);
-    setPage(0);
-    // queryClient.invalidateQueries({ queryKey: ['gatheringListByCategory', page, category], });
-  }, [category]);
-
-  useEffect(() => {
-    const isSuccess = isFetched && !isError;
-
-    if (isSuccess && GatheringListByCategory) {
-      if (page === 0) {
-        setGatheringList([...GatheringListByCategory?.content]);
-      } else {
-        setGatheringList((prevList) => [...prevList, ...GatheringListByCategory?.content]);
-      }
-    }
-  }, [isFetched, isError, GatheringListByCategory, category]);
-  const currentUserInfo = useUserInfo((data) => data);
-
+  const gatheringList: GatheringListByCategory[] = data?.pages || [];
   return (
     <div className={styles.gatheringContainer}>
       <div className={styles.container}>
@@ -70,7 +62,9 @@ function GatheringMainPage() {
           </Link>
         </div>
         <Link to={'/gathering/post'} className={styles.width100}>
-          <Button variant="green3">모임 만들기</Button>
+          <Button variant="rectangular" color="primary" size="large">
+            모임 만들기
+          </Button>
         </Link>
       </div>
       <MyGatherings />
@@ -92,17 +86,15 @@ function GatheringMainPage() {
                   attendance: item.participants.length,
                   date: item.date,
                 }}
-                isLast={
-                  GatheringListByCategory &&
-                  GatheringListByCategory?.totalPage > page &&
-                  gatheringList.length === index + 1
-                }
-                setPage={setPage}
+                isLast={hasNextPage && gatheringList.length === index + 1 && !isFetching}
+                setPage={fetchNextPage}
                 onClick={() => navigate(`/gathering/detail?meetingid=${item.meetingId}`)}
+                state="default"
               />
             </div>
           ))}
-          {gatheringList?.length === 0 && <div>데이터가 없습니다.</div>}
+          {!gatheringList.length && !isFetching && <div>데이터가 없습니다.</div>}
+          {isFetching && <div>Loading more...</div>}
         </div>
       </div>
     </div>

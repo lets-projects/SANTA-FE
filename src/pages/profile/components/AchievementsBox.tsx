@@ -7,6 +7,7 @@ import styles from './Achievements.module.scss';
 import mountain from '/images/mountain.png';
 import { paths } from '/src/utils/path';
 import useUserInfo from '/src/hooks/useUserInfo';
+import { Button } from '/src/components/common/Button';
 
 export default function AchievementsBox() {
   const userInfo = useUserInfo();
@@ -24,7 +25,7 @@ export default function AchievementsBox() {
 
   const userMountain = userInfo?.accumulatedHeight;
 
-  const SUCCESS = !isError && isFetched;
+  const isSuccess = !isError && isFetched;
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -38,19 +39,21 @@ export default function AchievementsBox() {
       </div>
       <div className={styles.records}>
         <div className={styles.achievName}>총 높이</div>
-        <p>{SUCCESS && userMountain ? Math.floor(userMountain).toLocaleString() : 0} M</p>
+        <p>{isSuccess && userMountain ? Math.floor(userMountain).toLocaleString() : 0} M</p>
         <div className={styles.achievName}>정복한 정상</div>
-        <p>{SUCCESS ? myMountains.length : 0} 개</p>
+        <p>{isSuccess ? myMountains.length : 0} 개</p>
       </div>
       <div className={styles.btnContainer}>
-        <button
-          className={styles.certificationBtn}
-          onClick={() => {
-            navigation(paths.MOUNTAIN_VERTIFY);
-          }}
-        >
-          인증하러 가기
-        </button>
+        
+        <Button
+        onClick={() => {
+          navigation(paths.MOUNTAIN_VERTIFY);
+        }}
+        size='fluent'
+        color='primary'
+        variant='rounded'
+        
+        >인증하러 가기</Button>
         <div className={styles.imgContainer}>
           <img className={styles.mountainImg} src={mountain} />
         </div>

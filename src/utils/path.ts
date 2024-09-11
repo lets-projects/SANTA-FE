@@ -13,6 +13,8 @@ export const paths = {
   LOGIN: '/login',
   JOIN: '/join',
   OAUTH_KAKAO: '/oauth/kakao',
+  OAUTH_GOOGLE: '/oauth/google',
+  OAUTH_NAVER: '/oauth/naver',
   PROFILE: '/profile',
   PROFILE_EDIT: '/profile/edit',
   FIND_ACCOUNT: '/user/find-account',
