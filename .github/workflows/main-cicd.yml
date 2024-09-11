@@ -20,7 +20,7 @@ jobs:
       - name: Create dotenv file
         run: |
           touch .env
-          echo "VITE_BASE_URL"=${{secrets.VITE_BASE_URL}}" >> .env
+          echo "VITE_BASE_URL"=${{secrets.VITE_BASE_URL}} >> .env
           cat .env
 
       - name: Use Node.js ${{ matrix.node-version }}
