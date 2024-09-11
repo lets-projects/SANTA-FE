@@ -3,7 +3,10 @@
 @import '../reset';
 
 .mainContainer {
-  @include flex-center-col;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   @include setting;
   // height: calc(100vh - 8.875rem) !important;
   gap: 2rem;
@@ -16,11 +19,12 @@
 }
 
 .containerRow {
-  @include flex-between-row;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-bottom: 1rem;
-  // margin:1rem 0;
 }
 
 .wrap {

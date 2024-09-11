@@ -74,3 +74,5 @@ export function userReport(data: UserReport) {
 export function getUserGathering() {
   return api.get<GatheringListResponse>('meetings/my-meetings');
 }
+
+export {};
