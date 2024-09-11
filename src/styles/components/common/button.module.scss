@@ -1,0 +1,166 @@
+// // variant?: 'green1' | 'green3' | 'gray' | 'yellow' | 'rounded-outline' | 'rounded-color';
+// @import '../../color.scss';
+// @import '../../global';
+// .button {
+//     border: none;
+//     border-radius: 0.6rem;
+//     height:2.8rem;
+//     font-size: 16px;
+//     cursor: pointer;
+//     width: 100%;
+//     background-color: $green3;
+//     font-weight: 700;
+//     @include flex-center-col;
+//     font-family: 'Noto Sans KR', sans-serif;
+// }
+
+// .green1{
+//     background-color: $green1;
+//     color:$green3;
+// }
+// .green3{
+//     background-color: $green3;
+//     color:$white;
+// }
+// .gray{
+//     background-color: $gray1;
+//     color:$white;
+// }
+// .yellow{
+//     background-color: $yellow;
+//     color:$white;
+// }
+// .rounded-outline{
+//     width:15rem;
+//     border: 0.1rem solid $green3;
+//     background-color: rgba(0,0,0,0);
+//     border-radius: 1.2rem;
+//     font-weight: 500;
+// }
+// .rounded-color{
+//     width:15rem;
+//     border: 0.1rem solid $yellow;
+//     background-color: $yellow;
+//     border-radius: 1.2rem;
+//     font-weight: 500;
+//     filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+// }
+
+// .deleteBtn{
+//     font-family: 'Noto Sans KR', sans-serif;
+//     width:2rem;
+//     padding:0.2rem;
+//     border: 0.1rem solid $green3;
+//     background-color: $white;
+//     border-radius: 0.3rem;
+//     color:$green3;
+// }
+// .editBtn{
+//     font-family: 'Noto Sans KR', sans-serif;
+//     width:2rem;
+//     padding:0.2rem;
+//     border: 0.1rem solid $green3;
+//     background-color: $green3;
+//     border-radius: 0.3rem;
+//     color:$white
+// }
+
+.button {
+    border: none;
+    height: 2.8rem;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #498428;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 0.6rem;
+  }
+  
+  .button.large {
+    width: 100%;
+  }
+  
+  .button.fixed {
+    width: 295px;
+  }
+  
+  .button.fluent {
+    width: fit-content;
+    padding: 0.2rem 1rem;
+  }
+  //variant = rectangular , rounded, outlined, outlined-icon
+  
+  .rectangular {
+    border-radius: 0.6rem;
+  }
+  .rounded {
+    border-radius: 1.2rem;
+  }
+  
+  .outlined-icon {
+    border-radius: 1.2rem;
+    border: 0.1rem solid #498428;
+    background-color: white;
+    color: #498428;
+    filter: none;
+    position: relative;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .outlined {
+    border-radius: 1.2rem;
+    border: 0.1rem solid #498428;
+    background-color: white;
+    color: #498428;
+    filter: none;
+  }
+  
+  .outlined:hover,
+  .outlined-icon:hover {
+    border: 0.2rem solid #2d5318;
+    color: #2d5318;
+    filter: none;
+  }
+  
+  .primary {
+    background-color: #498428;
+    color: white;
+  }
+  .primary:hover {
+    background-color: #2d5318;
+  }
+  
+  .secondary {
+    background-color: #eaef9d;
+    color: #498428;
+  }
+  .secondary:hover {
+    background-color: #c1ce1d;
+  }
+  
+  .disabled {
+    background-color: #aeaeae;
+    color: white;
+  }
+  .danger {
+    background-color: #fbc241;
+    color: white;
+  }
+  .danger:hover {
+    background-color: #805900;
+  }
+  .none {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  .none:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .outlined.none:hover,
+  .outlined-icon.none:hover {
+    background-color: rgba(0, 0, 0, 0);
+  }

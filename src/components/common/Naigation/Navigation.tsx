@@ -1,75 +1,118 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { IoIosArrowBack } from 'react-icons/io';
 
-import logo from '../../../../public/images/logo.svg';
-import styles from '../../../styles/components/common/navigation.module.scss';
+import logo from '/images/logo.svg';
+import styles from '/src/styles/components/common/navigation.module.scss';
 import UserProfile from './UserProfile';
+import { NAVLIST, paths } from '/src/utils/path';
+import logout from '/src/utils/logout';
+import { getIsAdmin, getRefreshToken } from '/src/services/auth';
+import { TbTimeDuration30 } from 'react-icons/tb';
+import { tokenRefresh } from '/src/services/api';
 
-const NAVLIST = [
-  { title: '내 프로필', path: '/porfile' },
-  { title: '랭킹', path: '/rank' },
-  { title: '진행중인 챌린지', path: '/challenge' },
-  { title: '내 모임 바로가기', path: '/myclub' },
-  { title: '실시간 채팅', path: '/livechat' },
-  { title: '모임 만들기', path: '/createclub' },
-  { title: '설정', path: '/setting' },
-];
+export default function Navigation({ back }: { back: boolean }) {
+  const navigation = useNavigate();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const navRef = useRef<HTMLDivElement>(null);
+  const isLogin = getRefreshToken();
 
-export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
-  const outside = useRef<any>();
+  const hideNav = useCallback((e: MouseEvent) => {
+    if (navRef.current === null) {
+      return;
+    }
+    if (!navRef.current.contains(e.target as HTMLElement)) {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handlerOutsie);
+    document.addEventListener('click', hideNav, true);
     return () => {
-      document.removeEventListener('mousedown', handlerOutsie);
+      document.removeEventListener('click', hideNav, true);
     };
-  });
-  const handlerOutsie = (e: MouseEvent) => {
-    if (!outside.current.contains(e.target)) {
-      toggleSide();
-    }
-  };
-
-  const toggleSide = () => {
-    setIsOpen(false);
-  };
+  }, [hideNav]);
 
   const onClick = () => {
     setIsOpen(!isOpen);
   };
 
+  const HambergerBtn = () => {
+    return (
+      <button onClick={onClick} className={styles.btn}>
+        <GiHamburgerMenu size="30" color="white" />
+      </button>
+    );
+  };
+
+  const BackBtn = () => {
+    return (
+      <button
+        onClick={() => {
+          navigation(-1);
+        }}
+        className={styles.btn}
+      >
+        <IoIosArrowBack size="30" color="white" />
+      </button>
+    );
+  };
+
+  const isAdmin = getIsAdmin();
+
+  const handleAuth = () => {
+    if (isLogin) {
+      return logout();
+    } else {
+      return navigation(paths.LOGIN);
+    }
+  };
+
+  const handleAccessToken = () => {
+    tokenRefresh();
+  };
+
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <nav className={isOpen ? styles.darkBg : ''}>
-          <button onClick={onClick} className={styles.hambergerBtn}>
-            <GiHamburgerMenu size="30" color="white" />
-          </button>
-          <div className={isOpen ? styles.navOpen : styles.navClose} ref={outside}>
-            <Link to="/" onClick={onClick}>
-              <img src={logo} className={styles.logo} />
-            </Link>
-            <div className={styles.navContainer}>
-              <div className={styles.userBox}>
-                <UserProfile />
-              </div>
-              <div className={styles.linkBox}>
-                <ul>
-                  {NAVLIST.map((item) => (
-                    <li>
-                      <Link to={item.path} onClick={onClick}>
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <header className={styles.header}>
+      <nav className={isOpen ? styles.darkBg : ''}>
+        <div className={styles.btnContainer}>
+          {back ? <BackBtn /> : <HambergerBtn />}
+          {isLogin && <TbTimeDuration30 onClick={handleAccessToken} className={styles.accessTokenBtn} />}
+        </div>
+        <div className={isOpen ? styles.navOpen : styles.navClose} ref={navRef}>
+          <div className={styles.top}>
+            <img src={logo} className={styles.logo} />
+            {isAdmin && (
+              <button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                  navigation(paths.ADMIN);
+                }}
+              >
+                관리자 페이지
+              </button>
+            )}
+          </div>
+          <div className={styles.navContainer}>
+            <div className={styles.userBox}>{!back && <UserProfile />}</div>
+            <div className={styles.linkBox}>
+              <ul>
+                {NAVLIST.map((item) => (
+                  <li key={item.path}>
+                    <Link to={item.path} onClick={onClick}>
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+                <li className={styles.logoutBtn} onClick={handleAuth}>
+                  {!isLogin ? '로그인' : '로그아웃'}
+                </li>
+              </ul>
             </div>
           </div>
-        </nav>
-      </header>
-    </div>
+        </div>
+      </nav>
+    </header>
   );
 }

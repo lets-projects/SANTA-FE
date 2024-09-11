@@ -1,0 +1,62 @@
+@import '/src/styles/global';
+@import '/src/styles/color';
+
+.container {
+  @include setting;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  @include flex-center-col;
+}
+
+.mainImg {
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.title {
+  @include font-subtitle1;
+  padding: 1.9rem 0;
+}
+
+.trophyList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-between;
+}
+
+.trophyContainer {
+  display: flex;
+  width: 33%;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.trophyImg {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+}
+
+.trophyName {
+  @include font-subtitle2;
+  padding: 0.3rem 0 0.5rem;
+}
+
+.nothingData {
+  @include font-subtitle1;
+  color: $gray2;
+
+  padding: 6.25rem 0;
+}
+
+.textContainer {
+  @include flex-center-col;
+
+  width: 100%;
+  height: 100%;
+}

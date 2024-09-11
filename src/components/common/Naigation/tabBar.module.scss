@@ -1,0 +1,43 @@
+@import '/src/styles/color';
+@import '/src/styles/global';
+
+.tabBarContainer {
+  background-color: #eef5d4;
+  width: 100%;
+  height: 5.4rem;
+
+  //하단 고정
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 500;
+
+  ul {
+    height: 5.4rem;
+    display: flex;
+    margin: 0;
+  }
+}
+
+.tabBtn {
+  flex: 1 1 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  list-style: none;
+  padding: 0;
+
+  color: $green3;
+}
+
+.name {
+  @include font-body2;
+  padding-top: 0.1rem;
+}
+.icon {
+  font-size: 1.87rem;
+}
