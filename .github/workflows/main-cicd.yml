@@ -22,7 +22,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: npm-${{ hashFiles('package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ hashFiles('**/package.json') }}
           restore-keys: |
             npm-
             
