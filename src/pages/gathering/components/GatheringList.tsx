@@ -3,9 +3,9 @@ import useIntersectionObserver from '/src/hooks/useIntersectionObserver';
 type Props = {
   gatheringInfo: GatheringInfoType;
   isLast?: boolean;
-  setPage?: React.Dispatch<React.SetStateAction<number>>;
+  setPage?: () => void;
   onClick: () => void;
-  state:'default'|'myGatherings' | 'attendingGatherings'|'completedGatherings';
+  state: 'default' | 'myGatherings' | 'attendingGatherings' | 'completedGatherings';
 };
 type GatheringInfoType = {
   title: string;
@@ -16,7 +16,7 @@ type GatheringInfoType = {
   capacity: number;
   attendance: number;
   date: string;
-}
+};
 /**
  * 
  * @param param0 title,
@@ -29,22 +29,16 @@ type GatheringInfoType = {
   date,
  * @returns 
  */
-export function GatheringList({
-  gatheringInfo,
-  isLast,
-  setPage,
-  onClick,
-  state
-}: Props) {
+export function GatheringList({ gatheringInfo, isLast, setPage, onClick }: Props) {
   const { targetRef } = useIntersectionObserver<HTMLDivElement>(() => {
     if (isLast && setPage) {
-      setPage((prev) => prev + 1);
+      setPage();
     }
   });
 
   return (
     <div
-      className={`${styles.gatheringList} ${styles[state]}`}
+      className={styles.gatheringListContainer}
       ref={(_ref) => {
         if (isLast) {
           targetRef.current = _ref;
@@ -54,9 +48,9 @@ export function GatheringList({
     >
       <img className={styles.image} src={gatheringInfo.imageUrl}></img>
       <div className={styles.textContainer}>
-        <div className={styles.title}>{gatheringInfo.title}</div>
-        <div className={`${styles.content} ${styles.hidden}`}>{gatheringInfo.content}</div>
-        <div className={`${styles.infoContainer}`}>
+        <div className={styles.subtitle1}>{gatheringInfo.title}</div>
+        <div className={`${styles.body2} ${styles.hidden}`}>{gatheringInfo.content}</div>
+        <div className={`${styles.infoContainer} ${styles.body2}`}>
           <div className={styles.tag}>{gatheringInfo.tag}</div>
           {/* 5글자 까지만 들어가도록 */}
           <div>{gatheringInfo.mountain}</div>
