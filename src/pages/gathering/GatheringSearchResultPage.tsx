@@ -5,10 +5,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getGatheringSearchResult } from '/src/services/gatheringApi';
 import { SearchNoResult } from './components/SearchNoResults';
 import { TitleContainer } from './components/TitleContainer';
-import { IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from 'react-icons/io5';
 import { GatheringList } from './components/GatheringList';
 import { isClosedGathering } from '/src/utils/isClosedGathering';
 import { GatheringListByCategory } from '/src/types/gatheringTypes';
+import FilterShowAndHide from './components/FilterShowAndHide';
 const PAGE_SIZE = 10;
 export function GatheringSearchResultPage() {
   const [searchParams] = useSearchParams();
@@ -89,14 +89,9 @@ export function GatheringSearchResultPage() {
       {searchLists && (
         <div className={styles.containerCol}>
           <div className={styles.containerRow}>
-            <div className={`${styles.iconTextContainer} ${styles.pointer}`} onClick={clickShowInProgress}>
-              {showInProgress ? (
-                <IoCheckmarkCircleSharp color="#498428" />
-              ) : (
-                <IoCheckmarkCircleOutline color="#498428" />
-              )}
-              <div className={styles.body1}>모집중인 모임만 보기</div>
-            </div>
+            <FilterShowAndHide onClick={clickShowInProgress} isHide={showInProgress}>
+              모집중인 모임만 보기
+            </FilterShowAndHide>
             <div className={`${styles.filterContainer} ${styles.subtitle2}`}>
               <div
                 className={`${styles.pointer} ${sortByLatest ? styles.green3Font : ''}`}

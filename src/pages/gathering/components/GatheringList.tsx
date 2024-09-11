@@ -38,7 +38,7 @@ export function GatheringList({ gatheringInfo, isLast, setPage, onClick }: Props
 
   return (
     <div
-      className={styles.gatheringListContainer}
+      className={styles.gatheringList}
       ref={(_ref) => {
         if (isLast) {
           targetRef.current = _ref;
