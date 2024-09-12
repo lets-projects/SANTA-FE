@@ -259,7 +259,7 @@ export function GatheringDetailEditPage() {
           </div>
         </div>
       </form>
-      <Button type="submit" variant="green1" onClick={handleCreateBtn}>
+      <Button type="submit" variant="rectangular" size='large' color='secondary' onClick={handleCreateBtn}>
         수정 완료
       </Button>
     </div>

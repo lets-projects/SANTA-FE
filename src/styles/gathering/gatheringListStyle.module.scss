@@ -3,6 +3,7 @@
 
 .gatheringList {
   // width: 100%;
+  background-color: rebeccapurple;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -87,4 +88,9 @@
 }
 .default {
   background-color: none;
+}
+.gatheringListContainer {
+  width: 100%;
+  text-decoration: none;
+  display: flex;
 }

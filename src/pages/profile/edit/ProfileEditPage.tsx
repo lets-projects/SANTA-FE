@@ -127,7 +127,7 @@ export default function ProfileEditPage() {
           {errors.phoneNumber && <p className={styles.errorMessage}>{errors.phoneNumber?.message}</p>}
         </div>
         <div className={styles.submitBtn}>
-          <Button variant="green3" children={'수정 완료'} />
+          <Button variant="rectangular" size='large' color='primary' children={'수정 완료'} />
         </div>
       </form>
     </div>

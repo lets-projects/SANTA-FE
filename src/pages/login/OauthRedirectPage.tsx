@@ -7,9 +7,11 @@ import { paths } from '/src/utils/path';
 
 export default function OauthRedirectPage() {
   const navigate = useNavigate();
-  const code = new URL(window.location.href).searchParams.get('code');
 
-  const { mutate } = useMutation({
+  const code = new URL(window.location.href).searchParams.get('code');
+  const socialName = window.location.pathname.replace('/oauth/', '');
+
+  const { mutate: kakaoLogin } = useMutation({
     mutationFn: (postData: KakaoCode) => postKakaoCode(postData),
     onSuccess: (data) => {
       localStorage.setItem('access_token', data.data.accessToken);
@@ -18,18 +20,44 @@ export default function OauthRedirectPage() {
       navigate(paths.HOME);
     },
     onError: () => {
+      alert('다시 시도 해 주세요.');
       navigate(paths.LOGIN);
     },
   });
 
   useEffect(() => {
-    if (code) {
+    if (!code) {
+      return;
+    }
+
+    if (socialName == 'kakao') {
       const postData = {
         authorizationCode: code,
       };
-      return mutate(postData);
+      return kakaoLogin(postData);
+    }
+
+    if (socialName == 'google') {
+      console.log(socialName);
+      console.log(code);
+    }
+
+    if (socialName == 'naver') {
+      console.log(socialName);
+      console.log(code);
     }
   }, [code]);
 
-  return <></>;
+  return (
+    <>
+      {code && socialName ? (
+        <div>
+          <div>소셜 이름 : {socialName}</div>
+          <div>인가코드 : {code}</div>
+        </div>
+      ) : (
+        <div>뭔가 에러생김</div>
+      )}
+    </>
+  );
 }

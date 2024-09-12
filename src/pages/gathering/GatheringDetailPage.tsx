@@ -232,13 +232,13 @@ export function GatheringDetailPage() {
             </div>
           </div>
           {isClosed ? (
-            <Button variant="gray">이미 종료된 모임입니다</Button>
+            <Button variant="rectangular" size='large' color='disabled'>이미 종료된 모임입니다</Button>
           ) : !isClosed && isSameUser ? (
-            <Button variant="green3" onClick={handleCloseGathering}>
+            <Button variant="rectangular" size='large' color='primary' onClick={handleCloseGathering}>
               모임 종료하기
             </Button>
           ) : (
-            <Button variant="green3" onClick={handleJoinGathering}>
+            <Button variant="rectangular" size='large' color='primary' onClick={handleJoinGathering}>
               참가신청하기
             </Button>
           )}

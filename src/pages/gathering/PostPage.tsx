@@ -274,8 +274,8 @@ export function PostPage() {
           </div>
         </div>
       </form>
-      <Button type="submit" variant="green3" onClick={handleCreateBtn}>
-        모임 만들기{' '}
+      <Button type="submit" variant="rectangular" size='large' color='secondary' onClick={handleCreateBtn}>
+        모임 만들기
       </Button>
     </div>
   );
