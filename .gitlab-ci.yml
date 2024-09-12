@@ -23,6 +23,7 @@ build:
   artifacts:
     paths:
       - public/
+  retry: 2 # 최대 2번 재시도
 
 deploy-to-s3:
   stage: deploy
@@ -32,6 +33,9 @@ deploy-to-s3:
   only:
     - dev
   when: manual
+  retry:
+    max: 2
+    when: stuck_or_timeout_failure
 
 purge:
   stage: purge
@@ -41,3 +45,6 @@ purge:
   only:
     - dev
   when: manual
+  retry:
+    max: 2
+    when: stuck_or_timeout_failure

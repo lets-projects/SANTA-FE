@@ -3,7 +3,7 @@ import { SearchInput } from '../../components/common/Input';
 import styles from '../../styles/gathering/gatheringSearch.module.scss';
 import { IoChevronBack } from 'react-icons/io5';
 import { ChangeEvent } from 'react';
-import { useSearchValueStore } from '/src/store/store';
+import { useRecentSearchKeyword, useSearchValueStore } from '/src/store/store';
 import { SearchKeyword } from './components/SearchKeyword';
 export function GatheringSearchPage() {
   const { searchValue, setSearchValue } = useSearchValueStore();
@@ -12,9 +12,11 @@ export function GatheringSearchPage() {
     setSearchValue(e.target.value);
   }
 
+  const { addRecentSearchKeyword } = useRecentSearchKeyword();
 
   function handleClickSearchBtn() {
-    navigate(`/gathering/search/result?keyword=${searchValue}`)
+    addRecentSearchKeyword(searchValue);
+    navigate(`/gathering/search/result?keyword=${searchValue}`);
   }
 
   return (

@@ -19,9 +19,10 @@ const PAGE_SIZE = 2;
 function GatheringMainPage() {
   const navigate = useNavigate();
   //선택된 카테고리 값을 저장하는 state
-  const [selectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
+  const [selectedCategory, setSelectedCategory] = useState<GatheringCategoryType>({ id: 1, name: '등산' });
   const currentUserInfo = useUserInfo((data) => data);
   const fetchGatheringList = async (pageParam: number) => {
+    console.log('selectedCategory', selectedCategory.name);
     const res = await getGatheringListByCategory(selectedCategory.name, pageParam, PAGE_SIZE);
     return {
       content: res.data.content,
@@ -71,7 +72,7 @@ function GatheringMainPage() {
       <Top3Gatherings />
       <div className={`${styles.container} ${styles.gap}`}>
         <SectionTitle title="모임 둘러보기" subtitle="산타의 모임을 둘러보세요!" />
-        <GatheringCategory />
+        <GatheringCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         <div className={styles.gatheringList}>
           {gatheringList?.map((item: GatheringListByCategory, index) => (
             <div key={`${item.meetingId}-${item.leaderId}-${index}`}>
