@@ -7,6 +7,10 @@
 
 ![산타로고](https://kdt-gitlab.elice.io/cloud_track/class_01/web_project3/team02/santa__front/uploads/dc801ba523de5ecdfa288ded03778468/image.png)
 
+## 프로젝트 기간
+
+2024.04.08 ~ 2024.05.10(5주)
+
 ## 실행 방법
 
 ### client
